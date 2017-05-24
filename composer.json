@@ -21,7 +21,8 @@
   ],
   "require": {
     "php": "^7.0",
-    "bytic/framework": "dev-develop"
+    "bytic/framework": "dev-develop",
+    "bytic/request-detective": "dev-develop"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "2.*",
