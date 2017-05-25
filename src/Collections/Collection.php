@@ -2,8 +2,10 @@
 
 namespace ByTIC\MediaLibrary\Collections;
 
+use ByTIC\MediaLibrary\Loaders\AbstractLoader;
 use ByTIC\MediaLibrary\Loaders\Filesystem;
 use ByTIC\MediaLibrary\Loaders\HasLoaderTrait;
+use ByTIC\MediaLibrary\Media\Media;
 use ByTIC\MediaLibrary\MediaRepository\HasMediaRepositoryTrait;
 
 /**
@@ -58,6 +60,16 @@ class Collection extends \Nip\Collection
     }
 
     /**
+     * @param AbstractLoader $loader
+     * @return AbstractLoader
+     */
+    protected function hydrateLoader($loader)
+    {
+        $loader->setCollection($this);
+        return $loader;
+    }
+
+    /**
      * @return mixed
      */
     protected function getLoaderClass()
@@ -73,5 +85,25 @@ class Collection extends \Nip\Collection
     public function filter($filter)
     {
         return $this->items;
+    }
+
+    protected function loadMedia()
+    {
+        if ($this->isMediaLoaded())
+            return;
+
+        $this->getLoader()->loadMedia();
+
+        $this->setMediaLoaded(true);
+    }
+
+    /**
+     * Append a media object inside the collection
+     *
+     * @param Media $media
+     */
+    public function appendMedia(Media $media)
+    {
+        $this->items[$media->getName()] = $media;
     }
 }
