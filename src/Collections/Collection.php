@@ -88,6 +88,14 @@ class Collection extends \Nip\Collection
         return $this->items;
     }
 
+    /**
+     * @return Media
+     */
+    public function getDefaultMedia()
+    {
+        return reset($this->items);
+    }
+
     protected function loadMedia()
     {
         if ($this->isMediaLoaded())
