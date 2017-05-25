@@ -2,7 +2,9 @@
 
 namespace ByTIC\MediaLibrary\Media;
 
+use ByTIC\MediaLibrary\Collections\Collection;
 use Nip\Filesystem\File;
+use Nip\Records\Record;
 
 /**
  * Class Media
@@ -12,9 +14,35 @@ class Media
 {
 
     /**
+     * @var Record
+     */
+    protected $record;
+
+    /**
      * @var File
      */
     protected $file;
+
+    /**
+     * @var Collection
+     */
+    protected $collection;
+
+    /**
+     * @return Record
+     */
+    public function getRecord(): Record
+    {
+        return $this->record;
+    }
+
+    /**
+     * @param Record $record
+     */
+    public function setRecord(Record $record)
+    {
+        $this->record = $record;
+    }
 
     /**
      * @return File
@@ -30,6 +58,22 @@ class Media
     public function setFile(File $file)
     {
         $this->file = $file;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getCollection(): Collection
+    {
+        return $this->collection;
+    }
+
+    /**
+     * @param Collection $collection
+     */
+    public function setCollection(Collection $collection)
+    {
+        $this->collection = $collection;
     }
 
     /**

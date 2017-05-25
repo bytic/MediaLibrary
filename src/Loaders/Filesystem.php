@@ -16,6 +16,7 @@ class Filesystem extends AbstractLoader
      */
     function getMediaFiles()
     {
-        // TODO: Implement getMediaFiles() method.
+        $path = $this->getBasePath();
+        $files = $this->getFilesystem()->listFiles($path);
     }
 }

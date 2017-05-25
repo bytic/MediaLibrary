@@ -3,7 +3,7 @@
 namespace ByTIC\MediaLibrary\MediaRepository;
 
 use ByTIC\MediaLibrary\Collections\Collection;
-use ByTIC\MediaLibrary\HasMedia\Interfaces\HasMedia;
+use ByTIC\MediaLibrary\HasMedia\HasMediaTrait;
 use Nip\Records\Record;
 
 /**
@@ -20,12 +20,12 @@ class MediaRepository
     protected $collections;
 
     /**
-     * @var Record|HasMedia
+     * @var Record|HasMediaTrait
      */
     protected $record;
 
     /**
-     * @param Record|HasMedia $record
+     * @param Record|HasMediaTrait $record
      */
     public function __construct(Record $record)
     {
@@ -33,7 +33,7 @@ class MediaRepository
     }
 
     /**
-     * @return Record|HasMedia
+     * @return Record|HasMediaTrait
      */
     public function getRecord(): Record
     {

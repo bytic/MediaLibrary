@@ -15,7 +15,7 @@ trait HasMediaRepositoryTrait
     /**
      * @return MediaRepository|null
      */
-    protected function getMediaRepository()
+    public function getMediaRepository()
     {
         if ($this->mediaRepository == null) {
             $this->initMediaRepository();

@@ -12,6 +12,7 @@ use Nip\Collection;
 trait HasMediaTrait
 {
     use HasMediaRepositoryTrait;
+    use HasMediaFilesystemTrait;
 
     /**
      * Get media collection by its collectionName.

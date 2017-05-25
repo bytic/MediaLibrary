@@ -66,6 +66,7 @@ class Collection extends \Nip\Collection
     protected function hydrateLoader($loader)
     {
         $loader->setCollection($this);
+        $loader->setFilesystem($this->getMediaRepository()->getRecord()->getMediaFilesystemDisk());
         return $loader;
     }
 
