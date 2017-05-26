@@ -3,8 +3,10 @@
 namespace ByTIC\MediaLibrary\Media;
 
 use ByTIC\MediaLibrary\Collections\Collection;
+use ByTIC\MediaLibrary\UrlGenerator\UrlGeneratorFactory;
 use Nip\Filesystem\File;
 use Nip\Records\Record;
+use function Nip\url;
 
 /**
  * Class Media
@@ -45,22 +47,6 @@ class Media
     }
 
     /**
-     * @return File
-     */
-    public function getFile(): File
-    {
-        return $this->file;
-    }
-
-    /**
-     * @param File $file
-     */
-    public function setFile(File $file)
-    {
-        $this->file = $file;
-    }
-
-    /**
      * @return Collection
      */
     public function getCollection(): Collection
@@ -85,6 +71,22 @@ class Media
     }
 
     /**
+     * @return File
+     */
+    public function getFile(): File
+    {
+        return $this->file;
+    }
+
+    /**
+     * @param File $file
+     */
+    public function setFile(File $file)
+    {
+        $this->file = $file;
+    }
+
+    /**
      * Get the path to the original media file.
      *
      * @param string $conversionName
@@ -94,5 +96,43 @@ class Media
     public function getPath(string $conversionName = ''): string
     {
         return '';
+    }
+
+    /**
+     * @return string
+     * @deprecated Use getFullUrl
+     */
+    public function __toString()
+    {
+        return $this->getFullUrl();
+    }
+
+    /**
+     * Get the full url to a original media file.
+     *
+     * @param string $conversionName
+     *
+     * @return string
+     */
+    public function getFullUrl(string $conversionName = ''): string
+    {
+        return url()->to($this->getUrl($conversionName));
+    }
+
+    /**
+     * Get the url to a original media file.
+     *
+     * @param string $conversionName
+     *
+     * @return string
+     */
+    public function getUrl(string $conversionName = ''): string
+    {
+        $urlGenerator = UrlGeneratorFactory::createForMedia($this);
+        if ($conversionName !== '') {
+//            $conversion = ConversionCollection::createForMedia($this)->getByName($conversionName);
+//            $urlGenerator->setConversion($conversion);
+        }
+        return $urlGenerator->getUrl();
     }
 }

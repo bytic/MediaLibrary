@@ -5,6 +5,7 @@ namespace ByTIC\MediaLibrary\Loaders;
 use ByTIC\MediaLibrary\Collections\Collection;
 use ByTIC\MediaLibrary\Media\Media;
 use ByTIC\MediaLibrary\PathGenerator\PathGenerator;
+use ByTIC\MediaLibrary\PathGenerator\PathGeneratorFactory;
 use Nip\Filesystem\File;
 use Nip\Filesystem\FileDisk;
 
@@ -23,22 +24,6 @@ abstract class AbstractLoader implements LoaderInterface
      * @var Collection
      */
     protected $collection;
-
-    /**
-     * @return Collection
-     */
-    public function getCollection(): Collection
-    {
-        return $this->collection;
-    }
-
-    /**
-     * @param Collection $collection
-     */
-    public function setCollection(Collection $collection)
-    {
-        $this->collection = $collection;
-    }
 
     /**
      * @return FileDisk
@@ -76,14 +61,6 @@ abstract class AbstractLoader implements LoaderInterface
     abstract function getMediaFiles();
 
     /**
-     * @param $media
-     */
-    protected function appendMediaInCollection($media)
-    {
-        $this->getCollection()->appendMedia($media);
-    }
-
-    /**
      * @return Media
      */
     protected function newMedia()
@@ -95,11 +72,35 @@ abstract class AbstractLoader implements LoaderInterface
     }
 
     /**
+     * @return Collection
+     */
+    public function getCollection(): Collection
+    {
+        return $this->collection;
+    }
+
+    /**
+     * @param Collection $collection
+     */
+    public function setCollection(Collection $collection)
+    {
+        $this->collection = $collection;
+    }
+
+    /**
+     * @param $media
+     */
+    protected function appendMediaInCollection($media)
+    {
+        $this->getCollection()->appendMedia($media);
+    }
+
+    /**
      * @return string
      */
     protected function getBasePath()
     {
         $media = $this->newMedia();
-        return PathGenerator::getBasePathForMedia($media);
+        return PathGeneratorFactory::create()::getBasePathForMedia($media);
     }
 }

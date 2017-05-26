@@ -5,10 +5,10 @@ namespace ByTIC\MediaLibrary\PathGenerator;
 use ByTIC\MediaLibrary\Media\Media;
 
 /**
- * Class PathGenerator
+ * Class AbstractPathGenerator
  * @package ByTIC\MediaLibrary\PathGenerator
  */
-class PathGenerator
+abstract class AbstractPathGenerator
 {
 
     /**
