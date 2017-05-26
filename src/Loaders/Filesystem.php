@@ -17,6 +17,9 @@ class Filesystem extends AbstractLoader
     function getMediaFiles()
     {
         $path = $this->getBasePath();
-        $files = $this->getFilesystem()->listFiles($path);
+        $contents = $this->getFilesystem()->listContents($path);
+        foreach ($contents as $object) {
+//            echo $object['basename'].' is located at'.$object['path'].' and is a '.$object['type'];
+        }
     }
 }
