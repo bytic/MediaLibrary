@@ -41,11 +41,34 @@ class MediaRepository
     }
 
     /**
-     * @param Record $record
+     * @param Record|HasMediaTrait $record
      */
     public function setRecord(Record $record)
     {
         $this->record = $record;
+    }
+
+    /**
+     * @param string $collectionName
+     * @param array $filter
+     * @return Collection
+     */
+    public function getFilteredCollection(string $collectionName, $filter = []): Collection
+    {
+        return $this->applyFilterToCollection($this->getCollection($collectionName), $filter);
+    }
+
+    /**
+     * Apply given filters on media.
+     *
+     * @param Collection $collection
+     * @param array|callable $filter
+     *
+     * @return Collection
+     */
+    protected function applyFilterToCollection(Collection $collection, $filter): Collection
+    {
+        return $collection->filter($filter);
     }
 
     /**
@@ -62,29 +85,11 @@ class MediaRepository
 
     /**
      * @param string $collectionName
-     * @param array $filter
-     * @return Collection
-     */
-    public function getFilteredCollection(string $collectionName, $filter = []): Collection
-    {
-        return $this->applyFilterToCollection($this->getCollection($collectionName), $filter);
-    }
-
-    /**
-     * @param string $collectionName
      */
     protected function initCollection(string $collectionName)
     {
         $collection = $this->getNewCollection($collectionName);
         $this->addCollection($collection);
-    }
-
-    /**
-     * @param Collection $collection
-     */
-    protected function addCollection(Collection $collection)
-    {
-        $this->collections[$collection->getName()] = $collection;
     }
 
     /**
@@ -100,15 +105,10 @@ class MediaRepository
     }
 
     /**
-     * Apply given filters on media.
-     *
      * @param Collection $collection
-     * @param array|callable $filter
-     *
-     * @return Collection
      */
-    protected function applyFilterToCollection(Collection $collection, $filter): Collection
+    protected function addCollection(Collection $collection)
     {
-        return $collection->filter($filter);
+        $this->collections[$collection->getName()] = $collection;
     }
 }

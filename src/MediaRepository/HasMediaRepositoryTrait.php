@@ -23,11 +23,6 @@ trait HasMediaRepositoryTrait
         return $this->mediaRepository;
     }
 
-    protected function initMediaRepository()
-    {
-
-    }
-
     /**
      * @param MediaRepository $repository
      * @return void
@@ -37,14 +32,21 @@ trait HasMediaRepositoryTrait
         $this->mediaRepository = $repository;
     }
 
+    protected function initMediaRepository()
+    {
+        $mediaRepository = $this->newMediaRepository();
+        $mediaRepository = $this->hydrateMediaRepository($mediaRepository);
+        $this->setMediaRepository($mediaRepository);
+    }
+
     /**
      * @return MediaRepository
      */
     protected function newMediaRepository()
     {
-       $class = $this->getMediaRepositoryClass();
-       $repository = new $class();
-       return $repository;
+        $class = $this->getMediaRepositoryClass();
+        $repository = new $class();
+        return $repository;
     }
 
     /**
@@ -53,5 +55,14 @@ trait HasMediaRepositoryTrait
     protected function getMediaRepositoryClass()
     {
         return MediaRepository::class;
+    }
+
+    /**
+     * @param $mediaRepository
+     * @return MediaRepository
+     */
+    protected function hydrateMediaRepository($mediaRepository)
+    {
+        return $mediaRepository;
     }
 }

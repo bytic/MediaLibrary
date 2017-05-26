@@ -4,6 +4,7 @@ namespace ByTIC\MediaLibrary\HasMedia;
 
 use ByTIC\MediaLibrary\Collections\Collection;
 use ByTIC\MediaLibrary\MediaRepository\HasMediaRepositoryTrait;
+use ByTIC\MediaLibrary\MediaRepository\MediaRepository;
 
 /**
  * Trait HasMediaTrait
@@ -28,4 +29,14 @@ trait HasMediaTrait
         return $this->getMediaRepository()->getFilteredCollection($collectionName, $filters);
     }
 
+
+    /**
+     * @param MediaRepository $mediaRepository
+     * @return MediaRepository
+     */
+    protected function hydrateMediaRepository($mediaRepository)
+    {
+        $mediaRepository->setRecord($this);
+        return $mediaRepository;
+    }
 }
