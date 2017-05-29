@@ -25,14 +25,6 @@ class MediaRepository
     protected $record;
 
     /**
-     * @param Record|HasMediaTrait $record
-     */
-    public function __construct(Record $record)
-    {
-        $this->setRecord($record);
-    }
-
-    /**
      * @return Record|HasMediaTrait
      */
     public function getRecord(): Record
@@ -77,7 +69,7 @@ class MediaRepository
      */
     public function getCollection(string $collectionName): Collection
     {
-        if (isset($this->collections[$collectionName])) {
+        if (!isset($this->collections[$collectionName])) {
             $this->initCollection($collectionName);
         }
         return $this->collections[$collectionName];
@@ -89,6 +81,7 @@ class MediaRepository
     protected function initCollection(string $collectionName)
     {
         $collection = $this->getNewCollection($collectionName);
+        $collection->loadMedia();
         $this->addCollection($collection);
     }
 

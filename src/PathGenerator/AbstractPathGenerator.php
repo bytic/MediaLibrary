@@ -17,7 +17,11 @@ abstract class AbstractPathGenerator
      */
     public static function getBasePathForMedia($media)
     {
-        return '/' . $media->getCollection()->getName() . '/' . $media->getRecord()->getPrimaryKey() . '/';
+
+        return '/' . $media->getCollection()->getName()
+            . '/' . $media->getRecord()->getManager()->getTable()
+            . '/' . $media->getRecord()->getPrimaryKey()
+            . '/';
     }
 
 }

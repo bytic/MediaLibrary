@@ -3,7 +3,6 @@
 namespace ByTIC\MediaLibrary\Media;
 
 use ByTIC\MediaLibrary\Collections\Collection;
-use ByTIC\MediaLibrary\UrlGenerator\UrlGeneratorFactory;
 use Nip\Filesystem\File;
 use Nip\Records\Record;
 use function Nip\url;
@@ -67,7 +66,7 @@ class Media
      */
     public function getName()
     {
-        return $this->getFile()->getPath();
+        return $this->getFile()->getName();
     }
 
     /**
@@ -128,11 +127,12 @@ class Media
      */
     public function getUrl(string $conversionName = ''): string
     {
-        $urlGenerator = UrlGeneratorFactory::createForMedia($this);
-        if ($conversionName !== '') {
-//            $conversion = ConversionCollection::createForMedia($this)->getByName($conversionName);
-//            $urlGenerator->setConversion($conversion);
-        }
-        return $urlGenerator->getUrl();
+        return $this->getFile()->getUrl();
+//        $urlGenerator = UrlGeneratorFactory::createForMedia($this);
+//        if ($conversionName !== '') {
+////            $conversion = ConversionCollection::createForMedia($this)->getByName($conversionName);
+////            $urlGenerator->setConversion($conversion);
+//        }
+//        return $urlGenerator->getUrl();
     }
 }

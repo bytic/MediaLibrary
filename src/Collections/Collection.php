@@ -43,6 +43,34 @@ class Collection extends \Nip\Collection
         $this->name = $name;
     }
 
+    /** @noinspection PhpUnusedParameterInspection
+     *
+     * @param $filter
+     * @return array|Collection
+     */
+    public function filter($filter)
+    {
+        return $this;
+    }
+
+    /**
+     * @return Media
+     */
+    public function getDefaultMedia()
+    {
+        return reset($this->items);
+    }
+
+    public function loadMedia()
+    {
+        if ($this->isMediaLoaded())
+            return;
+
+        $this->getLoader()->loadMedia();
+
+        $this->setMediaLoaded(true);
+    }
+
     /**
      * @return bool
      */
@@ -57,6 +85,16 @@ class Collection extends \Nip\Collection
     public function setMediaLoaded(bool $mediaLoaded)
     {
         $this->mediaLoaded = $mediaLoaded;
+    }
+
+    /**
+     * Append a media object inside the collection
+     *
+     * @param Media $media
+     */
+    public function appendMedia(Media $media)
+    {
+        $this->items[$media->getName()] = $media;
     }
 
     /**
@@ -76,43 +114,5 @@ class Collection extends \Nip\Collection
     protected function getLoaderClass()
     {
         return Filesystem::class;
-    }
-
-    /** @noinspection PhpUnusedParameterInspection
-     *
-     * @param $filter
-     * @return array|Collection
-     */
-    public function filter($filter)
-    {
-        return $this->items;
-    }
-
-    /**
-     * @return Media
-     */
-    public function getDefaultMedia()
-    {
-        return reset($this->items);
-    }
-
-    protected function loadMedia()
-    {
-        if ($this->isMediaLoaded())
-            return;
-
-        $this->getLoader()->loadMedia();
-
-        $this->setMediaLoaded(true);
-    }
-
-    /**
-     * Append a media object inside the collection
-     *
-     * @param Media $media
-     */
-    public function appendMedia(Media $media)
-    {
-        $this->items[$media->getName()] = $media;
     }
 }
