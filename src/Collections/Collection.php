@@ -58,7 +58,19 @@ class Collection extends \Nip\Collection
      */
     public function getDefaultMedia()
     {
-        return reset($this->items);
+        if (count($this->items)) {
+            return reset($this->items);
+        }
+        return $this->compileDefaultMedia();
+    }
+
+    /**
+     * @return Media
+     */
+    protected function compileDefaultMedia()
+    {
+        $media = new Media();
+        return $media;
     }
 
     public function loadMedia()

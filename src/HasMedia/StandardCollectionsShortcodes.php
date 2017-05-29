@@ -22,4 +22,28 @@ trait StandardCollectionsShortcodes
         return $this->getMedia('images')->getDefaultMedia();
     }
 
+    /**
+     * @return Media
+     */
+    public function getLogo()
+    {
+        return $this->getMedia('logos')->getDefaultMedia();
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasLogo()
+    {
+        return $this->getMedia('logos')->count() > 0;
+    }
+
+    /**
+     * @return Media
+     */
+    public function getCover()
+    {
+        return $this->getMedia('covers')->getDefaultMedia();
+    }
+
 }

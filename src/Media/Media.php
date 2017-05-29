@@ -72,7 +72,7 @@ class Media
     /**
      * @return File
      */
-    public function getFile(): File
+    public function getFile()
     {
         return $this->file;
     }
@@ -127,12 +127,23 @@ class Media
      */
     public function getUrl(string $conversionName = ''): string
     {
-        return $this->getFile()->getUrl();
+        if ($this->hasFile()) {
+            return $this->getFile()->getUrl();
+        }
+        return '';
 //        $urlGenerator = UrlGeneratorFactory::createForMedia($this);
 //        if ($conversionName !== '') {
 ////            $conversion = ConversionCollection::createForMedia($this)->getByName($conversionName);
 ////            $urlGenerator->setConversion($conversion);
 //        }
 //        return $urlGenerator->getUrl();
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasFile()
+    {
+        return $this->getFile() instanceof File;
     }
 }
