@@ -27,22 +27,6 @@ class Collection extends \Nip\Collection
      */
     protected $mediaLoaded = false;
 
-    /**
-     * @return string
-     */
-    public function getName(): string
-    {
-        return $this->name;
-    }
-
-    /**
-     * @param string $name
-     */
-    public function setName(string $name)
-    {
-        $this->name = $name;
-    }
-
     /** @noinspection PhpUnusedParameterInspection
      *
      * @param $filter
@@ -69,8 +53,63 @@ class Collection extends \Nip\Collection
      */
     protected function compileDefaultMedia()
     {
-        $media = new Media();
+        $media = $this->newMedia();
         return $media;
+    }
+
+    /**
+     * @return Media
+     */
+    public function newMedia()
+    {
+        $mediaFile = new Media();
+        $mediaFile->setCollection($this);
+        $mediaFile->setRecord($this->getMediaRepository()->getRecord());
+        return $mediaFile;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDefaultMediaUrl()
+    {
+        return '/assets/images/'
+            . $this->getRecord()->getManager()->getTable() . '/'
+            . $this->getDefaultFileName();
+    }
+
+    /**
+     * @return \ByTIC\MediaLibrary\HasMedia\HasMediaTrait|\Nip\Records\Record
+     */
+    protected function getRecord()
+    {
+        return $this->getMediaRepository()->getRecord();
+    }
+
+    /**
+     * @return string
+     */
+    protected function getDefaultFileName()
+    {
+        $name = inflector()->singularize($this->getName());
+        $extension = $this->getName() == 'logos' ? 'png' : 'jpg';
+        return $name . '.' . $extension;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setName(string $name)
+    {
+        $this->name = $name;
     }
 
     public function loadMedia()
@@ -107,6 +146,22 @@ class Collection extends \Nip\Collection
     public function appendMedia(Media $media)
     {
         $this->items[$media->getName()] = $media;
+    }
+
+    /**
+     * @return string
+     */
+    protected function getDefaultConversion()
+    {
+        return 'default';
+    }
+
+    /**
+     * @return bool
+     */
+    protected function hasConversions()
+    {
+        return true;
     }
 
     /**

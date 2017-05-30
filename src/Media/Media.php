@@ -46,22 +46,6 @@ class Media
     }
 
     /**
-     * @return Collection
-     */
-    public function getCollection(): Collection
-    {
-        return $this->collection;
-    }
-
-    /**
-     * @param Collection $collection
-     */
-    public function setCollection(Collection $collection)
-    {
-        $this->collection = $collection;
-    }
-
-    /**
      * @return string
      */
     public function getName()
@@ -130,7 +114,7 @@ class Media
         if ($this->hasFile()) {
             return $this->getFile()->getUrl();
         }
-        return '';
+        return $this->getCollection()->getDefaultMediaUrl();
 //        $urlGenerator = UrlGeneratorFactory::createForMedia($this);
 //        if ($conversionName !== '') {
 ////            $conversion = ConversionCollection::createForMedia($this)->getByName($conversionName);
@@ -145,5 +129,21 @@ class Media
     public function hasFile()
     {
         return $this->getFile() instanceof File;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getCollection(): Collection
+    {
+        return $this->collection;
+    }
+
+    /**
+     * @param Collection $collection
+     */
+    public function setCollection(Collection $collection)
+    {
+        $this->collection = $collection;
     }
 }
