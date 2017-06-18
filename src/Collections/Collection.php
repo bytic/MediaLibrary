@@ -73,6 +73,10 @@ class Collection extends \Nip\Collection
      */
     public function getDefaultMediaUrl()
     {
+        if (method_exists($this->getRecord()->getManager(), 'getDefaultMediaUrl')) {
+            return $this->getRecord()->getManager()->getDefaultMediaUrl();
+        }
+
         return '/assets/images/'
             . $this->getRecord()->getManager()->getTable() . '/'
             . $this->getDefaultFileName();
