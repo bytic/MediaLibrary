@@ -46,4 +46,12 @@ trait StandardCollectionsShortcodes
         return $this->getMedia('covers')->getDefaultMedia();
     }
 
+    /**
+     * @return bool
+     */
+    public function hasCover()
+    {
+        return $this->getMedia('covers')->count() > 0;
+    }
+
 }
