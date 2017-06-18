@@ -81,9 +81,7 @@ class Collection extends \Nip\Collection
             return $this->getRecord()->getManager()->getDefaultMediaUrl($this);
         }
 
-        return '/assets/images/'
-            . $this->getRecord()->getManager()->getTable() . '/'
-            . $this->getDefaultFileName();
+        return $this->getDefaultMediaGenericUrl();
     }
 
     /**
@@ -92,6 +90,16 @@ class Collection extends \Nip\Collection
     protected function getRecord()
     {
         return $this->getMediaRepository()->getRecord();
+    }
+
+    /**
+     * @return string
+     */
+    public function getDefaultMediaGenericUrl()
+    {
+        return '/assets/images/'
+            . $this->getRecord()->getManager()->getTable() . '/'
+            . $this->getDefaultFileName();
     }
 
     /**
@@ -122,8 +130,9 @@ class Collection extends \Nip\Collection
 
     public function loadMedia()
     {
-        if ($this->isMediaLoaded())
+        if ($this->isMediaLoaded()) {
             return;
+        }
 
         $this->getLoader()->loadMedia();
 
