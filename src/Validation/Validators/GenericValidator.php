@@ -1,12 +1,12 @@
 <?php
 
-namespace ByTIC\MediaLibrary\Validation;
+namespace ByTIC\MediaLibrary\Validation\Validators;
 
 /**
- * Class ImageValidator
- * @package ByTIC\MediaLibrary\Validation
+ * Class GenericValidator
+ * @package ByTIC\MediaLibrary\Validation\Validators
  */
-abstract class AbstractValidator implements ValidatorInterface
+class GenericValidator
 {
 
     /**

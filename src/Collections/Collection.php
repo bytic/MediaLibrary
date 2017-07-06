@@ -7,6 +7,7 @@ use ByTIC\MediaLibrary\Loaders\Filesystem;
 use ByTIC\MediaLibrary\Loaders\HasLoaderTrait;
 use ByTIC\MediaLibrary\Media\Media;
 use ByTIC\MediaLibrary\MediaRepository\HasMediaRepositoryTrait;
+use ByTIC\MediaLibrary\Validation\Traits\HasValidatorTrait;
 
 /**
  * Class Collection
@@ -16,11 +17,17 @@ class Collection extends \Nip\Collection
 {
     use HasLoaderTrait;
     use HasMediaRepositoryTrait;
+    use HasValidatorTrait;
 
     /**
      * @var string
      */
     protected $name;
+
+    /**
+     * @var string
+     */
+    protected $mediaType = 'files';
 
     /**
      * @var bool
@@ -163,6 +170,22 @@ class Collection extends \Nip\Collection
     public function appendMedia(Media $media)
     {
         $this->items[$media->getName()] = $media;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMediaType()
+    {
+        return $this->mediaType;
+    }
+
+    /**
+     * @param mixed $mediaType
+     */
+    public function setMediaType($mediaType)
+    {
+        $this->mediaType = $mediaType;
     }
 
     /**
