@@ -23,6 +23,14 @@ trait StandardCollectionsShortcodes
     }
 
     /**
+     * @return Collection|Media[]
+     */
+    public function getImages()
+    {
+        return $this->getMedia('images');
+    }
+
+    /**
      * @return Media
      */
     public function getLogo()

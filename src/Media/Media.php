@@ -146,4 +146,12 @@ class Media
     {
         $this->collection = $collection;
     }
+
+    /**
+     * @return bool
+     */
+    public function isDefault()
+    {
+        return $this === $this->getCollection()->getDefaultMedia();
+    }
 }
