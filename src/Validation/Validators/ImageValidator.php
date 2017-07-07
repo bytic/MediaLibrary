@@ -30,7 +30,6 @@ class ImageValidator extends AbstractValidator
         return true;
     }
 
-
     /**
      * @param $value
      * @param ConstraintInterface $constraint

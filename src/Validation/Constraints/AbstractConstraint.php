@@ -20,7 +20,7 @@ abstract class AbstractConstraint implements ConstraintInterface
     /**
      * @var string
      */
-    protected $type;
+    protected $name = null;
 
     public function init()
     {
@@ -28,7 +28,6 @@ abstract class AbstractConstraint implements ConstraintInterface
             return;
         }
         $this->doInit();
-        $this->type = strtolower(str_replace('Contraint', '', $this->getClassFirstName()));
         $this->init = true;
     }
 
@@ -39,7 +38,7 @@ abstract class AbstractConstraint implements ConstraintInterface
 
     protected function initVariablesFromConfig()
     {
-        $configKey = 'media-library.contraints.' . $this->getType();
+        $configKey = 'media-library.contraints.' . $this->getName();
         if (config()->has($configKey)) {
             $variables = config()->get($configKey);
             $this->applyVariables($variables);
@@ -49,9 +48,25 @@ abstract class AbstractConstraint implements ConstraintInterface
     /**
      * @return string
      */
-    public function getType(): string
+    public function getName(): string
     {
-        return $this->type;
+        if ($this->name === null) {
+            $this->initName();
+        }
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setName(string $name)
+    {
+        $this->name = $name;
+    }
+
+    protected function initName()
+    {
+        $this->name = strtolower(str_replace('Constraint', '', $this->getClassFirstName()));
     }
 
     /**

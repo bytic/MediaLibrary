@@ -2,21 +2,30 @@
 
 namespace ByTIC\MediaLibrary\Validation\Validators;
 
+use ByTIC\MediaLibrary\Validation\Constraints\ConstraintInterface;
+
 /**
  * Class GenericValidator
  * @package ByTIC\MediaLibrary\Validation\Validators
  */
-class GenericValidator
+class GenericValidator extends AbstractValidator
 {
-
     /**
-     * @param $file
-     * @param $validatorGroups
+     * @param ConstraintInterface $constraint
+     * @return boolean
      */
-    public static function validate($file, $validatorGroups)
+    protected function contraintNeedsValidation(ConstraintInterface $constraint): bool
     {
-        $validator = \Validator::make($data, $rules, $messages);
+        return false;
     }
 
-
+    /**
+     * @param $value
+     * @param ConstraintInterface $constraint
+     * @return mixed
+     */
+    protected function doValidation($value, ConstraintInterface $constraint)
+    {
+        return;
+    }
 }

@@ -81,7 +81,7 @@ class MediaRepository
     protected function initCollection(string $collectionName)
     {
         $collection = $this->getNewCollection($collectionName);
-        $collection->loadMedia();
+        $this->prepareCollection($collection);
         $this->addCollection($collection);
     }
 
@@ -95,6 +95,17 @@ class MediaRepository
         $collection->setName($collectionName);
         $collection->setMediaRepository($this);
         return $collection;
+    }
+
+    /**
+     * @param Collection $collection
+     */
+    protected function prepareCollection($collection)
+    {
+        if (in_array($collection->getName(), ['images', 'covers', 'logos'])) {
+            $collection->setMediaType('images');
+        }
+        $collection->loadMedia();
     }
 
     /**

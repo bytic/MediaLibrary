@@ -7,6 +7,7 @@ use ByTIC\MediaLibrary\Loaders\Filesystem;
 use ByTIC\MediaLibrary\Loaders\HasLoaderTrait;
 use ByTIC\MediaLibrary\Media\Media;
 use ByTIC\MediaLibrary\MediaRepository\HasMediaRepositoryTrait;
+use ByTIC\MediaLibrary\Validation\Constraints\Traits\HasConstraintTrait;
 use ByTIC\MediaLibrary\Validation\Traits\HasValidatorTrait;
 
 /**
@@ -18,6 +19,7 @@ class Collection extends \Nip\Collection
     use HasLoaderTrait;
     use HasMediaRepositoryTrait;
     use HasValidatorTrait;
+    use HasConstraintTrait;
 
     /**
      * @var string
@@ -28,6 +30,11 @@ class Collection extends \Nip\Collection
      * @var string
      */
     protected $mediaType = 'files';
+
+    /**
+     * @var string
+     */
+    protected $contraintName = null;
 
     /**
      * @var bool
@@ -186,6 +193,22 @@ class Collection extends \Nip\Collection
     public function setMediaType($mediaType)
     {
         $this->mediaType = $mediaType;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getContraintName()
+    {
+        return $this->contraintName;
+    }
+
+    /**
+     * @param string $contraintName
+     */
+    public function setContraintName(string $contraintName)
+    {
+        $this->contraintName = $contraintName;
     }
 
     /**

@@ -23,19 +23,14 @@ abstract class AbstractValidator implements ValidatorInterface
     protected $collection;
 
     /**
-     * @var AbstractConstraint|null
-     */
-    protected $contraint = null;
-
-    /**
      * @param $value
      * @param $constraint
      * @return mixed|void
      */
     public function validate($value, ConstraintInterface $constraint = null)
     {
-        $constraint = $constraint ? $constraint : $this->getConstraint();
-        $this->isValidContraint($constraint);
+        $constraint = $constraint ? $constraint : $this->getCollection()->getConstraint();
+        $this->isValidConstraint($constraint);
 
         if (!$this->contraintNeedsValidation($constraint)) {
             return;
@@ -43,76 +38,6 @@ abstract class AbstractValidator implements ValidatorInterface
 
         $this->doValidation($value, $constraint);
     }
-
-    /**
-     * @return AbstractConstraint|null
-     */
-    public function getConstraint()
-    {
-        if ($this->contraint == null) {
-            $this->initContraint();
-        }
-        return $this->contraint;
-    }
-
-    protected function initContraint()
-    {
-        $constraint = $this->newContraint();
-        $this->setContraint($constraint);
-    }
-
-    /**
-     * @return AbstractConstraint
-     */
-    protected function newContraint()
-    {
-        $class = $this->getContraintClassName();
-        return new $class();
-    }
-
-    /**
-     * @return mixed
-     */
-    protected function getContraintClassName()
-    {
-        $className = $this->getClassName();
-        $firstName = $this->getClassFirstName();
-        $contraintFirstName = str_replace('Validator', 'Constraint', $firstName);
-        return str_replace('\Validators\\' . $firstName, '\Contraints\\' . $contraintFirstName, $className);
-    }
-
-    /**
-     * @param AbstractConstraint|null $contraint
-     */
-    public function setContraint($contraint)
-    {
-        $this->contraint = $contraint;
-    }
-
-    /**
-     * @param AbstractConstraint $constraint
-     */
-    protected function isValidContraint($constraint)
-    {
-        $className = $this->getContraintClassName();
-
-        if (!$constraint instanceof $className) {
-            throw new UnexpectedTypeException($constraint, $className);
-        }
-    }
-
-    /**
-     * @param ConstraintInterface $constraint
-     * @return boolean
-     */
-    abstract protected function contraintNeedsValidation(ConstraintInterface $constraint): bool;
-
-    /**
-     * @param $value
-     * @param ConstraintInterface $constraint
-     * @return mixed
-     */
-    abstract protected function doValidation($value, ConstraintInterface $constraint);
 
     /**
      * @return Collection
@@ -131,20 +56,38 @@ abstract class AbstractValidator implements ValidatorInterface
     }
 
     /**
-     * @return AbstractConstraint
+     * @param AbstractConstraint $constraint
      */
-    protected function generateContraint()
+    protected function isValidConstraint($constraint)
     {
-        $constraint = $this->newContraint();
-        $this->hydrateContraint($constraint);
-        return $constraint;
+        $className = $this->getConstraintClassName();
+
+        if (!$constraint instanceof $className) {
+            throw new UnexpectedTypeException($constraint, $className);
+        }
     }
 
     /**
-     * @param AbstractConstraint $constraint
+     * @return mixed
      */
-    protected function hydrateContraint($constraint)
+    public function getConstraintClassName()
     {
-        $constraint->init();
+        $className = $this->getClassName();
+        $firstName = $this->getClassFirstName();
+        $contraintFirstName = str_replace('Validator', 'Constraint', $firstName);
+        return str_replace('\Validators\\' . $firstName, '\Constraints\\' . $contraintFirstName, $className);
     }
+
+    /**
+     * @param ConstraintInterface $constraint
+     * @return boolean
+     */
+    abstract protected function contraintNeedsValidation(ConstraintInterface $constraint): bool;
+
+    /**
+     * @param $value
+     * @param ConstraintInterface $constraint
+     * @return mixed
+     */
+    abstract protected function doValidation($value, ConstraintInterface $constraint);
 }
