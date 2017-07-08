@@ -77,13 +77,4 @@ trait HasConstraintTrait
         }
         $constraint->init();
     }
-
-    /**
-     * @return bool
-     */
-    public function hasCustomValidator()
-    {
-        return false;
-    }
-
 }
