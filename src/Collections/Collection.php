@@ -2,6 +2,7 @@
 
 namespace ByTIC\MediaLibrary\Collections;
 
+use ByTIC\MediaLibrary\Collections\UploadStrategy\Traits\HasStrategyTrait;
 use ByTIC\MediaLibrary\Loaders\AbstractLoader;
 use ByTIC\MediaLibrary\Loaders\Filesystem;
 use ByTIC\MediaLibrary\Loaders\HasLoaderTrait;
@@ -9,6 +10,7 @@ use ByTIC\MediaLibrary\Media\Media;
 use ByTIC\MediaLibrary\MediaRepository\HasMediaRepositoryTrait;
 use ByTIC\MediaLibrary\Validation\Constraints\Traits\HasConstraintTrait;
 use ByTIC\MediaLibrary\Validation\Traits\HasValidatorTrait;
+use Nip\Filesystem\FileDisk;
 
 /**
  * Class Collection
@@ -19,7 +21,9 @@ class Collection extends \Nip\Collection
     use HasLoaderTrait;
     use HasMediaRepositoryTrait;
     use HasValidatorTrait;
+    use HasStrategyTrait;
     use HasConstraintTrait;
+    use Traits\HasDefaultMediaTrait;
 
     /**
      * @var string
@@ -41,35 +45,22 @@ class Collection extends \Nip\Collection
      */
     protected $mediaLoaded = false;
 
-    /** @noinspection PhpUnusedParameterInspection
-     *
+    /**
+     * @var FileDisk
+     */
+    protected $filesystem = null;
+
+    /**
      * @param $filter
      * @return array|Collection
+     *
+     * @noinspection PhpUnusedParameterInspection
      */
     public function filter($filter)
     {
         return $this;
     }
 
-    /**
-     * @return Media
-     */
-    public function getDefaultMedia()
-    {
-        if (count($this->items)) {
-            return reset($this->items);
-        }
-        return $this->compileDefaultMedia();
-    }
-
-    /**
-     * @return Media
-     */
-    protected function compileDefaultMedia()
-    {
-        $media = $this->newMedia();
-        return $media;
-    }
 
     /**
      * @return Media
@@ -80,50 +71,6 @@ class Collection extends \Nip\Collection
         $mediaFile->setCollection($this);
         $mediaFile->setRecord($this->getMediaRepository()->getRecord());
         return $mediaFile;
-    }
-
-    /**
-     * @return string
-     */
-    public function getDefaultMediaUrl()
-    {
-        if (method_exists($this->getRecord(), 'getDefaultMediaUrl')) {
-            return $this->getRecord()->getDefaultMediaUrl($this);
-        }
-
-        if (method_exists($this->getRecord()->getManager(), 'getDefaultMediaUrl')) {
-            return $this->getRecord()->getManager()->getDefaultMediaUrl($this);
-        }
-
-        return $this->getDefaultMediaGenericUrl();
-    }
-
-    /**
-     * @return \ByTIC\MediaLibrary\HasMedia\HasMediaTrait|\Nip\Records\Record
-     */
-    protected function getRecord()
-    {
-        return $this->getMediaRepository()->getRecord();
-    }
-
-    /**
-     * @return string
-     */
-    public function getDefaultMediaGenericUrl()
-    {
-        return '/assets/images/'
-            . $this->getRecord()->getManager()->getTable() . '/'
-            . $this->getDefaultFileName();
-    }
-
-    /**
-     * @return string
-     */
-    protected function getDefaultFileName()
-    {
-        $name = inflector()->singularize($this->getName());
-        $extension = $this->getName() == 'logos' ? 'png' : 'jpg';
-        return $name . '.' . $extension;
     }
 
     /**
@@ -214,6 +161,22 @@ class Collection extends \Nip\Collection
     /**
      * @return string
      */
+    public function getOriginalPath()
+    {
+        return 'full';
+    }
+
+    /**
+     * @return \ByTIC\MediaLibrary\HasMedia\HasMediaTrait|\Nip\Records\Record
+     */
+    protected function getRecord()
+    {
+        return $this->getMediaRepository()->getRecord();
+    }
+
+    /**
+     * @return string
+     */
     protected function getDefaultConversion()
     {
         return 'default';
@@ -234,8 +197,40 @@ class Collection extends \Nip\Collection
     protected function hydrateLoader($loader)
     {
         $loader->setCollection($this);
-        $loader->setFilesystem($this->getMediaRepository()->getRecord()->getMediaFilesystemDisk());
+        $loader->setFilesystem($this->getFilesystem());
         return $loader;
+    }
+
+    /**
+     * @return FileDisk
+     */
+    public function getFilesystem()
+    {
+        if ($this->filesystem == null) {
+            $this->initFilesystem();
+        }
+        return $this->filesystem;
+    }
+
+    /**
+     * @param mixed $filesystem
+     */
+    public function setFilesystem($filesystem)
+    {
+        $this->filesystem = $filesystem;
+    }
+
+    protected function initFilesystem()
+    {
+        $this->setFilesystem($this->generateFilesystem());
+    }
+
+    /**
+     * @return FileDisk
+     */
+    protected function generateFilesystem()
+    {
+        return $this->getMediaRepository()->getRecord()->getMediaFilesystemDisk();
     }
 
     /**

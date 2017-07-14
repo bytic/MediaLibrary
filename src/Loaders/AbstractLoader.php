@@ -33,7 +33,7 @@ abstract class AbstractLoader implements LoaderInterface
     }
 
     /**
-     * @param mixed $filesystem
+     * @param FileDisk $filesystem
      */
     public function setFilesystem($filesystem)
     {

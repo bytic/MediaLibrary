@@ -3,6 +3,7 @@
 namespace ByTIC\MediaLibrary\Media;
 
 use ByTIC\MediaLibrary\Collections\Collection;
+use ByTIC\MediaLibrary\HasMedia\HasMediaTrait;
 use Nip\Filesystem\File;
 use Nip\Records\Record;
 use function Nip\url;
@@ -38,7 +39,7 @@ class Media
     }
 
     /**
-     * @param Record $record
+     * @param Record|HasMediaTrait $record
      */
     public function setRecord(Record $record)
     {

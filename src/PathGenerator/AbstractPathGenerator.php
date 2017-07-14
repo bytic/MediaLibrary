@@ -15,6 +15,16 @@ abstract class AbstractPathGenerator
      * @param Media $media
      * @return string
      */
+    public static function getBasePathForMediaOriginal($media)
+    {
+        return self::getBasePathForMedia($media)
+            . DIRECTORY_SEPARATOR . $media->getCollection()->getOriginalPath();
+    }
+
+    /**
+     * @param Media $media
+     * @return string
+     */
     public static function getBasePathForMedia($media)
     {
 
@@ -22,6 +32,16 @@ abstract class AbstractPathGenerator
             . '/' . $media->getRecord()->getManager()->getTable()
             . '/' . $media->getRecord()->getPrimaryKey()
             . '/';
+    }
+
+    /**
+     * @param Media $media
+     * @param string $conversionName
+     * @return string
+     */
+    public static function getBasePathForMediaConversion($media, $conversionName)
+    {
+        return self::getBasePathForMedia($media) . DIRECTORY_SEPARATOR . $conversionName;
     }
 
 }
