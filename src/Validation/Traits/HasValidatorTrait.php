@@ -12,34 +12,14 @@ use ByTIC\MediaLibrary\Validation\Validators\{
  */
 trait HasValidatorTrait
 {
-    /**
-     * @var null|AbstractValidator
-     */
-    protected $validator = null;
 
     /**
      * @return AbstractValidator|null
      */
     public function getValidator()
     {
-        if ($this->validator === null) {
-            $this->initValidator();
-        }
-        return $this->validator;
-    }
-
-    /**
-     * @param AbstractValidator|null $validator
-     */
-    public function setValidator($validator)
-    {
-        $this->validator = $validator;
-    }
-
-    protected function initValidator()
-    {
         $validator = $this->generateValidator();
-        $this->setValidator($validator);
+        return $validator;
     }
 
     /**

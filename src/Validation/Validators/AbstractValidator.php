@@ -4,9 +4,9 @@ namespace ByTIC\MediaLibrary\Validation\Validators;
 
 use ByTIC\MediaLibrary\Collections\Collection;
 use ByTIC\MediaLibrary\Exceptions\UnexpectedTypeException;
-use ByTIC\MediaLibrary\Validation\Constraints\AbstractConstraint;
 use ByTIC\MediaLibrary\Validation\Constraints\ConstraintInterface;
 use ByTIC\MediaLibrary\Validation\Traits\HasValidatorTrait;
+use ByTIC\MediaLibrary\Validation\Violations\ViolationsBag;
 use Nip\Utility\Traits\NameWorksTrait;
 
 /**
@@ -18,25 +18,44 @@ abstract class AbstractValidator implements ValidatorInterface
     use NameWorksTrait;
 
     /**
+     * @var mixed
+     */
+    protected $value;
+
+    /**
+     * @var mixed
+     */
+    protected $constraint;
+
+    /**
      * @var Collection
      */
     protected $collection;
 
     /**
+     * @var ViolationsBag
+     */
+    protected $violations;
+
+    /**
      * @param $value
      * @param $constraint
-     * @return mixed|void
+     * @return ViolationsBag
      */
     public function validate($value, ConstraintInterface $constraint = null)
     {
         $constraint = $constraint ? $constraint : $this->getCollection()->getConstraint();
-        $this->isValidConstraint($constraint);
+        $this->setValue($value);
+        $this->setConstraint($constraint);
+        $this->isValidConstraint();
 
-        if (!$this->contraintNeedsValidation($constraint)) {
-            return;
+        $this->violations = new ViolationsBag();
+
+        if ($this->contraintNeedsValidation()) {
+            $this->doValidation();
         }
 
-        $this->doValidation($value, $constraint);
+        return $this->violations;
     }
 
     /**
@@ -55,12 +74,10 @@ abstract class AbstractValidator implements ValidatorInterface
         $this->collection = $collection;
     }
 
-    /**
-     * @param AbstractConstraint $constraint
-     */
-    protected function isValidConstraint($constraint)
+    protected function isValidConstraint()
     {
         $className = $this->getConstraintClassName();
+        $constraint = $this->getConstraint();
 
         if (!$constraint instanceof $className) {
             throw new UnexpectedTypeException($constraint, $className);
@@ -79,15 +96,53 @@ abstract class AbstractValidator implements ValidatorInterface
     }
 
     /**
-     * @param ConstraintInterface $constraint
-     * @return boolean
-     */
-    abstract protected function contraintNeedsValidation(ConstraintInterface $constraint): bool;
-
-    /**
-     * @param $value
-     * @param ConstraintInterface $constraint
      * @return mixed
      */
-    abstract protected function doValidation($value, ConstraintInterface $constraint);
+    public function getConstraint()
+    {
+        return $this->constraint;
+    }
+
+    /**
+     * @param mixed $constraint
+     */
+    public function setConstraint($constraint)
+    {
+        $this->constraint = $constraint;
+    }
+
+    /**
+     * @return boolean
+     */
+    abstract protected function contraintNeedsValidation(): bool;
+
+    /**
+     * @return void
+     */
+    abstract protected function doValidation();
+
+    /**
+     * @return mixed
+     */
+    public function getValue()
+    {
+        return $this->value;
+    }
+
+    /**
+     * @param mixed $value
+     */
+    public function setValue($value)
+    {
+        $this->value = $value;
+    }
+
+    /**
+     * @param $attribute
+     * @param $parameters
+     */
+    protected function addViolation($constraint, $code, $parameters)
+    {
+
+    }
 }
