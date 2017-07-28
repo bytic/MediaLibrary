@@ -3,6 +3,7 @@
 namespace ByTIC\MediaLibrary\HasMedia;
 
 use ByTIC\MediaLibrary\Collections\Collection;
+use ByTIC\MediaLibrary\MediaRepository\HasMediaRepositoryTrait;
 use ByTIC\MediaLibrary\MediaRepository\MediaRepository;
 
 /**
@@ -11,7 +12,7 @@ use ByTIC\MediaLibrary\MediaRepository\MediaRepository;
  */
 trait HasMediaTrait
 {
-    use Traits\HasMediaRepositoryTrait;
+    use HasMediaRepositoryTrait;
     use Traits\HasMediaFilesystemTrait;
     use Traits\StandardCollectionsShortcodes;
     use Traits\HasMediaConversionsTrait;

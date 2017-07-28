@@ -55,6 +55,14 @@ class Media
     }
 
     /**
+     * @return string
+     */
+    public function getExtension()
+    {
+        return pathinfo($this->getName(), PATHINFO_EXTENSION);
+    }
+
+    /**
      * @return File
      */
     public function getFile()

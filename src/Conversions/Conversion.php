@@ -2,23 +2,50 @@
 
 namespace ByTIC\MediaLibrary\Conversions;
 
+use ByTIC\MediaLibrary\Conversions\Manipulations\ManipulationSequence;
+
 /**
  * Class Conversion
  * @package ByTIC\MediaLibrary\Convertions
  */
 class Conversion
 {
+    /** @var string */
+    protected $name = '';
+
     protected $manipulations;
 
     /** @var array */
     protected $performOnCollections = [];
 
+    /**
+     * Conversion constructor.
+     * @param string $name
+     */
     public function __construct(string $name)
     {
         $this->name = $name;
-        $this->manipulations = (new Manipulations())->format('jpg');
+        $this->manipulations = (new ManipulationSequence());
     }
 
+    /**
+     * @param $name
+     * @param $arguments
+     * @return $this
+     */
+    public function __call($name, $arguments)
+    {
+        if (!method_exists($this->manipulations, $name)) {
+            throw new BadMethodCallException("Manipulation `{$name}` does not exist");
+        }
+        $this->manipulations->$name(...$arguments);
+        return $this;
+    }
+
+    /**
+     * @param string $name
+     * @return static
+     */
     public static function create(string $name)
     {
         return new static($name);

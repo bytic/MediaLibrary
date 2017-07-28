@@ -13,8 +13,10 @@ trait HasMediaConversionsTrait
 {
     public $mediaConversions = null;
 
-    /*
+    /**
      * Add a conversion.
+     * @param string $name
+     * @return Conversion
      */
     public function addMediaConversion(string $name): Conversion
     {

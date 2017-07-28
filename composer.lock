@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "bytic/framework",
-            "version": "1.0.4",
+          "version": "1.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ByTIC/framework.git",
-                "reference": "e37ff2bdd88addaaec9a6693dab70c94a7252abd"
+              "reference": "4f03e4365a43eee1236cfc6036e6d1770d4cbb58"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ByTIC/framework/zipball/e37ff2bdd88addaaec9a6693dab70c94a7252abd",
-                "reference": "e37ff2bdd88addaaec9a6693dab70c94a7252abd",
+              "url": "https://api.github.com/repos/ByTIC/framework/zipball/4f03e4365a43eee1236cfc6036e6d1770d4cbb58",
+              "reference": "4f03e4365a43eee1236cfc6036e6d1770d4cbb58",
                 "shasum": ""
             },
             "require": {
@@ -73,7 +73,7 @@
             ],
             "description": "Php Framework",
             "homepage": "https://github.com/ByTIC/request-detective",
-            "time": "2017-07-09T14:29:47+00:00"
+          "time": "2017-07-28T20:39:37+00:00"
         },
         {
             "name": "bytic/request-detective",
@@ -2102,7 +2102,7 @@
             ],
             "authors": [
                 {
-                    "name": "Padraic Brady",
+                  "name": "Pádraic Brady",
                     "email": "padraic.brady@gmail.com",
                     "homepage": "http://blog.astrumfutura.com"
                 },
