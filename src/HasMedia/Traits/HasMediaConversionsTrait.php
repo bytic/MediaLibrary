@@ -1,7 +1,8 @@
 <?php
 
-namespace ByTIC\MediaLibrary\HasMedia;
+namespace ByTIC\MediaLibrary\HasMedia\Traits;
 
+use ByTIC\MediaLibrary\Conversions\Conversion;
 use ByTIC\MediaLibrary\Conversions\ConversionCollection;
 
 /**
@@ -12,8 +13,18 @@ trait HasMediaConversionsTrait
 {
     public $mediaConversions = null;
 
+    /*
+     * Add a conversion.
+     */
+    public function addMediaConversion(string $name): Conversion
+    {
+        $conversion = Conversion::create($name);
+        $this->mediaConversions[] = $conversion;
+        return $conversion;
+    }
+
     /**
-     * @return null
+     * @return ConversionCollection
      */
     public function getMediaConversions()
     {
@@ -26,5 +37,9 @@ trait HasMediaConversionsTrait
     protected function initMediaConversions()
     {
         $this->mediaConversions = new ConversionCollection();
+
+        if (method_exists($this, 'registerMediaConversions')) {
+            $this->registerMediaConversions();
+        }
     }
 }

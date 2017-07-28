@@ -134,7 +134,7 @@ class FileAdder
             throw new Exception("Invalid file in FileAdder Media Library");
         }
         $media = new Media();
-        $media->setRecord($this->getSubject());
+        $media->setModel($this->getSubject());
         return $media;
     }
 

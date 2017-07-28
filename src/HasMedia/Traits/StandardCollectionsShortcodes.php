@@ -1,6 +1,6 @@
 <?php
 
-namespace ByTIC\MediaLibrary\HasMedia;
+namespace ByTIC\MediaLibrary\HasMedia\Traits;
 
 use ByTIC\MediaLibrary\Collections\Collection;
 use ByTIC\MediaLibrary\Media\Media;

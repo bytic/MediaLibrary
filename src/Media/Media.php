@@ -18,7 +18,7 @@ class Media
     /**
      * @var Record
      */
-    protected $record;
+    protected $model;
 
     /**
      * @var File
@@ -31,19 +31,19 @@ class Media
     protected $collection;
 
     /**
-     * @return Record
+     * @return Record|HasMediaTrait
      */
-    public function getRecord(): Record
+    public function getModel(): Record
     {
-        return $this->record;
+        return $this->model;
     }
 
     /**
      * @param Record|HasMediaTrait $record
      */
-    public function setRecord(Record $record)
+    public function setModel(Record $record)
     {
-        $this->record = $record;
+        $this->model = $record;
     }
 
     /**

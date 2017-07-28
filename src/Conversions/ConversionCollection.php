@@ -15,7 +15,7 @@ class ConversionCollection extends \Nip\Collection
      *
      * @return $this
      */
-    public function getConversions(string $collectionName = '')
+    public function forCollection(string $collectionName = '')
     {
         if ($collectionName === '') {
             return $this;

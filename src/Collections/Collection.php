@@ -69,7 +69,7 @@ class Collection extends \Nip\Collection
     {
         $mediaFile = new Media();
         $mediaFile->setCollection($this);
-        $mediaFile->setRecord($this->getMediaRepository()->getRecord());
+        $mediaFile->setModel($this->getMediaRepository()->getRecord());
         return $mediaFile;
     }
 

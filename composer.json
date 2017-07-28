@@ -10,7 +10,8 @@
   ],
   "autoload": {
     "psr-4": {
-      "ByTIC\\MediaLibrary\\": "src/"
+      "ByTIC\\MediaLibrary\\": "src/",
+      "ByTIC\\MediaLibrary\\Tests\\Fixtures": "tests/fixtures"
     }
   },
   "require": {

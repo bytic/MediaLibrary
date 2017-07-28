@@ -13,6 +13,17 @@ class Conversion
     /** @var array */
     protected $performOnCollections = [];
 
+    public function __construct(string $name)
+    {
+        $this->name = $name;
+        $this->manipulations = (new Manipulations())->format('jpg');
+    }
+
+    public static function create(string $name)
+    {
+        return new static($name);
+    }
+
     /**
      * Set the collection names on which this conversion must be performed.
      * @param array ...$collectionNames

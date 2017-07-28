@@ -1,6 +1,6 @@
 <?php
 
-namespace ByTIC\MediaLibrary\HasMedia;
+namespace ByTIC\MediaLibrary\HasMedia\Traits;
 
 use Nip\Filesystem\FileDisk;
 
