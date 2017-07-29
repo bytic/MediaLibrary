@@ -3,6 +3,7 @@
 namespace ByTIC\MediaLibrary\FileAdder;
 
 use ByTIC\MediaLibrary\HasMedia\HasMediaTrait;
+use ByTIC\MediaLibrary\HasMedia\Interfaces\HasMedia;
 use ByTIC\MediaLibrary\Media\Media;
 use ByTIC\MediaLibrary\PathGenerator\PathGeneratorFactory;
 use Nip\Logger\Exception;
@@ -13,9 +14,9 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
  * Class FileAdder
  * @package ByTIC\MediaLibrary\FileAdder
  */
-class FileAdder
+class FileAdder implements FileAdderInterface
 {
-    /** @var HasMediaTrait subject */
+    /** @var HasMediaTrait|HasMedia subject */
     protected $subject;
 
     /** @var null|\ByTIC\MediaLibrary\Media\Media */
@@ -128,7 +129,11 @@ class FileAdder
     protected function createMedia()
     {
         if (($this->getFile() instanceof SymfonyFile) === false) {
-            throw new Exception("Invalid file in FileAdder Media Library");
+            throw new Exception(self::NO_FILE_DEFINED);
+        }
+        if (($this->subject instanceof HasMedia) === false) {
+            var_dump($this->subject);
+            throw new Exception(self::NO_SUBJECT_DEFINED);
         }
         $media = new Media();
         $media->setModel($this->getSubject());
@@ -136,9 +141,9 @@ class FileAdder
     }
 
     /**
-     * @return HasMediaTrait
+     * @return HasMediaTrait|HasMedia
      */
-    public function getSubject(): HasMediaTrait
+    public function getSubject(): HasMedia
     {
         return $this->subject;
     }
