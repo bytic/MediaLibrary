@@ -2,6 +2,7 @@
 
 namespace ByTIC\MediaLibrary\Conversions;
 
+use ByTIC\MediaLibrary\Conversions\Manipulations\Manipulation;
 use ByTIC\MediaLibrary\Conversions\Manipulations\ManipulationSequence;
 
 /**
@@ -35,16 +36,24 @@ class Conversion
      */
     public function __call($name, $arguments)
     {
-        if (!method_exists($this->manipulations, $name)) {
-            throw new BadMethodCallException("Manipulation `{$name}` does not exist");
-        }
-        $this->manipulations->$name(...$arguments);
+//        if (!method_exists($this->manipulations, $name)) {
+//            throw new BadMethodCallException("Manipulation `{$name}` does not exist");
+//        }
+        $this->manipulations[] = Manipulation::create($name, $arguments);
         return $this;
     }
 
     /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
      * @param string $name
-     * @return static
+     * @return Conversion
      */
     public static function create(string $name)
     {
@@ -80,4 +89,11 @@ class Conversion
         return in_array($collectionName, $this->performOnCollections);
     }
 
+    /**
+     * @return ManipulationSequence
+     */
+    public function getManipulations(): ManipulationSequence
+    {
+        return $this->manipulations;
+    }
 }

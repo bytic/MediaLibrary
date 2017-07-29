@@ -15,4 +15,5 @@ interface ManipulatorInterface
      * @return true
      */
     public function canConvert(Media $media);
+
 }
