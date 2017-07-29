@@ -48,13 +48,10 @@ class FileAdder
      */
     public function setFile($file)
     {
-        $this->file = $file;
         if (is_string($file)) {
-            $this->setPathToFile($file);
-            $this->setFileName(pathinfo($file, PATHINFO_BASENAME));
-            $this->mediaName = pathinfo($file, PATHINFO_FILENAME);
-            return $this;
+            $file = new SymfonyFile($file, true);
         }
+        $this->file = $file;
         if ($file instanceof UploadedFile) {
             $this->setPathToFile($file->getPath() . '/' . $file->getFilename());
             $this->setFileName($file->getClientOriginalName());
@@ -130,7 +127,7 @@ class FileAdder
      */
     protected function createMedia()
     {
-        if (($this->file instanceof SymfonyFile) === false) {
+        if (($this->getFile() instanceof SymfonyFile) === false) {
             throw new Exception("Invalid file in FileAdder Media Library");
         }
         $media = new Media();
@@ -187,4 +184,22 @@ class FileAdder
     protected function createMediaConversions()
     {
     }
+
+    /**
+     * @return string
+     */
+    public function getMediaName(): string
+    {
+        return $this->mediaName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFileName(): string
+    {
+        return $this->fileName;
+    }
+
+
 }
