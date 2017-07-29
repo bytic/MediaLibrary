@@ -21,7 +21,7 @@ trait HasMediaConversionsTrait
     public function addMediaConversion(string $name): Conversion
     {
         $conversion = Conversion::create($name);
-        $this->mediaConversions[] = $conversion;
+        $this->mediaConversions[$name] = $conversion;
         return $conversion;
     }
 

@@ -10,13 +10,19 @@
   ],
   "autoload": {
     "psr-4": {
-      "ByTIC\\MediaLibrary\\": "src/",
+      "ByTIC\\MediaLibrary\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "ByTIC\\MediaLibrary\\Tests\\": "tests/",
       "ByTIC\\MediaLibrary\\Tests\\Fixtures\\": "tests/fixtures"
     }
   },
   "require": {
     "php": "^7.0",
-    "bytic/framework": "^1.0"
+    "bytic/framework": "^1.0",
+    "intervention/image": "^2.4"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "2.*",
