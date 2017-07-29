@@ -1,6 +1,6 @@
 <?php
 
-namespace ByTIC\MediaLibrary\Media\Manipulator;
+namespace ByTIC\MediaLibrary\Media\Manipulators;
 
 use ByTIC\MediaLibrary\Media\Media;
 

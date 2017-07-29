@@ -1,8 +1,8 @@
 <?php
 
-namespace ByTIC\MediaLibrary\Media\Manipulator\Images;
+namespace ByTIC\MediaLibrary\Media\Manipulators\Images;
 
-use ByTIC\MediaLibrary\Media\Manipulator\AbstractManipulator;
+use ByTIC\MediaLibrary\Media\Manipulators\AbstractManipulator;
 use Nip\Collection;
 
 /**

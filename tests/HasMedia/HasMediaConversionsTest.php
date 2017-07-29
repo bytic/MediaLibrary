@@ -17,9 +17,13 @@ class HasMediaConversionsTest extends AbstractTest
     public function testGetMediaConversionsEmpty()
     {
         $model = new HasMediaModel();
+
         $conversions = $model->getMediaConversions();
         self::assertInstanceOf(ConversionCollection::class, $conversions);
-        self::assertEquals(0, $conversions->count());
+        self::assertFalse($model->hasMediaConversions());
+
+        $model->addMediaConversion('thumb');
+        self::assertTrue($model->hasMediaConversions());
     }
 
     public function testAddMediaConversion()

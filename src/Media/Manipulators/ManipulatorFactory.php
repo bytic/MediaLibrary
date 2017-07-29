@@ -1,7 +1,8 @@
 <?php
 
-namespace ByTIC\MediaLibrary\Media\Manipulator;
+namespace ByTIC\MediaLibrary\Media\Manipulators;
 
+use ByTIC\MediaLibrary\Media\Manipulators\Images\ImageManipulator;
 use ByTIC\MediaLibrary\Media\Media;
 
 /**
@@ -13,7 +14,7 @@ class ManipulatorFactory
     /**
      * @var AbstractManipulator[]
      */
-    protected static $manipulators;
+    protected static $manipulators = null;
 
     /**
      * @param $media
@@ -24,7 +25,9 @@ class ManipulatorFactory
         $manipulators = self::getManipulators();
 
         foreach ($manipulators as $manipulator) {
-            $manipulator->canConvert($media);
+            if ($manipulator->canConvert($media)) {
+                return $manipulator;
+            }
         }
         return self::get('base');
     }
@@ -34,21 +37,16 @@ class ManipulatorFactory
      */
     public static function getManipulators()
     {
-        $classes = ['Image'];
-        $return = [];
-        foreach ($classes as $class) {
-            $return[] = self::create($class);
-        }
-        return $return;
+        self::checkManipulators();
+        return self::$manipulators;
     }
 
     /**
-     * @param $name
-     * @return mixed
+     * @param string $class
+     * @return AbstractManipulator
      */
-    public static function create($name)
+    public static function create($class)
     {
-        $class = 'ByTIC\MediaLibrary\Media\Manipulator\\' . ucfirst($name) . 'Manipulator';
         return new $class();
     }
 
@@ -59,13 +57,30 @@ class ManipulatorFactory
      */
     public static function get($name)
     {
+        self::checkManipulators();
         if (isset(self::$manipulators[$name])) {
-            return self::$manipulators[$name];
-        }
-        if ($name == 'base') {
-            self::$manipulators[$name] = new BaseManipulator();
             return self::$manipulators[$name];
         }
         throw new \Exception('Invalid manipulator name');
     }
+
+    protected static function checkManipulators()
+    {
+        if (self::$manipulators === null) {
+            self::initManipulators();
+        }
+    }
+
+    protected static function initManipulators()
+    {
+        $classes = [
+            'image' => ImageManipulator::class,
+            'base' => BaseManipulator::class
+        ];
+        self::$manipulators = [];
+        foreach ($classes as $type => $class) {
+            self::$manipulators[$type] = self::create($class);
+        }
+    }
 }
+

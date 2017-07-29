@@ -4,6 +4,7 @@ namespace ByTIC\MediaLibrary\FileAdder;
 
 use ByTIC\MediaLibrary\HasMedia\HasMediaTrait;
 use ByTIC\MediaLibrary\HasMedia\Interfaces\HasMedia;
+use ByTIC\MediaLibrary\Media\Manipulators\ManipulatorFactory;
 use ByTIC\MediaLibrary\Media\Media;
 use ByTIC\MediaLibrary\PathGenerator\PathGeneratorFactory;
 use Nip\Logger\Exception;
@@ -188,6 +189,9 @@ class FileAdder implements FileAdderInterface
 
     protected function createMediaConversions()
     {
+        if ($this->getSubject()->hasMediaConversions()) {
+            $manipulator = ManipulatorFactory::createForMedia($this->getMedia());
+        }
     }
 
     /**

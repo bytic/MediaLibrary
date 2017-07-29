@@ -36,6 +36,14 @@ trait HasMediaConversionsTrait
         return $this->mediaConversions;
     }
 
+    /**
+     * @return bool
+     */
+    public function hasMediaConversions()
+    {
+        return $this->getMediaConversions()->isNotEmpty();
+    }
+
     protected function initMediaConversions()
     {
         $this->mediaConversions = new ConversionCollection();
