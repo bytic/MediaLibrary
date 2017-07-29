@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "bytic/framework",
-            "version": "1.0.5",
+            "version": "1.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ByTIC/framework.git",
-                "reference": "4f03e4365a43eee1236cfc6036e6d1770d4cbb58"
+                "reference": "0168894ac069edd5551bdac6506e2418519b0200"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ByTIC/framework/zipball/4f03e4365a43eee1236cfc6036e6d1770d4cbb58",
-                "reference": "4f03e4365a43eee1236cfc6036e6d1770d4cbb58",
+                "url": "https://api.github.com/repos/ByTIC/framework/zipball/0168894ac069edd5551bdac6506e2418519b0200",
+                "reference": "0168894ac069edd5551bdac6506e2418519b0200",
                 "shasum": ""
             },
             "require": {
@@ -42,8 +42,9 @@
                 "vlucas/phpdotenv": "^2.4"
             },
             "require-dev": {
-                "codeception/codeception": "^2.2",
-                "codeception/mockery-module": "^0.2"
+                "codeception/mockery-module": "^0.2",
+                "phpunit/phpunit": "^6.0",
+                "squizlabs/php_codesniffer": "^2.0"
             },
             "type": "library",
             "autoload": {
@@ -73,7 +74,7 @@
             ],
             "description": "Php Framework",
             "homepage": "https://github.com/ByTIC/request-detective",
-            "time": "2017-07-28T20:39:37+00:00"
+            "time": "2017-07-29T14:58:49+00:00"
         },
         {
             "name": "bytic/request-detective",
