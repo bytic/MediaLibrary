@@ -24,7 +24,11 @@ class ImageManipulator extends AbstractManipulator
     public function performConversion(Media $media, Conversion $conversion)
     {
         $driver = $this->getDriver();
-        $driver->manipulate($media, $conversion->getManipulations());
+        $imageContent = $driver->manipulate($media, $conversion->getManipulations());
+
+        $path = $media->getPath($conversion->getName());
+        $media->getCollection()->getFilesystem()->put($path, $imageContent);
+
     }
 
     /**

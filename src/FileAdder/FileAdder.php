@@ -7,6 +7,7 @@ use ByTIC\MediaLibrary\HasMedia\Interfaces\HasMedia;
 use ByTIC\MediaLibrary\Media\Manipulators\ManipulatorFactory;
 use ByTIC\MediaLibrary\Media\Media;
 use ByTIC\MediaLibrary\PathGenerator\PathGeneratorFactory;
+use Nip\Filesystem\File;
 use Nip\Logger\Exception;
 use Symfony\Component\HttpFoundation\File\File as SymfonyFile;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -99,9 +100,13 @@ class FileAdder implements FileAdderInterface
     {
         $media = $this->getMedia();
         $collection = $this->getSubject()->getMediaRepository()->getCollection($name);
+
         $media->setCollection($collection);
+
         $this->copyMediaToFilesystem();
         $this->createMediaConversions();
+
+        $collection->appendMedia($media);
     }
 
     /**
@@ -165,9 +170,10 @@ class FileAdder implements FileAdderInterface
         $destination = PathGeneratorFactory::create()::getBasePathForMediaOriginal($media);
         $destination .= DIRECTORY_SEPARATOR . $media->getCollection()->getStrategy()::makeFileName($this);
 
-        $file = fopen($this->getPathToFile(), 'r');
+        $media->generateFileFromContent($destination, fopen($this->getPathToFile(), 'r'));
 
-        $media->getCollection()->getFilesystem()->put($destination, $file);
+        $file = new File($media->getCollection()->getFilesystem(), $destination);
+        $media->setFile($file);
     }
 
     /**

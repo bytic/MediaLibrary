@@ -4,7 +4,10 @@ namespace ByTIC\MediaLibrary\Media;
 
 use ByTIC\MediaLibrary\Collections\Collection;
 use ByTIC\MediaLibrary\HasMedia\HasMediaTrait;
+use ByTIC\MediaLibrary\PathGenerator\PathGeneratorFactory;
+use League\Flysystem\File as FileLeague;
 use Nip\Filesystem\File;
+use Nip\Logger\Exception;
 use Nip\Records\Record;
 use function Nip\url;
 
@@ -21,7 +24,7 @@ class Media
     protected $model;
 
     /**
-     * @var File
+     * @var File|FileLeague
      */
     protected $file;
 
@@ -82,12 +85,32 @@ class Media
      * Get the path to the original media file.
      *
      * @param string $conversionName
-     *
      * @return string
+     * @throws Exception
      */
     public function getPath(string $conversionName = ''): string
     {
-        return '';
+        if (!$this->hasFile()) {
+            throw  new Exception('Error getting path for media with no file');
+        }
+
+        $path = $this->getFile()->getPath();
+
+        if ($conversionName) {
+            $path = $this->getBasePath()
+                . DIRECTORY_SEPARATOR . $conversionName
+                . DIRECTORY_SEPARATOR . $this->getName();
+        }
+
+        return $path;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBasePath()
+    {
+        return PathGeneratorFactory::create()::getBasePathForMedia($this);
     }
 
     /**
@@ -162,5 +185,20 @@ class Media
     public function isDefault()
     {
         return $this === $this->getCollection()->getDefaultMedia();
+    }
+
+    /**
+     * @param $path
+     * @param $contents
+     */
+    public function generateFileFromContent($path, $contents)
+    {
+        $this->getCollection()->getFilesystem()->put(
+            $path,
+            $contents
+        );
+
+        $file = new File($this->getCollection()->getFilesystem(), $path);
+        $this->setFile($file);
     }
 }
