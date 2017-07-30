@@ -133,7 +133,6 @@ class FileAdder implements FileAdderInterface
             throw new Exception(self::NO_FILE_DEFINED);
         }
         if (($this->subject instanceof HasMedia) === false) {
-            var_dump($this->subject);
             throw new Exception(self::NO_SUBJECT_DEFINED);
         }
         $media = new Media();
@@ -189,9 +188,8 @@ class FileAdder implements FileAdderInterface
 
     protected function createMediaConversions()
     {
-        if ($this->getSubject()->hasMediaConversions()) {
-            $manipulator = ManipulatorFactory::createForMedia($this->getMedia());
-        }
+        $manipulator = ManipulatorFactory::createForMedia($this->getMedia());
+        $manipulator->performConversions($this->getSubject()->getMediaConversions(), $this->getMedia());
     }
 
     /**

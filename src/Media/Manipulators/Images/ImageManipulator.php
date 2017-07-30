@@ -2,7 +2,11 @@
 
 namespace ByTIC\MediaLibrary\Media\Manipulators\Images;
 
+use ByTIC\MediaLibrary\Conversions\Conversion;
 use ByTIC\MediaLibrary\Media\Manipulators\AbstractManipulator;
+use ByTIC\MediaLibrary\Media\Manipulators\Images\Drivers\AbstractDriver;
+use ByTIC\MediaLibrary\Media\Manipulators\Images\Drivers\ImagineDriver;
+use ByTIC\MediaLibrary\Media\Media;
 use Nip\Collection;
 
 /**
@@ -11,6 +15,36 @@ use Nip\Collection;
  */
 class ImageManipulator extends AbstractManipulator
 {
+    protected $driver = null;
+
+    /**
+     * @param Media $media
+     * @param Conversion $conversion
+     */
+    public function performConversion(Media $media, Conversion $conversion)
+    {
+        $driver = $this->getDriver();
+        $driver->manipulate($media, $conversion->getManipulations());
+    }
+
+    /**
+     * @return AbstractDriver
+     */
+    public function getDriver()
+    {
+        if ($this->driver === null) {
+            $this->driver = $this->newDriver();
+        }
+        return $this->driver;
+    }
+
+    /**
+     * @return ImagineDriver
+     */
+    protected function newDriver()
+    {
+        return new ImagineDriver();
+    }
 
     /**
      * @return bool

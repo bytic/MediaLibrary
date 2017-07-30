@@ -2,6 +2,8 @@
 
 namespace ByTIC\MediaLibrary\Media\Manipulators;
 
+use ByTIC\MediaLibrary\Conversions\Conversion;
+use ByTIC\MediaLibrary\Conversions\ConversionCollection;
 use ByTIC\MediaLibrary\Media\Media;
 use Nip\Collection;
 
@@ -31,6 +33,27 @@ abstract class AbstractManipulator implements ManipulatorInterface
 //        }
         return true;
     }
+
+    /**
+     * @param ConversionCollection $conversions
+     * @param Media $media
+     */
+    public function performConversions(ConversionCollection $conversions, Media $media)
+    {
+        if (!$conversions->isEmpty()) {
+            return;
+        }
+
+        foreach ($conversions as $conversion) {
+            $this->performConversion($media, $conversion);
+        }
+    }
+
+    /**
+     * @param Media $media
+     * @param Conversion $conversion
+     */
+    abstract public function performConversion(Media $media, Conversion $conversion);
 
     /**
      * @return bool
