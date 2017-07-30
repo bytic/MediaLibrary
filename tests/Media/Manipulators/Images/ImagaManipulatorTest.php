@@ -2,6 +2,7 @@
 
 namespace ByTIC\MediaLibrary\Tests\Media\Manipulators\Images;
 
+use ByTIC\MediaLibrary\Media\Manipulators\Images\Drivers\ImagineDriver;
 use ByTIC\MediaLibrary\Media\Manipulators\Images\ImageManipulator;
 use ByTIC\MediaLibrary\Media\Media;
 use ByTIC\MediaLibrary\Tests\AbstractTest;
@@ -26,5 +27,11 @@ class ImagaManipulatorTest extends AbstractTest
 
         $manipulator = new ImageManipulator();
         self::assertTrue($manipulator->canConvert($media));
+    }
+
+    public function testGetDriver()
+    {
+        $manipulator = new ImageManipulator();
+        self::assertInstanceOf(ImagineDriver::class, $manipulator->getDriver());
     }
 }

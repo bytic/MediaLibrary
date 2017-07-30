@@ -21,6 +21,7 @@ class ImagineDriver extends AbstractDriver
      */
     public function manipulate(Media $media, ManipulationSequence $manipulations)
     {
+        /** @noinspection PhpDynamicAsStaticMethodCallInspection */
         $image = Image::make($media->getFile()->read());
         $this->performManipulations($image, $manipulations);
 
