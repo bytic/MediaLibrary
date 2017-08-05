@@ -1,6 +1,6 @@
 <?php
 
-namespace ByTIC\MediaLibrary\Tests\HasMedia;
+namespace ByTIC\MediaLibrary\Tests\Conversions;
 
 use ByTIC\MediaLibrary\Conversions\Conversion;
 use ByTIC\MediaLibrary\Conversions\Manipulations\ManipulationSequence;
@@ -22,7 +22,6 @@ class ConversionTest extends AbstractTest
         self::assertInstanceOf(ManipulationSequence::class, $manipulations);
         self::assertEquals(0, $manipulations->count());
     }
-
 
     public function testAddSameNameManipulation()
     {
