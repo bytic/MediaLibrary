@@ -3,6 +3,7 @@
 namespace ByTIC\MediaLibrary\Tests\Conversions;
 
 use ByTIC\MediaLibrary\Conversions\Conversion;
+use ByTIC\MediaLibrary\Conversions\Manipulations\Manipulation;
 use ByTIC\MediaLibrary\Conversions\Manipulations\ManipulationSequence;
 use ByTIC\MediaLibrary\Tests\AbstractTest;
 
@@ -32,5 +33,17 @@ class ConversionTest extends AbstractTest
         $manipulations = $conversion->getManipulations();
         self::assertInstanceOf(ManipulationSequence::class, $manipulations);
         self::assertEquals(2, $manipulations->count());
+    }
+
+    public function testCreateManipulation()
+    {
+        $conversion = Conversion::create('thumb');
+        $conversion->resize(100, 200);
+
+        /** @var Manipulation $manipulation */
+        $manipulation = $conversion->getManipulations()[0];
+        self::assertInstanceOf(Manipulation::class, $manipulation);
+        self::assertEquals('resize', $manipulation->getName());
+        self::assertEquals([100, 200], $manipulation->getAttributes());
     }
 }

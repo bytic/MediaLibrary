@@ -39,7 +39,7 @@ class Conversion
 //        if (!method_exists($this->manipulations, $name)) {
 //            throw new BadMethodCallException("Manipulation `{$name}` does not exist");
 //        }
-        $this->manipulations[] = Manipulation::create($name, $arguments);
+        $this->manipulations[] = Manipulation::create($name, ...$arguments);
         return $this;
     }
 
