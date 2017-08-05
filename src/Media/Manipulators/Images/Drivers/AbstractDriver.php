@@ -3,7 +3,6 @@
 namespace ByTIC\MediaLibrary\Media\Manipulators\Images\Drivers;
 
 use ByTIC\MediaLibrary\Conversions\Manipulations\ManipulationSequence;
-use ByTIC\MediaLibrary\Media\Media;
 
 /**
  * Class AbstractDriver
@@ -13,16 +12,10 @@ abstract class AbstractDriver
 {
 
     /**
-     * @param Media $media
+     * @param $data
      * @param ManipulationSequence $manipulations
+     * @param $extension
+     * @return string
      */
-    abstract public function manipulate(Media $media, ManipulationSequence $manipulations);
-
-    /**
-     * @param $media
-     */
-    public function save($media, $content)
-    {
-
-    }
+    abstract public function manipulate($data, ManipulationSequence $manipulations, $extension);
 }

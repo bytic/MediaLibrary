@@ -194,8 +194,11 @@ class FileAdder implements FileAdderInterface
 
     protected function createMediaConversions()
     {
-        $manipulator = ManipulatorFactory::createForMedia($this->getMedia());
-        $manipulator->performConversions($this->getSubject()->getMediaConversions(), $this->getMedia());
+        $media = $this->getMedia();
+        ManipulatorFactory::createForMedia($media)->performConversions(
+            $this->getSubject()->getMediaConversions()->forCollection($media->getCollection()),
+            $media
+        );
     }
 
     /**

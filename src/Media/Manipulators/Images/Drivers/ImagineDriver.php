@@ -4,7 +4,6 @@ namespace ByTIC\MediaLibrary\Media\Manipulators\Images\Drivers;
 
 use ByTIC\MediaLibrary\Conversions\Manipulations\Manipulation;
 use ByTIC\MediaLibrary\Conversions\Manipulations\ManipulationSequence;
-use ByTIC\MediaLibrary\Media\Media;
 use Intervention\Image\Image;
 use Intervention\Image\ImageManager;
 
@@ -16,16 +15,14 @@ class ImagineDriver extends AbstractDriver
 {
 
     /**
-     * @param Media $media
-     * @param ManipulationSequence $manipulations
-     * @return string
+     * @inheritdoc
      */
-    public function manipulate(Media $media, ManipulationSequence $manipulations)
+    public function manipulate($data, ManipulationSequence $manipulations, $extenstion)
     {
-        $image = $this->makeImage($media->getFile()->read());
+        $image = $this->makeImage($data);
         $this->performManipulations($image, $manipulations);
 
-        $image->encode($media->getExtension());
+        $image->encode($extenstion);
 
         return $image->__toString();
     }

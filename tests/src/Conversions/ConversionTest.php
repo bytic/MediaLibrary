@@ -46,4 +46,6 @@ class ConversionTest extends AbstractTest
         self::assertEquals('resize', $manipulation->getName());
         self::assertEquals([100, 200], $manipulation->getAttributes());
     }
+
+
 }
