@@ -99,5 +99,4 @@ class ImageConstraint extends FileConstraint
      */
     public $detectCorrupted = false;
 
-
 }

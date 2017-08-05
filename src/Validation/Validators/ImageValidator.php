@@ -2,10 +2,8 @@
 
 namespace ByTIC\MediaLibrary\Validation\Validators;
 
-use ByTIC\MediaLibrary\Validation\Constraints\ConstraintInterface;
 use ByTIC\MediaLibrary\Validation\Constraints\ImageConstraint;
 use Nip\Logger\Exception;
-use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * Class ImageValidator
@@ -34,14 +32,12 @@ class ImageValidator extends AbstractValidator
     }
 
     /**
-     * @param File $value
-     * @param ConstraintInterface|ImageConstraint $constraint
-     * @return mixed
      * @throws Exception
      */
     protected function doValidation()
     {
         $size = @getimagesize($this->getValue());
+        $constraint = $this->getConstraint();
 
         if (empty($size) || ($size[0] === 0) || ($size[1] === 0)) {
             $this->addViolation($constraint, ImageConstraint::SIZE_NOT_DETECTED_ERROR, []);
@@ -135,17 +131,18 @@ class ImageValidator extends AbstractValidator
             }
         }
 
-        $this->validateCorruptedFile($constraint, $value);
+        $this->validateCorruptedFile();
     }
 
     /**
-     * @param ImageConstraint $constraint
-     * @param File $value
      * @return bool
      * @throws Exception
      */
-    protected function validateCorruptedFile($constraint, $value)
+    protected function validateCorruptedFile()
     {
+        $constraint = $this->getConstraint();
+        $value = $this->getValue();
+
         if ($constraint->detectCorrupted) {
             if (!function_exists('imagecreatefromstring')) {
                 throw new Exception('Corrupted images detection requires installed and enabled GD extension');
@@ -164,12 +161,13 @@ class ImageValidator extends AbstractValidator
     }
 
     /**
-     * @param ImageConstraint $constraint
-     * @param File $value
-     * @return bool
+     * @param $width
+     * @param $height
      */
-    protected function validateOrientation($constraint, $value)
+    protected function validateOrientation($width, $height)
     {
+        $constraint = $this->getConstraint();
+
         if (!$constraint->allowSquare && $width == $height) {
             $this->addViolation(
                 $constraint,
@@ -192,5 +190,4 @@ class ImageValidator extends AbstractValidator
             );
         }
     }
-
 }
