@@ -37,16 +37,20 @@ abstract class AbstractManipulator implements ManipulatorInterface
     /**
      * @param ConversionCollection $conversions
      * @param Media $media
+     * @return int Number of convertions performed
      */
     public function performConversions(ConversionCollection $conversions, Media $media)
     {
-        if (!$conversions->isEmpty()) {
-            return;
+        if ($conversions->isEmpty()) {
+            return null;
         }
 
+        $i = 0;
         foreach ($conversions as $conversion) {
             $this->performConversion($media, $conversion);
+            $i++;
         }
+        return $i;
     }
 
     /**

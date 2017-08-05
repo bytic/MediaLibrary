@@ -2,6 +2,7 @@
 
 namespace ByTIC\MediaLibrary\Tests\Media\Manipulators\Images;
 
+use ByTIC\MediaLibrary\Conversions\ConversionCollection;
 use ByTIC\MediaLibrary\Media\Manipulators\Images\Drivers\ImagineDriver;
 use ByTIC\MediaLibrary\Media\Manipulators\Images\ImageManipulator;
 use ByTIC\MediaLibrary\Media\Media;
@@ -16,6 +17,16 @@ use Nip\Filesystem\FileDisk;
  */
 class ImagaManipulatorTest extends AbstractTest
 {
+
+    public function testPerformConversionsEmptyCollection()
+    {
+        $media = new Media();
+        $collection = new ConversionCollection();
+        $manipulator = new ImageManipulator();
+        $converstionsPerformed = $manipulator->performConversions($collection, $media);
+        self::assertSame(null, $converstionsPerformed);
+    }
+
     public function testCreateForMediaImage()
     {
         $fileSystem = new FileDisk((new Local(TEST_FIXTURE_PATH . '/test-files')));
