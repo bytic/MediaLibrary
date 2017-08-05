@@ -6,6 +6,7 @@ use ByTIC\MediaLibrary\Conversions\Manipulations\Manipulation;
 use ByTIC\MediaLibrary\Conversions\Manipulations\ManipulationSequence;
 use ByTIC\MediaLibrary\Media\Media;
 use Intervention\Image\Image;
+use Intervention\Image\ImageManager;
 
 /**
  * Class ImagineDriver
@@ -21,13 +22,22 @@ class ImagineDriver extends AbstractDriver
      */
     public function manipulate(Media $media, ManipulationSequence $manipulations)
     {
-        /** @noinspection PhpDynamicAsStaticMethodCallInspection */
-        $image = Image::make($media->getFile()->read());
+        $image = $this->makeImage($media->getFile()->read());
         $this->performManipulations($image, $manipulations);
 
         $image->encode($media->getExtension());
 
         return $image->__toString();
+    }
+
+    /**
+     * @param $data
+     * @return Image
+     */
+    public function makeImage($data)
+    {
+        $manager = new ImageManager();
+        return $manager->make($data);
     }
 
     /**
