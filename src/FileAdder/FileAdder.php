@@ -196,7 +196,7 @@ class FileAdder implements FileAdderInterface
     {
         $media = $this->getMedia();
         ManipulatorFactory::createForMedia($media)->performConversions(
-            $this->getSubject()->getMediaConversions()->forCollection($media->getCollection()),
+            $this->getSubject()->getMediaConversions()->forCollection($media->getCollection()->getName()),
             $media
         );
     }

@@ -14,11 +14,71 @@ use Nip\Records\Record;
  */
 trait HasDefaultMediaTrait
 {
+    /**
+     * @var null|Media
+     */
+    protected $defaultMedia = null;
+
+    /**
+     * @param Media $media
+     */
+    public function setDefaultMedia($media)
+    {
+        $this->defaultMedia = $media;
+    }
+
+    /**
+     * @param $mediaName
+     * @return mixed
+     */
+    public function persistDefaultMediaFromName($mediaName)
+    {
+        $media = $this->get($mediaName,null);
+        if ($media) {
+            $this->setDefaultMedia($media);
+            return $this->persistDefaultMedia();
+        }
+    }
+
+    /**
+     * @return mixed
+     */
+    public function persistDefaultMedia()
+    {
+        $media = $this->getDefaultMedia();
+
+        if ($media->getFile()->exists()) {
+            if (method_exists($this->getModel(), 'persistDefaultMedia')) {
+                return $this->getModel()->persistDefaultMedia($this, $media);
+            }
+
+            if ($this->getName() == 'images') {
+                $this->default_image = $media->getName();
+                $this->update();
+            }
+        }
+    }
+
+    /**
+     * @return Media|null
+     */
+    public function getDefaultMedia()
+    {
+        if ($this->defaultMedia === null) {
+            $this->initDefaultMedia();
+        }
+        return $this->defaultMedia;
+    }
+
+    protected function initDefaultMedia()
+    {
+        $this->setDefaultMedia($this->generateDefaultMedia());
+    }
 
     /**
      * @return Media
      */
-    public function getDefaultMedia()
+    public function generateDefaultMedia()
     {
         if (count($this->items)) {
             return reset($this->items);
