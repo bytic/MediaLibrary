@@ -48,13 +48,13 @@ trait HasDefaultMediaTrait
         $media = $this->getDefaultMedia();
 
         if ($media->getFile()->exists()) {
-            if (method_exists($this->getModel(), 'persistDefaultMedia')) {
-                return $this->getModel()->persistDefaultMedia($this, $media);
+            if (method_exists($this->getRecord(), 'persistDefaultMedia')) {
+                return $this->getRecord()->persistDefaultMedia($this, $media);
             }
 
             if ($this->getName() == 'images') {
-                $this->default_image = $media->getName();
-                $this->update();
+                $this->getRecord()->default_image = $media->getName();
+                $this->getRecord()->update();
             }
         }
     }
