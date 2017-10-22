@@ -13,16 +13,10 @@
       "ByTIC\\MediaLibrary\\": "src/"
     }
   },
-  "repositories": [
-    {
-      "type": "git",
-      "url": "https://github.com/ByTIC/framework.git"
-    }
-  ],
   "require": {
     "php": "^7.0",
-    "bytic/framework": "dev-develop",
-    "bytic/request-detective": "dev-develop"
+    "bytic/framework": "^0.9",
+    "bytic/request-detective": "^1.0"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "2.*",
