@@ -2,8 +2,9 @@
 
 namespace ByTIC\MediaLibrary\HasMedia;
 
+use ByTIC\MediaLibrary\Collections\Collection;
 use ByTIC\MediaLibrary\MediaRepository\HasMediaRepositoryTrait;
-use Nip\Collection;
+use ByTIC\MediaLibrary\MediaRepository\MediaRepository;
 
 /**
  * Trait HasMediaTrait
@@ -12,6 +13,9 @@ use Nip\Collection;
 trait HasMediaTrait
 {
     use HasMediaRepositoryTrait;
+    use Traits\HasMediaFilesystemTrait;
+    use Traits\StandardCollectionsShortcodes;
+    use Traits\HasMediaConversionsTrait;
 
     /**
      * Get media collection by its collectionName.
@@ -19,11 +23,21 @@ trait HasMediaTrait
      * @param string $collectionName
      * @param array|callable $filters
      *
-     * @return \Nip\Collection
+     * @return Collection
      */
     public function getMedia(string $collectionName = 'default', $filters = []): Collection
     {
         return $this->getMediaRepository()->getFilteredCollection($collectionName, $filters);
     }
 
+
+    /**
+     * @param MediaRepository $mediaRepository
+     * @return MediaRepository
+     */
+    protected function hydrateMediaRepository($mediaRepository)
+    {
+        $mediaRepository->setRecord($this);
+        return $mediaRepository;
+    }
 }

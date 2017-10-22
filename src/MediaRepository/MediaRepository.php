@@ -3,7 +3,7 @@
 namespace ByTIC\MediaLibrary\MediaRepository;
 
 use ByTIC\MediaLibrary\Collections\Collection;
-use ByTIC\MediaLibrary\HasMedia\Interfaces\HasMedia;
+use ByTIC\MediaLibrary\HasMedia\HasMediaTrait;
 use Nip\Records\Record;
 
 /**
@@ -20,20 +20,12 @@ class MediaRepository
     protected $collections;
 
     /**
-     * @var Record|HasMedia
+     * @var Record|HasMediaTrait
      */
     protected $record;
 
     /**
-     * @param Record|HasMedia $record
-     */
-    public function __construct(Record $record)
-    {
-        $this->setRecord($record);
-    }
-
-    /**
-     * @return Record|HasMedia
+     * @return Record|HasMediaTrait
      */
     public function getRecord(): Record
     {
@@ -41,23 +33,11 @@ class MediaRepository
     }
 
     /**
-     * @param Record $record
+     * @param Record|HasMediaTrait $record
      */
     public function setRecord(Record $record)
     {
         $this->record = $record;
-    }
-
-    /**
-     * @param string $collectionName
-     * @return Collection
-     */
-    public function getCollection(string $collectionName): Collection
-    {
-        if (isset($this->collections[$collectionName])) {
-            $this->initCollection($collectionName);
-        }
-        return $this->collections[$collectionName];
     }
 
     /**
@@ -71,20 +51,38 @@ class MediaRepository
     }
 
     /**
+     * Apply given filters on media.
+     *
+     * @param Collection $collection
+     * @param array|callable $filter
+     *
+     * @return Collection
+     */
+    protected function applyFilterToCollection(Collection $collection, $filter): Collection
+    {
+        return $collection->filter($filter);
+    }
+
+    /**
+     * @param string $collectionName
+     * @return Collection
+     */
+    public function getCollection(string $collectionName): Collection
+    {
+        if (!isset($this->collections[$collectionName])) {
+            $this->initCollection($collectionName);
+        }
+        return $this->collections[$collectionName];
+    }
+
+    /**
      * @param string $collectionName
      */
     protected function initCollection(string $collectionName)
     {
         $collection = $this->getNewCollection($collectionName);
+        $this->prepareCollection($collection);
         $this->addCollection($collection);
-    }
-
-    /**
-     * @param Collection $collection
-     */
-    protected function addCollection(Collection $collection)
-    {
-        $this->collections[$collection->getName()] = $collection;
     }
 
     /**
@@ -100,15 +98,21 @@ class MediaRepository
     }
 
     /**
-     * Apply given filters on media.
-     *
      * @param Collection $collection
-     * @param array|callable $filter
-     *
-     * @return Collection
      */
-    protected function applyFilterToCollection(Collection $collection, $filter): Collection
+    protected function prepareCollection($collection)
     {
-        return $collection->filter($filter);
+        if (in_array($collection->getName(), ['images', 'covers', 'logos'])) {
+            $collection->setMediaType('images');
+        }
+        $collection->loadMedia();
+    }
+
+    /**
+     * @param Collection $collection
+     */
+    protected function addCollection(Collection $collection)
+    {
+        $this->collections[$collection->getName()] = $collection;
     }
 }

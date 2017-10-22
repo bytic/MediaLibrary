@@ -2,20 +2,18 @@
 
 namespace ByTIC\MediaLibrary\HasMedia\Interfaces;
 
+use ByTIC\MediaLibrary\Collections\Collection;
+
 /**
  * Interface HasMedia
  * @package ByTIC\MediaLibrary\HasMedia\Interfaces
  */
 interface HasMedia
 {
-
     /**
-     * Cache the media on the object.
-     *
      * @param string $collectionName
-     *
-     * @return mixed
+     * @param array $filters
+     * @return Collection
      */
-    public function loadMedia(string $collectionName);
-
+    public function getMedia(string $collectionName = 'default', $filters = []): Collection;
 }
