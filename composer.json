@@ -15,7 +15,7 @@
   },
   "require": {
     "php": "^7.0",
-    "bytic/framework": "^1.0"
+    "bytic/framework": "^0.9"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "2.*",
