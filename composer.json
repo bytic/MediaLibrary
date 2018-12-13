@@ -13,13 +13,20 @@
       "ByTIC\\MediaLibrary\\": "src/"
     }
   },
+  "autoload-dev": {
+    "psr-4": {
+      "ByTIC\\MediaLibrary\\Tests\\": "tests/src/",
+      "ByTIC\\MediaLibrary\\Tests\\Fixtures\\": "tests/fixtures/"
+    }
+  },
   "require": {
     "php": "^7.0",
-    "bytic/framework": "^0.9"
+    "bytic/collections": "^1.0",
+    "bytic/filesystem": "^0.9",
+    "bytic/orm": "^0.9"
   },
   "require-dev": {
-    "squizlabs/php_codesniffer": "2.*",
-    "codeception/codeception": "2.2.*",
-    "codeception/mockery-module": "0.2.*"
+    "phpunit/phpunit": "^7.5",
+    "mockery/mockery": "^1.2"
   }
 }

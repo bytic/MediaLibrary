@@ -3,6 +3,8 @@
 namespace ByTIC\MediaLibrary\HasMedia;
 
 use ByTIC\MediaLibrary\Collections\Collection;
+use ByTIC\MediaLibrary\HasMedia\StandardCollections\FilesShortcodes;
+use ByTIC\MediaLibrary\HasMedia\StandardCollections\ImageShortcodes;
 use ByTIC\MediaLibrary\MediaRepository\HasMediaRepositoryTrait;
 use ByTIC\MediaLibrary\MediaRepository\MediaRepository;
 
@@ -14,7 +16,8 @@ trait HasMediaTrait
 {
     use HasMediaRepositoryTrait;
     use HasMediaFilesystemTrait;
-    use StandardCollectionsShortcodes;
+    use ImageShortcodes;
+    use FilesShortcodes;
 
     /**
      * Get media collection by its collectionName.

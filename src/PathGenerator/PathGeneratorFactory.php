@@ -19,7 +19,10 @@ class PathGeneratorFactory
 //            $pathGeneratorClass = $customPathClass;
 //        }
 //        static::guardAgainstInvalidPathGenerator($pathGeneratorClass);
-        return app($pathGeneratorClass);
-    }
+        if (function_exists('app')) {
+            return app($pathGeneratorClass);
+        }
 
+        return new $pathGeneratorClass;
+    }
 }
