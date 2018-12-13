@@ -3,7 +3,9 @@
 namespace ByTIC\MediaLibrary\Media;
 
 use ByTIC\MediaLibrary\Collections\Collection;
-use Nip\Filesystem\File;
+use ByTIC\MediaLibrary\HasMedia\HasMediaTrait;
+use ByTIC\MediaLibrary\Media\Traits\FileMethodsTrait;
+use ByTIC\MediaLibrary\PathGenerator\PathGeneratorFactory;
 use Nip\Records\Record;
 use function Nip\url;
 
@@ -13,16 +15,12 @@ use function Nip\url;
  */
 class Media
 {
+    use FileMethodsTrait;
 
     /**
      * @var Record
      */
     protected $record;
-
-    /**
-     * @var File
-     */
-    protected $file;
 
     /**
      * @var Collection
@@ -48,37 +46,17 @@ class Media
     /**
      * @return string
      */
-    public function getName()
+    public function getExtension()
     {
-        return $this->getFile()->getName();
+        return pathinfo($this->getName(), PATHINFO_EXTENSION);
     }
 
     /**
-     * @return File
-     */
-    public function getFile()
-    {
-        return $this->file;
-    }
-
-    /**
-     * @param File $file
-     */
-    public function setFile(File $file)
-    {
-        $this->file = $file;
-    }
-
-    /**
-     * Get the path to the original media file.
-     *
-     * @param string $conversionName
-     *
      * @return string
      */
-    public function getPath(string $conversionName = ''): string
+    public function getBasePath()
     {
-        return '';
+        return PathGeneratorFactory::create()::getBasePathForMedia($this);
     }
 
     /**
@@ -121,14 +99,6 @@ class Media
 ////            $urlGenerator->setConversion($conversion);
 //        }
 //        return $urlGenerator->getUrl();
-    }
-
-    /**
-     * @return bool
-     */
-    public function hasFile()
-    {
-        return $this->getFile() instanceof File;
     }
 
     /**
