@@ -4,9 +4,8 @@ namespace ByTIC\MediaLibrary\Media;
 
 use ByTIC\MediaLibrary\Collections\Collection;
 use ByTIC\MediaLibrary\HasMedia\HasMediaTrait;
+use ByTIC\MediaLibrary\Media\Traits\FileMethodsTrait;
 use ByTIC\MediaLibrary\PathGenerator\PathGeneratorFactory;
-use League\Flysystem\File as FileLeague;
-use Nip\Filesystem\File;
 use Nip\Logger\Exception;
 use Nip\Records\Record;
 use function Nip\url;
@@ -17,16 +16,12 @@ use function Nip\url;
  */
 class Media
 {
+    use FileMethodsTrait;
 
     /**
      * @var Record
      */
     protected $model;
-
-    /**
-     * @var File|FileLeague
-     */
-    protected $file;
 
     /**
      * @var Collection
@@ -52,57 +47,9 @@ class Media
     /**
      * @return string
      */
-    public function getName()
-    {
-        return $this->getFile()->getName();
-    }
-
-    /**
-     * @return string
-     */
     public function getExtension()
     {
         return pathinfo($this->getName(), PATHINFO_EXTENSION);
-    }
-
-    /**
-     * @return File
-     */
-    public function getFile()
-    {
-        return $this->file;
-    }
-
-    /**
-     * @param File $file
-     */
-    public function setFile(File $file)
-    {
-        $this->file = $file;
-    }
-
-    /**
-     * Get the path to the original media file.
-     *
-     * @param string $conversionName
-     * @return string
-     * @throws Exception
-     */
-    public function getPath(string $conversionName = ''): string
-    {
-        if (!$this->hasFile()) {
-            throw  new Exception('Error getting path for media with no file');
-        }
-
-        $path = $this->getFile()->getPath();
-
-        if ($conversionName) {
-            $path = $this->getBasePath()
-                . DIRECTORY_SEPARATOR . $conversionName
-                . DIRECTORY_SEPARATOR . $this->getName();
-        }
-
-        return $path;
     }
 
     /**
@@ -156,14 +103,6 @@ class Media
     }
 
     /**
-     * @return bool
-     */
-    public function hasFile()
-    {
-        return $this->getFile() instanceof File;
-    }
-
-    /**
      * @return Collection
      */
     public function getCollection(): Collection
@@ -185,20 +124,5 @@ class Media
     public function isDefault()
     {
         return $this === $this->getCollection()->getDefaultMedia();
-    }
-
-    /**
-     * @param $path
-     * @param $contents
-     */
-    public function generateFileFromContent($path, $contents)
-    {
-        $this->getCollection()->getFilesystem()->put(
-            $path,
-            $contents
-        );
-
-        $file = new File($this->getCollection()->getFilesystem(), $path);
-        $this->setFile($file);
     }
 }
