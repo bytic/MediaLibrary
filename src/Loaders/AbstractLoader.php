@@ -86,7 +86,7 @@ abstract class AbstractLoader implements LoaderInterface
     /**
      * @return string
      */
-    protected function getBasePath()
+    public function getBasePath()
     {
         $media = $this->getCollection()->newMedia();
         return PathGeneratorFactory::create()::getBasePathForMedia($media);

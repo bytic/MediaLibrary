@@ -1,6 +1,6 @@
 <?php
 
-namespace ByTIC\MediaLibrary\HasMedia\Traits;
+namespace ByTIC\MediaLibrary\HasMedia\StandardCollections;
 
 use ByTIC\MediaLibrary\Collections\Collection;
 use ByTIC\MediaLibrary\Media\Media;
@@ -11,7 +11,7 @@ use ByTIC\MediaLibrary\Media\Media;
  *
  * @method Collection getMedia(string $collectionName = 'default', $filters = []): Collection
  */
-trait StandardCollectionsShortcodes
+trait ImageShortcodes
 {
 
     /**
@@ -61,5 +61,4 @@ trait StandardCollectionsShortcodes
     {
         return $this->getMedia('covers')->count() > 0;
     }
-
 }
