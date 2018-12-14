@@ -15,7 +15,16 @@ trait FilesShortcodes
 {
 
     /**
-     * @return Collection
+     * @return Collection|Media[]
+     * @deprecated Use getFiles
+     */
+    public function findFiles()
+    {
+        return $this->getFiles();
+    }
+
+    /**
+     * @return Collection|Media[]
      */
     public function getFiles()
     {

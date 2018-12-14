@@ -3,6 +3,7 @@
 namespace ByTIC\MediaLibrary\Loaders;
 
 use ByTIC\MediaLibrary\Collections\Collection;
+use ByTIC\MediaLibrary\Collections\Traits\LoadMediaTrait;
 use ByTIC\MediaLibrary\PathGenerator\PathGenerator;
 use ByTIC\MediaLibrary\PathGenerator\PathGeneratorFactory;
 use Nip\Filesystem\File;
@@ -68,7 +69,7 @@ abstract class AbstractLoader implements LoaderInterface
     }
 
     /**
-     * @param Collection $collection
+     * @param Collection|LoadMediaTrait $collection
      */
     public function setCollection(Collection $collection)
     {

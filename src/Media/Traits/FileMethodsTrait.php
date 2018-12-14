@@ -73,6 +73,14 @@ trait FileMethodsTrait
         return $this->getFile()->read();
     }
 
+    /**
+     * @return bool
+     */
+    public function delete()
+    {
+        return $this->getFile()->delete();
+    }
+
 
     /**
      * Get the path to the original media file.
