@@ -22,9 +22,9 @@
   "require": {
     "php": "^7.0",
     "bytic/collections": "^1.0",
-    "bytic/logger": "^1.0",
-    "bytic/filesystem": "^1.0",
-    "bytic/orm": "^1.0",
+    "bytic/logger": "^0.9",
+    "bytic/filesystem": "^0.9",
+    "bytic/orm": "^0.9",
     "intervention/image": "^2.4"
   },
   "require-dev": {
