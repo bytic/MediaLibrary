@@ -3,7 +3,7 @@
 namespace ByTIC\MediaLibrary\Media;
 
 use ByTIC\MediaLibrary\Collections\Collection;
-use ByTIC\MediaLibrary\HasMedia\HasMediaTrait;
+use ByTIC\MediaLibrary\Collections\Traits\LoadMediaTrait;
 use ByTIC\MediaLibrary\Media\Traits\FileMethodsTrait;
 use ByTIC\MediaLibrary\PathGenerator\PathGeneratorFactory;
 use Nip\Records\Record;
@@ -110,7 +110,7 @@ class Media
     }
 
     /**
-     * @param Collection $collection
+     * @param Collection|LoadMediaTrait $collection
      */
     public function setCollection(Collection $collection)
     {

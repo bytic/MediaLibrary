@@ -2,11 +2,10 @@
 
 namespace ByTIC\MediaLibrary\Collections;
 
-use ByTIC\MediaLibrary\Loaders\AbstractLoader;
-use ByTIC\MediaLibrary\Loaders\Filesystem;
-use ByTIC\MediaLibrary\Loaders\HasLoaderTrait;
-use ByTIC\MediaLibrary\Media\Media;
-use ByTIC\MediaLibrary\MediaRepository\HasMediaRepositoryTrait;
+use ByTIC\MediaLibrary\Collections\Traits\HasRecordTrait;
+use ByTIC\MediaLibrary\Collections\Traits\LoadMediaTrait;
+use ByTIC\MediaLibrary\Collections\Traits\MediaDefaultsTraits;
+use ByTIC\MediaLibrary\Collections\Traits\MediaOperationsTraits;
 use ByTIC\MediaLibrary\Validation\Constraints\Traits\HasConstraintTrait;
 use ByTIC\MediaLibrary\Validation\Traits\HasValidatorTrait;
 
@@ -14,10 +13,12 @@ use ByTIC\MediaLibrary\Validation\Traits\HasValidatorTrait;
  * Class Collection
  * @package ByTIC\MediaLibrary\Collections
  */
-class Collection extends \Nip\Collection
+class Collection extends \Nip\Collections\Collection
 {
-    use HasLoaderTrait;
-    use HasMediaRepositoryTrait;
+    use LoadMediaTrait;
+    use MediaDefaultsTraits;
+    use HasRecordTrait;
+    use MediaOperationsTraits;
     use HasValidatorTrait;
     use HasConstraintTrait;
 
@@ -29,102 +30,8 @@ class Collection extends \Nip\Collection
     /**
      * @var string
      */
-    protected $mediaType = 'files';
-
-    /**
-     * @var string
-     */
     protected $contraintName = null;
 
-    /**
-     * @var bool
-     */
-    protected $mediaLoaded = false;
-
-    /** @noinspection PhpUnusedParameterInspection
-     *
-     * @param $filter
-     * @return array|Collection
-     */
-    public function filter($filter)
-    {
-        return $this;
-    }
-
-    /**
-     * @return Media
-     */
-    public function getDefaultMedia()
-    {
-        if (count($this->items)) {
-            return reset($this->items);
-        }
-        return $this->compileDefaultMedia();
-    }
-
-    /**
-     * @return Media
-     */
-    protected function compileDefaultMedia()
-    {
-        $media = $this->newMedia();
-        return $media;
-    }
-
-    /**
-     * @return Media
-     */
-    public function newMedia()
-    {
-        $mediaFile = new Media();
-        $mediaFile->setCollection($this);
-        $mediaFile->setRecord($this->getMediaRepository()->getRecord());
-        return $mediaFile;
-    }
-
-    /**
-     * @return string
-     */
-    public function getDefaultMediaUrl()
-    {
-        if (method_exists($this->getRecord(), 'getDefaultMediaUrl')) {
-            return $this->getRecord()->getDefaultMediaUrl($this);
-        }
-
-        if (method_exists($this->getRecord()->getManager(), 'getDefaultMediaUrl')) {
-            return $this->getRecord()->getManager()->getDefaultMediaUrl($this);
-        }
-
-        return $this->getDefaultMediaGenericUrl();
-    }
-
-    /**
-     * @return \ByTIC\MediaLibrary\HasMedia\HasMediaTrait|\Nip\Records\Record
-     */
-    protected function getRecord()
-    {
-        return $this->getMediaRepository()->getRecord();
-    }
-
-    /**
-     * @return string
-     */
-    public function getDefaultMediaGenericUrl()
-    {
-        return '/assets/images/'
-            . $this->getRecord()->getManager()->getTable() . '/'
-            . $this->getDefaultFileName();
-    }
-
-    /**
-     * @return string
-     */
-    protected function getDefaultFileName()
-    {
-        $name = inflector()->singularize($this->getName());
-        $extension = $this->getName() == 'logos' ? 'png' : 'jpg';
-        return $name . '.' . $extension;
-    }
 
     /**
      * @return string
@@ -140,59 +47,6 @@ class Collection extends \Nip\Collection
     public function setName(string $name)
     {
         $this->name = $name;
-    }
-
-    public function loadMedia()
-    {
-        if ($this->isMediaLoaded()) {
-            return;
-        }
-
-        $this->getLoader()->loadMedia();
-
-        $this->setMediaLoaded(true);
-    }
-
-    /**
-     * @return bool
-     */
-    public function isMediaLoaded(): bool
-    {
-        return $this->mediaLoaded;
-    }
-
-    /**
-     * @param bool $mediaLoaded
-     */
-    public function setMediaLoaded(bool $mediaLoaded)
-    {
-        $this->mediaLoaded = $mediaLoaded;
-    }
-
-    /**
-     * Append a media object inside the collection
-     *
-     * @param Media $media
-     */
-    public function appendMedia(Media $media)
-    {
-        $this->items[$media->getName()] = $media;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getMediaType()
-    {
-        return $this->mediaType;
-    }
-
-    /**
-     * @param mixed $mediaType
-     */
-    public function setMediaType($mediaType)
-    {
-        $this->mediaType = $mediaType;
     }
 
     /**
@@ -228,21 +82,10 @@ class Collection extends \Nip\Collection
     }
 
     /**
-     * @param AbstractLoader $loader
-     * @return AbstractLoader
+     * @return \Nip\Filesystem\FileDisk
      */
-    protected function hydrateLoader($loader)
+    protected function getFilesystemDisk()
     {
-        $loader->setCollection($this);
-        $loader->setFilesystem($this->getMediaRepository()->getRecord()->getMediaFilesystemDisk());
-        return $loader;
-    }
-
-    /**
-     * @return mixed
-     */
-    protected function getLoaderClass()
-    {
-        return Filesystem::class;
+        return $this->getRecord()->getMediaFilesystemDisk();
     }
 }

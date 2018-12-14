@@ -3,8 +3,8 @@
 namespace ByTIC\MediaLibrary\Media\Traits;
 
 use Exception;
-use Nip\Filesystem\File;
 use League\Flysystem\File as FileLeague;
+use Nip\Filesystem\File;
 
 /**
  * Trait FileMethodsTrait
@@ -71,6 +71,14 @@ trait FileMethodsTrait
     public function read()
     {
         return $this->getFile()->read();
+    }
+
+    /**
+     * @return bool
+     */
+    public function delete()
+    {
+        return $this->getFile()->delete();
     }
 
 
