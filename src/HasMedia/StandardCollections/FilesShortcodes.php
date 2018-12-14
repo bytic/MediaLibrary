@@ -3,6 +3,7 @@
 namespace ByTIC\MediaLibrary\HasMedia\StandardCollections;
 
 use ByTIC\MediaLibrary\Collections\Collection;
+use ByTIC\MediaLibrary\FileAdder\FileAdder;
 use ByTIC\MediaLibrary\Media\Media;
 
 /**
@@ -29,5 +30,26 @@ trait FilesShortcodes
     public function getFiles()
     {
         return $this->getMedia('files');
+    }
+
+    /**
+     * @param $file
+     * @return FileAdder
+     */
+    public function addFile($file)
+    {
+        return $this->addMediaToCollection($file, 'files');
+    }
+
+    /**
+     * @param $content
+     * @param $name
+     */
+    public function addFileFromContent($content, $name)
+    {
+        $path = sys_get_temp_dir();
+        $fullPath = $path . DIRECTORY_SEPARATOR . $name;
+        file_put_contents($fullPath, $content);
+        $this->addFile($fullPath);
     }
 }

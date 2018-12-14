@@ -104,6 +104,7 @@ class MediaRepository
     {
         if (in_array($collection->getName(), ['images', 'covers', 'logos'])) {
             $collection->setMediaType('images');
+            $collection->setOriginalPath('full');
         }
         $collection->loadMedia();
     }

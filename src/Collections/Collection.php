@@ -4,12 +4,15 @@ namespace ByTIC\MediaLibrary\Collections;
 
 use ByTIC\MediaLibrary\Collections\UploadStrategy\Traits\HasStrategyTrait;
 use ByTIC\MediaLibrary\Loaders\AbstractLoader;
+use ByTIC\MediaLibrary\Media\Media;
 use ByTIC\MediaLibrary\Validation\Constraints\Traits\HasConstraintTrait;
 use ByTIC\MediaLibrary\Validation\Traits\HasValidatorTrait;
 
 /**
  * Class Collection
  * @package ByTIC\MediaLibrary\Collections
+ *
+ * @method Media get
  */
 class Collection extends \Nip\Collections\Collection
 {
@@ -26,6 +29,12 @@ class Collection extends \Nip\Collections\Collection
      * @var string
      */
     protected $name;
+
+    /**
+     * @var string
+     */
+    protected $originalPath = null;
+
 
     /**
      * @var string
@@ -70,7 +79,15 @@ class Collection extends \Nip\Collections\Collection
      */
     public function getOriginalPath()
     {
-        return 'full';
+        return $this->originalPath;
+    }
+
+    /**
+     * @param string $originalPath
+     */
+    public function setOriginalPath(string $originalPath)
+    {
+        $this->originalPath = $originalPath;
     }
 
     /**

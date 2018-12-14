@@ -15,6 +15,7 @@ use ByTIC\MediaLibrary\MediaRepository\MediaRepository;
 trait HasMediaTrait
 {
     use HasMediaRepositoryTrait;
+    use Traits\AddMediaTrait;
     use Traits\HasMediaFilesystemTrait;
     use Traits\HasMediaConversionsTrait;
     use ImageShortcodes;

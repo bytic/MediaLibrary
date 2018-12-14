@@ -16,12 +16,23 @@ class FileAdderFactory
      * @param string|\Symfony\Component\HttpFoundation\File\File $file
      *
      * @return FileAdder
+     * @throws \Nip\Logger\Exception
      */
     public static function create($subject, $file)
     {
-        return app(FileAdder::class)
+        return static::newFileAdder()
             ->setSubject($subject)
             ->setFile($file);
     }
 
+    /**
+     * @return FileAdder
+     */
+    public static function newFileAdder()
+    {
+        if (function_exists('app')) {
+            app(FileAdder::class);
+        }
+        return new FileAdder;
+    }
 }

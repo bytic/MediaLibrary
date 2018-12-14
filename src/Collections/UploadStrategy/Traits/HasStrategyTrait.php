@@ -4,6 +4,7 @@ namespace ByTIC\MediaLibrary\Collections\UploadStrategy\Traits;
 
 use ByTIC\MediaLibrary\Collections\UploadStrategy\AbstractStrategy;
 use ByTIC\MediaLibrary\Collections\UploadStrategy\GenericStrategy;
+use ByTIC\MediaLibrary\Collections\UploadStrategy\OriginalNameStrategy;
 
 /**
  * Trait HasStrategyTrait
@@ -65,8 +66,11 @@ trait HasStrategyTrait
     {
         $mediaType = $this->getMediaType();
         switch ($mediaType) {
+            case 'images' :
+                return GenericStrategy::class;
+
         }
-        return GenericStrategy::class;
+        return OriginalNameStrategy::class;
     }
 
 }
