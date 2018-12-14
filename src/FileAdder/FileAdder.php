@@ -10,7 +10,6 @@ use ByTIC\MediaLibrary\PathGenerator\PathGeneratorFactory;
 use Nip\Filesystem\File;
 use Nip\Logger\Exception;
 use Symfony\Component\HttpFoundation\File\File as SymfonyFile;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * Class FileAdder
@@ -18,57 +17,19 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
  */
 class FileAdder implements FileAdderInterface
 {
+    use Traits\HasFileTrait;
+
     /** @var HasMediaTrait|HasMedia subject */
     protected $subject;
 
     /** @var null|\ByTIC\MediaLibrary\Media\Media */
     protected $media = null;
 
-    /** @var string|\Symfony\Component\HttpFoundation\File\File */
-    protected $file;
-
-    /**@var string */
-    protected $pathToFile;
-
     /**@var string */
     protected $mediaName;
 
     /**@var string */
     protected $fileName;
-
-    /**
-     * @return string|SymfonyFile
-     */
-    public function getFile()
-    {
-        return $this->file;
-    }
-
-    /**
-     * @param $file
-     * @return $this
-     * @throws Exception
-     */
-    public function setFile($file)
-    {
-        if (is_string($file)) {
-            $file = new SymfonyFile($file, true);
-        }
-        $this->file = $file;
-        if ($file instanceof UploadedFile) {
-            $this->setPathToFile($file->getPath() . '/' . $file->getFilename());
-            $this->setFileName($file->getClientOriginalName());
-            $this->mediaName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-            return $this;
-        }
-        if ($file instanceof SymfonyFile) {
-            $this->setPathToFile($file->getPath() . '/' . $file->getFilename());
-            $this->setFileName(pathinfo($file->getFilename(), PATHINFO_BASENAME));
-            $this->mediaName = pathinfo($file->getFilename(), PATHINFO_FILENAME);
-            return $this;
-        }
-        throw new Exception("Invalid File");
-    }
 
     /**
      * Set the name of the file that is stored on disk.
@@ -176,22 +137,6 @@ class FileAdder implements FileAdderInterface
         $media->setFile($file);
     }
 
-    /**
-     * @return string
-     */
-    public function getPathToFile(): string
-    {
-        return $this->pathToFile;
-    }
-
-    /**
-     * @param string $pathToFile
-     */
-    public function setPathToFile(string $pathToFile)
-    {
-        $this->pathToFile = $pathToFile;
-    }
-
     protected function createMediaConversions()
     {
         $media = $this->getMedia();
@@ -216,6 +161,4 @@ class FileAdder implements FileAdderInterface
     {
         return $this->fileName;
     }
-
-
 }

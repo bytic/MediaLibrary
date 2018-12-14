@@ -22,6 +22,15 @@ trait MediaOperationsTraits
         return $this;
     }
 
+    /**
+     * @param string $key
+     */
+    public function deleteMediaByKey($key)
+    {
+        $this->get($key)->delete();
+        $this->unset($key);
+    }
+
     public function delete()
     {
         foreach ($this as $key => $file) {

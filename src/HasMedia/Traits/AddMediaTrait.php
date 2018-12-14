@@ -32,6 +32,20 @@ trait AddMediaTrait
      */
     public function addMedia($file)
     {
-        return app(FileAdderFactory::class)->create($this, $file);
+        return call_user_func_array(
+            [self::getFileAdderFactory(), 'create'],
+            [$this, $file]
+        );
+    }
+
+    /**
+     * @return FileAdderFactory|string
+     */
+    public static function getFileAdderFactory()
+    {
+        if (function_exists('app')) {
+            return app(FileAdderFactory::class);
+        }
+        return FileAdderFactory::class;
     }
 }

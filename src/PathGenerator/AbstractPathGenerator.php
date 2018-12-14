@@ -17,8 +17,12 @@ abstract class AbstractPathGenerator
      */
     public static function getBasePathForMediaOriginal($media)
     {
-        return self::getBasePathForMedia($media)
-            . DIRECTORY_SEPARATOR . $media->getCollection()->getOriginalPath();
+        $basePath = self::getBasePathForMedia($media);
+        $originalPath = $media->getCollection()->getOriginalPath();
+        if (!empty($originalPath)) {
+            $basePath .= DIRECTORY_SEPARATOR . $media->getCollection()->getOriginalPath();
+        }
+        return $basePath;
     }
 
     /**
