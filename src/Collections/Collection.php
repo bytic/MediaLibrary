@@ -9,9 +9,10 @@ use ByTIC\MediaLibrary\Validation\Constraints\Traits\HasConstraintTrait;
 use ByTIC\MediaLibrary\Validation\Traits\HasValidatorTrait;
 
 /**
- * Class Collection.
+ * Class Collection
+ * @package ByTIC\MediaLibrary\Collections
  *
- * @method Media get()
+ * @method Media get
  */
 class Collection extends \Nip\Collections\Collection
 {

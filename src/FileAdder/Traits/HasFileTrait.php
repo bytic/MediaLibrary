@@ -7,7 +7,8 @@ use Symfony\Component\HttpFoundation\File\File as SymfonyFile;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
- * Trait HasFileTrait.
+ * Trait HasFileTrait
+ * @package ByTIC\MediaLibrary\FileAdder\Traits
  */
 trait HasFileTrait
 {
@@ -88,10 +89,9 @@ trait HasFileTrait
     public function setFileFromUploadedFile($file)
     {
         $this->file = $file;
-        $this->setPathToFile($file->getPath().'/'.$file->getFilename());
+        $this->setPathToFile($file->getPath() . '/' . $file->getFilename());
         $this->setFileName($file->getClientOriginalName());
         $this->mediaName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-
         return $this;
     }
 }

@@ -16,6 +16,7 @@ class FileAdderFactory
      * @throws \Nip\Logger\Exception
      *
      * @return FileAdder
+     * @throws \Nip\Logger\Exception
      */
     public static function create($subject, $file)
     {
