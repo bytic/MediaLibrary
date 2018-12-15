@@ -39,7 +39,7 @@ trait MediaOperationsTraits
             $this->unset($key);
         }
         if (isset($file)) {
-            $directory = dirname($file);
+            $directory = dirname($file->getPath());
             $this->deleteDirIfEmpty($directory);
         }
     }
@@ -49,9 +49,9 @@ trait MediaOperationsTraits
      */
     protected function deleteDirIfEmpty($directory)
     {
-        $contents = $this->getFilesystemDisk()->listContents($directory);
+        $contents = $this->getFilesystem()->listContents($directory);
         if (empty($contents)) {
-            $this->getFilesystemDisk()->deleteDir($directory);
+            $this->getFilesystem()->deleteDir($directory);
         }
     }
 }

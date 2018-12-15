@@ -99,7 +99,7 @@ trait LoadMediaTrait
     protected function hydrateLoader($loader)
     {
         $loader->setCollection($this);
-        $loader->setFilesystem($this->getFilesystemDisk());
+        $loader->setFilesystem($this->getFilesystem());
 
         return $loader;
     }
