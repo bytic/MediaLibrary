@@ -11,39 +11,12 @@ use Nip\Utility\Traits\NameWorksTrait;
 abstract class AbstractConstraint implements ConstraintInterface
 {
     use NameWorksTrait;
-
-    /**
-     * @var bool
-     */
-    protected $init = false;
+    use Traits\InitTrait;
 
     /**
      * @var string
      */
     protected $name = null;
-
-    public function init()
-    {
-        if ($this->init === true) {
-            return;
-        }
-        $this->doInit();
-        $this->init = true;
-    }
-
-    protected function doInit()
-    {
-        $this->initVariablesFromConfig();
-    }
-
-    protected function initVariablesFromConfig()
-    {
-        $configKey = 'media-library.contraints.' . $this->getName();
-        if (config()->has($configKey)) {
-            $variables = config()->get($configKey);
-            $this->applyVariables($variables);
-        }
-    }
 
     /**
      * @return string
