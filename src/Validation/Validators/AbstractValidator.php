@@ -5,8 +5,10 @@ namespace ByTIC\MediaLibrary\Validation\Validators;
 use ByTIC\MediaLibrary\Collections\Collection;
 use ByTIC\MediaLibrary\Exceptions\UnexpectedTypeException;
 use ByTIC\MediaLibrary\Media\Media;
+use ByTIC\MediaLibrary\Validation\Constraints\AbstractConstraint;
 use ByTIC\MediaLibrary\Validation\Constraints\ConstraintInterface;
 use ByTIC\MediaLibrary\Validation\Traits\HasValidatorTrait;
+use ByTIC\MediaLibrary\Validation\Violations\Violation;
 use ByTIC\MediaLibrary\Validation\Violations\ViolationsBag;
 use Nip\Utility\Traits\NameWorksTrait;
 
@@ -139,11 +141,19 @@ abstract class AbstractValidator implements ValidatorInterface
     }
 
     /**
-     * @param $attribute
+     * @param AbstractConstraint $constraint
+     * @param $code
      * @param $parameters
      */
     protected function addViolation($constraint, $code, $parameters)
     {
+        $violation = new Violation();
+        $violation->setCode($code);
+        $violation->setMessage($constraint::errorNames[$code]);
+        $violation->setParameters($parameters);
 
+        $this->violations->add(
+            $violation
+        );
     }
 }
