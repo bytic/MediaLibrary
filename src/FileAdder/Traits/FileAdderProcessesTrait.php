@@ -33,7 +33,7 @@ trait FileAdderProcessesTrait
      */
     protected function processMediaItem(Collection $collection, Media $media)
     {
-        $this->guardAgainstDisallowedFileAdditions($collection, $media);
+        $this->guardAgainstDisallowedFileAdditions($collection, $media, $this->getFile());
 
         $media->setCollection($collection);
 
@@ -66,13 +66,13 @@ trait FileAdderProcessesTrait
 
     /**
      * @param Collection $collection
-     * @param Media $media
+     * @param mixed $file
      */
-    protected function guardAgainstDisallowedFileAdditions(Collection $collection, Media $media)
+    protected function guardAgainstDisallowedFileAdditions(Collection $collection, $file)
     {
-        $guardTest = ($collection->acceptsMedia)($media);
+        $guardTest = ($collection->acceptsMedia)($file);
         if ($guardTest instanceof ViolationsBag) {
-            throw FileUnacceptableForCollection::createFromViolationsBag($media, $collection, $guardTest);
+            throw FileUnacceptableForCollection::createFromViolationsBag($file, $collection, $guardTest);
         }
     }
 }

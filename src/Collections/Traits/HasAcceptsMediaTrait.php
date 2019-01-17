@@ -24,12 +24,12 @@ trait HasAcceptsMediaTrait
 
     protected function initHasAcceptsMediaWithValidation()
     {
-        $this->acceptsMedia(function ($media) {
+        $this->acceptsMedia(function ($file) {
             /** @var AbstractValidator $validator */
             $validator = $this->getValidator();
             $constraint = $this->getConstraint();
 
-            $violations = $validator->validate($media, $constraint);
+            $violations = $validator->validate($file, $constraint);
             if ($violations->count() < 1) {
                 return true;
             }

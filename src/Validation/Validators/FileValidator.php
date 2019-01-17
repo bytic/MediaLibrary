@@ -54,12 +54,11 @@ class FileValidator extends AbstractValidator
     protected function validateMimeType()
     {
         $constraint = $this->getConstraint();
-        $value = $this->getValue();
-        $file = $value->getFile();
+
 
         if ($constraint->mimeTypes) {
             $mimeTypes = (array)$constraint->mimeTypes;
-            $mime = $file->getMimetype();
+            $mime = $this->determineMime();
             foreach ($mimeTypes as $mimeType) {
                 if ($mimeType === $mime) {
                     return;
@@ -73,6 +72,19 @@ class FileValidator extends AbstractValidator
             $this->addViolation($constraint, FileConstraint::INVALID_MIME_TYPE_ERROR, []);
         }
         return;
+    }
+
+    /**
+     * @return string|null
+     */
+    protected function determineMime()
+    {
+        $file = $this->getValue();
+        if ($file instanceof UploadedFile) {
+            return $file->getClientMimeType();
+        }
+
+        return null;
     }
 
     /**

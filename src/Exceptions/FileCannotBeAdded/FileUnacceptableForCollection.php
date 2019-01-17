@@ -16,12 +16,12 @@ class FileUnacceptableForCollection extends FileCannotBeAdded
     public $violations;
 
     /**
-     * @param Media $media
+     * @param mixed $media
      * @param Collection $collection
      * @param ViolationsBag $bag
      * @return FileUnacceptableForCollection
      */
-    public static function createFromViolationsBag(Media $media, Collection $collection, ViolationsBag $bag)
+    public static function createFromViolationsBag( $file, Collection $collection, ViolationsBag $bag)
     {
         $exception = new static(
             "The media was not accepted into the collection"
