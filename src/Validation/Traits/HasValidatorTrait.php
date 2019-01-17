@@ -69,5 +69,4 @@ trait HasValidatorTrait
     {
         return false;
     }
-
 }

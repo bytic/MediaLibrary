@@ -4,10 +4,7 @@ namespace ByTIC\MediaLibrary\FileAdder;
 
 use ByTIC\MediaLibrary\HasMedia\HasMediaTrait;
 use ByTIC\MediaLibrary\HasMedia\Interfaces\HasMedia;
-use ByTIC\MediaLibrary\Media\Manipulators\ManipulatorFactory;
 use ByTIC\MediaLibrary\Media\Media;
-use ByTIC\MediaLibrary\PathGenerator\PathGeneratorFactory;
-use Nip\Filesystem\File;
 use Nip\Logger\Exception;
 use Symfony\Component\HttpFoundation\File\File as SymfonyFile;
 
@@ -18,6 +15,7 @@ use Symfony\Component\HttpFoundation\File\File as SymfonyFile;
 class FileAdder implements FileAdderInterface
 {
     use Traits\HasFileTrait;
+    use Traits\FileAdderProcessesTrait;
 
     /** @var HasMediaTrait|HasMedia subject */
     protected $subject;
@@ -54,21 +52,6 @@ class FileAdder implements FileAdderInterface
         return str_replace(['#', '/', '\\'], '-', $fileName);
     }
 
-    /**
-     * @param $name
-     */
-    public function toMediaCollection($name)
-    {
-        $media = $this->getMedia();
-        $collection = $this->getSubject()->getMediaRepository()->getCollection($name);
-
-        $media->setCollection($collection);
-
-        $this->copyMediaToFilesystem();
-        $this->createMediaConversions();
-
-        $collection->appendMedia($media);
-    }
 
     /**
      * @return Media|null
@@ -123,27 +106,6 @@ class FileAdder implements FileAdderInterface
     {
         $this->subject = $subject;
         return $this;
-    }
-
-    protected function copyMediaToFilesystem()
-    {
-        $media = $this->getMedia();
-        $destination = PathGeneratorFactory::create()::getBasePathForMediaOriginal($media);
-        $destination .= DIRECTORY_SEPARATOR . $media->getCollection()->getStrategy()::makeFileName($this);
-
-        $media->generateFileFromContent($destination, fopen($this->getPathToFile(), 'r'));
-
-        $file = new File($media->getCollection()->getFilesystem(), $destination);
-        $media->setFile($file);
-    }
-
-    protected function createMediaConversions()
-    {
-        $media = $this->getMedia();
-        ManipulatorFactory::createForMedia($media)->performConversions(
-            $this->getSubject()->getMediaConversions()->forCollection($media->getCollection()->getName()),
-            $media
-        );
     }
 
     /**
