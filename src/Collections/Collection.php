@@ -16,6 +16,7 @@ use ByTIC\MediaLibrary\Validation\Traits\HasValidatorTrait;
  */
 class Collection extends \Nip\Collections\Collection
 {
+    use Traits\HasAcceptsMediaTrait;
     use Traits\LoadMediaTrait;
     use Traits\HasDefaultMediaTrait;
     use Traits\HasRecordTrait;
@@ -26,6 +27,14 @@ class Collection extends \Nip\Collections\Collection
     use HasConstraintTrait;
 
     /**
+     * @inheritdoc
+     */
+    public function __construct($items = [])
+    {
+        parent::__construct($items);
+        $this->initHasAcceptsMedia();
+    }
+    /**
      * @var string
      */
     protected $name;
@@ -34,12 +43,6 @@ class Collection extends \Nip\Collections\Collection
      * @var string
      */
     protected $originalPath = null;
-
-
-    /**
-     * @var string
-     */
-    protected $contraintName = null;
 
 
     /**
@@ -56,22 +59,6 @@ class Collection extends \Nip\Collections\Collection
     public function setName(string $name)
     {
         $this->name = $name;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getContraintName()
-    {
-        return $this->contraintName;
-    }
-
-    /**
-     * @param string $contraintName
-     */
-    public function setContraintName(string $contraintName)
-    {
-        $this->contraintName = $contraintName;
     }
 
     /**

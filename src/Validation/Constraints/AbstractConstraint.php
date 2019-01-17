@@ -6,44 +6,20 @@ use Nip\Utility\Traits\NameWorksTrait;
 
 /**
  * Class AbstractConstraint
+ *
+ * @property $errorNames
+ *
  * @package ByTIC\MediaLibrary\Validation\Constraints
  */
 abstract class AbstractConstraint implements ConstraintInterface
 {
     use NameWorksTrait;
-
-    /**
-     * @var bool
-     */
-    protected $init = false;
+    use Traits\InitTrait;
 
     /**
      * @var string
      */
     protected $name = null;
-
-    public function init()
-    {
-        if ($this->init === true) {
-            return;
-        }
-        $this->doInit();
-        $this->init = true;
-    }
-
-    protected function doInit()
-    {
-        $this->initVariablesFromConfig();
-    }
-
-    protected function initVariablesFromConfig()
-    {
-        $configKey = 'media-library.contraints.' . $this->getName();
-        if (config()->has($configKey)) {
-            $variables = config()->get($configKey);
-            $this->applyVariables($variables);
-        }
-    }
 
     /**
      * @return string
@@ -77,5 +53,16 @@ abstract class AbstractConstraint implements ConstraintInterface
         foreach ($variables as $name => $value) {
             $this->{$name} = $value;
         }
+    }
+
+    /**
+     * @param $code
+     */
+    public function getErrorMessage($code)
+    {
+        if (isset(static::$errorNames[$code])) {
+            return static::$errorNames[$code];
+        }
+        return;
     }
 }

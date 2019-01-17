@@ -11,10 +11,9 @@ use ByTIC\MediaLibrary\Validation\Constraints\ConstraintInterface;
 class GenericValidator extends AbstractValidator
 {
     /**
-     * @param ConstraintInterface $constraint
      * @return boolean
      */
-    protected function contraintNeedsValidation(ConstraintInterface $constraint): bool
+    protected function contraintNeedsValidation(): bool
     {
         return false;
     }
@@ -24,7 +23,7 @@ class GenericValidator extends AbstractValidator
      * @param ConstraintInterface $constraint
      * @return mixed
      */
-    protected function doValidation($value, ConstraintInterface $constraint)
+    protected function doValidation()
     {
         return;
     }

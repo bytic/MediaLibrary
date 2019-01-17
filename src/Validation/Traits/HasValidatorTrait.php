@@ -2,9 +2,7 @@
 
 namespace ByTIC\MediaLibrary\Validation\Traits;
 
-use ByTIC\MediaLibrary\Validation\Validators\{
-    AbstractValidator, GenericValidator, ImageValidator
-};
+use ByTIC\MediaLibrary\Validation\Validators\{AbstractValidator, FileValidator, GenericValidator, ImageValidator};
 
 /**
  * Trait HasValidatorTrait
@@ -50,6 +48,8 @@ trait HasValidatorTrait
         switch ($mediaType) {
             case 'images':
                 return ImageValidator::class;
+            case 'files':
+                return FileValidator::class;
         }
         return GenericValidator::class;
     }
@@ -69,5 +69,4 @@ trait HasValidatorTrait
     {
         return false;
     }
-
 }
