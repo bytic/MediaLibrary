@@ -3,6 +3,7 @@
 namespace ByTIC\MediaLibrary\FileAdder\Traits;
 
 use ByTIC\MediaLibrary\Collections\Collection;
+use ByTIC\MediaLibrary\Exceptions\FileCannotBeAdded;
 use ByTIC\MediaLibrary\Exceptions\FileCannotBeAdded\FileUnacceptableForCollection;
 use ByTIC\MediaLibrary\Media\Manipulators\ManipulatorFactory;
 use ByTIC\MediaLibrary\Media\Media;
@@ -18,23 +19,25 @@ trait FileAdderProcessesTrait
 {
 
     /**
-     * @param $name
+     * @param string|Collection $collection
      */
-    public function toMediaCollection($name)
+    public function toMediaCollection($collection)
     {
-        $media = $this->getMedia();
-        $collection = $this->getSubject()->getMediaRepository()->getCollection($name);
-        $this->processMediaItem($collection, $media);
+        if (is_string($collection)) {
+            $collection = $this->getMediaRepository()->getCollection($collection);
+        }
+        $this->processMediaItem($collection);
     }
 
     /**
      * @param Collection $collection
      * @param Media $media
      */
-    protected function processMediaItem(Collection $collection, Media $media)
+    protected function processMediaItem(Collection $collection, Media $media = null)
     {
-        $this->guardAgainstDisallowedFileAdditions($collection, $media, $this->getFile());
+        $this->guardAgainstDisallowedFileAdditions($collection, $this->getFile());
 
+        $media = $media ? $media : $this->getMedia();
         $media->setCollection($collection);
 
         $this->copyMediaToFilesystem();
@@ -73,6 +76,9 @@ trait FileAdderProcessesTrait
         $guardTest = ($collection->acceptsMedia)($file);
         if ($guardTest instanceof ViolationsBag) {
             throw FileUnacceptableForCollection::createFromViolationsBag($file, $collection, $guardTest);
+        }
+        if ($guardTest === false) {
+            throw new FileCannotBeAdded();
         }
     }
 }
