@@ -4,6 +4,7 @@ namespace ByTIC\MediaLibrary\Validation\Validators;
 
 use ByTIC\MediaLibrary\Collections\Collection;
 use ByTIC\MediaLibrary\Exceptions\UnexpectedTypeException;
+use ByTIC\MediaLibrary\Media\Media;
 use ByTIC\MediaLibrary\Validation\Constraints\ConstraintInterface;
 use ByTIC\MediaLibrary\Validation\Traits\HasValidatorTrait;
 use ByTIC\MediaLibrary\Validation\Violations\ViolationsBag;
@@ -122,7 +123,7 @@ abstract class AbstractValidator implements ValidatorInterface
     abstract protected function doValidation();
 
     /**
-     * @return mixed
+     * @return Media
      */
     public function getValue()
     {

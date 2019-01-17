@@ -23,4 +23,7 @@ class FileConstraint extends AbstractConstraint
         self::INVALID_MIME_TYPE_ERROR => 'INVALID_MIME_TYPE_ERROR',
     ];
 
+
+    protected $maxSize;
+    public $mimeTypes = [];
 }
