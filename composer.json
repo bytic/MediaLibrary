@@ -21,6 +21,7 @@
   },
   "require": {
     "php": "^7.0",
+    "bytic/container": "^0.9",
     "bytic/collections": "^1.0",
     "bytic/logger": "^0.9",
     "bytic/filesystem": "^0.9",
