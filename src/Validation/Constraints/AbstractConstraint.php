@@ -6,6 +6,9 @@ use Nip\Utility\Traits\NameWorksTrait;
 
 /**
  * Class AbstractConstraint
+ *
+ * @property $errorNames
+ *
  * @package ByTIC\MediaLibrary\Validation\Constraints
  */
 abstract class AbstractConstraint implements ConstraintInterface
@@ -50,5 +53,16 @@ abstract class AbstractConstraint implements ConstraintInterface
         foreach ($variables as $name => $value) {
             $this->{$name} = $value;
         }
+    }
+
+    /**
+     * @param $code
+     */
+    public function getErrorMessage($code)
+    {
+        if (isset(static::$errorNames[$code])) {
+            return static::$errorNames[$code];
+        }
+        return;
     }
 }

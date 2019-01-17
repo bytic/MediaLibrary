@@ -149,7 +149,7 @@ abstract class AbstractValidator implements ValidatorInterface
     {
         $violation = new Violation();
         $violation->setCode($code);
-        $violation->setMessage($constraint::errorNames[$code]);
+        $violation->setMessage($constraint->getErrorMessage($code));
         $violation->setParameters($parameters);
 
         $this->violations->add(
