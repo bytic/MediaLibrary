@@ -8,12 +8,10 @@ use ByTIC\MediaLibrary\Tests\AbstractTest;
 use ByTIC\MediaLibrary\Tests\Fixtures\Models\HasMediaModel;
 
 /**
- * Class HasMediaConversionsTest
- * @package ByTIC\MediaLibrary\Tests\HasMedia
+ * Class HasMediaConversionsTest.
  */
 class HasMediaConversionsTest extends AbstractTest
 {
-
     public function testGetMediaConversionsEmpty()
     {
         $model = new HasMediaModel();

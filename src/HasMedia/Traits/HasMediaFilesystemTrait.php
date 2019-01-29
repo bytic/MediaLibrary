@@ -5,14 +5,12 @@ namespace ByTIC\MediaLibrary\HasMedia\Traits;
 use Nip\Filesystem\FileDisk;
 
 /**
- * Trait HasMediaFilesystemTrait
- * @package ByTIC\MediaLibrary\HasMedia
+ * Trait HasMediaFilesystemTrait.
  */
 trait HasMediaFilesystemTrait
 {
-
     /**
-     * Get the default files disk instance for current model
+     * Get the default files disk instance for current model.
      *
      * @return FileDisk
      */

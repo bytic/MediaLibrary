@@ -12,12 +12,10 @@ use ByTIC\MediaLibrary\Validation\Violations\ViolationsBag;
 use Nip\Filesystem\File;
 
 /**
- * Trait FileAdderProcessesTrait
- * @package ByTIC\MediaLibrary\FileAdder\Traits
+ * Trait FileAdderProcessesTrait.
  */
 trait FileAdderProcessesTrait
 {
-
     /**
      * @param string|Collection $collection
      */
@@ -31,7 +29,7 @@ trait FileAdderProcessesTrait
 
     /**
      * @param Collection $collection
-     * @param Media $media
+     * @param Media      $media
      */
     protected function processMediaItem(Collection $collection, Media $media = null)
     {
@@ -50,7 +48,7 @@ trait FileAdderProcessesTrait
     {
         $media = $this->getMedia();
         $destination = PathGeneratorFactory::create()::getBasePathForMediaOriginal($media);
-        $destination .= DIRECTORY_SEPARATOR . $media->getCollection()->getStrategy()::makeFileName($this);
+        $destination .= DIRECTORY_SEPARATOR.$media->getCollection()->getStrategy()::makeFileName($this);
 
         $media->generateFileFromContent($destination, fopen($this->getPathToFile(), 'r'));
 
@@ -69,7 +67,7 @@ trait FileAdderProcessesTrait
 
     /**
      * @param Collection $collection
-     * @param mixed $file
+     * @param mixed      $file
      */
     protected function guardAgainstDisallowedFileAdditions(Collection $collection, $file)
     {

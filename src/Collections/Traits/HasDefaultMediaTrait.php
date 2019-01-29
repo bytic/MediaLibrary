@@ -7,8 +7,7 @@ use ByTIC\MediaLibrary\Media\Media;
 use Nip\Records\Record;
 
 /**
- * Trait HasDefaultMediaTrait
- * @package ByTIC\MediaLibrary\Collections\Traits
+ * Trait HasDefaultMediaTrait.
  *
  * @method HasMediaTrait|Record getRecord
  */
@@ -29,13 +28,15 @@ trait HasDefaultMediaTrait
 
     /**
      * @param $mediaName
+     *
      * @return mixed
      */
     public function persistDefaultMediaFromName($mediaName)
     {
-        $media = $this->get($mediaName,null);
+        $media = $this->get($mediaName, null);
         if ($media) {
             $this->setDefaultMedia($media);
+
             return $this->persistDefaultMedia();
         }
     }
@@ -67,6 +68,7 @@ trait HasDefaultMediaTrait
         if ($this->defaultMedia === null) {
             $this->initDefaultMedia();
         }
+
         return $this->defaultMedia;
     }
 
@@ -83,6 +85,7 @@ trait HasDefaultMediaTrait
         if (count($this->items)) {
             return reset($this->items);
         }
+
         return $this->compileDefaultMedia();
     }
 
@@ -92,6 +95,7 @@ trait HasDefaultMediaTrait
     protected function compileDefaultMedia()
     {
         $media = $this->newMedia();
+
         return $media;
     }
 
@@ -117,8 +121,8 @@ trait HasDefaultMediaTrait
     public function getDefaultMediaGenericUrl()
     {
         return '/assets/images/'
-            . $this->getRecord()->getManager()->getTable() . '/'
-            . $this->getDefaultFileName();
+            .$this->getRecord()->getManager()->getTable().'/'
+            .$this->getDefaultFileName();
     }
 
     /**
@@ -128,6 +132,7 @@ trait HasDefaultMediaTrait
     {
         $name = inflector()->singularize($this->getName());
         $extension = $this->getName() == 'logos' ? 'png' : 'jpg';
-        return $name . '.' . $extension;
+
+        return $name.'.'.$extension;
     }
 }

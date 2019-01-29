@@ -10,15 +10,13 @@ use ByTIC\MediaLibrary\Tests\Fixtures\Models\HasMediaModel;
 use Symfony\Component\HttpFoundation\File\File as SymfonyFile;
 
 /**
- * Class FileAdderTest
- * @package ByTIC\MediaLibrary\Tests\FileAdder
+ * Class FileAdderTest.
  */
 class FileAdderTest extends AbstractTest
 {
-
     public function testSetFileString()
     {
-        $filePath = TEST_FIXTURE_PATH . '/test-files/image1.gif';
+        $filePath = TEST_FIXTURE_PATH.'/test-files/image1.gif';
 
         $fileAdder = new FileAdder();
         $fileAdder->setFile($filePath);
@@ -38,7 +36,7 @@ class FileAdderTest extends AbstractTest
     public function testCreateMediaWithFileWithoughtMedia()
     {
         self::expectExceptionMessage(FileAdderInterface::NO_SUBJECT_DEFINED);
-        $filePath = TEST_FIXTURE_PATH . '/test-files/image1.gif';
+        $filePath = TEST_FIXTURE_PATH.'/test-files/image1.gif';
 
         $fileAdder = new FileAdder();
         $fileAdder->setFile($filePath);
@@ -48,7 +46,7 @@ class FileAdderTest extends AbstractTest
 
     public function testCreateMedia()
     {
-        $filePath = TEST_FIXTURE_PATH . '/test-files/image1.gif';
+        $filePath = TEST_FIXTURE_PATH.'/test-files/image1.gif';
 
         $fileAdder = new FileAdder();
         $fileAdder->setFile($filePath);
@@ -59,5 +57,4 @@ class FileAdderTest extends AbstractTest
         $media = $fileAdder->getMedia();
         self::assertInstanceOf(Media::class, $media);
     }
-
 }

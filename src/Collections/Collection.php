@@ -9,8 +9,7 @@ use ByTIC\MediaLibrary\Validation\Constraints\Traits\HasConstraintTrait;
 use ByTIC\MediaLibrary\Validation\Traits\HasValidatorTrait;
 
 /**
- * Class Collection
- * @package ByTIC\MediaLibrary\Collections
+ * Class Collection.
  *
  * @method Media get
  */
@@ -27,13 +26,14 @@ class Collection extends \Nip\Collections\Collection
     use HasConstraintTrait;
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function __construct($items = [])
     {
         parent::__construct($items);
         $this->initHasAcceptsMedia();
     }
+
     /**
      * @var string
      */
@@ -43,7 +43,6 @@ class Collection extends \Nip\Collections\Collection
      * @var string
      */
     protected $originalPath = null;
-
 
     /**
      * @return string
@@ -95,12 +94,14 @@ class Collection extends \Nip\Collections\Collection
 
     /**
      * @param AbstractLoader $loader
+     *
      * @return AbstractLoader
      */
     protected function hydrateLoader($loader)
     {
         $loader->setCollection($this);
         $loader->setFilesystem($this->getFilesystem());
+
         return $loader;
     }
 }

@@ -3,10 +3,8 @@
 namespace ByTIC\MediaLibrary\PathGenerator;
 
 /**
- * Class BasePathGenerator
- * @package ByTIC\MediaLibrary\PathGenerator
+ * Class BasePathGenerator.
  */
 class BasePathGenerator extends AbstractPathGenerator
 {
-
 }

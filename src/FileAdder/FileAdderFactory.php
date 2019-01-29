@@ -5,18 +5,17 @@ namespace ByTIC\MediaLibrary\FileAdder;
 use ByTIC\MediaLibrary\HasMedia\HasMediaTrait;
 
 /**
- * Class FileAdderFactory
- * @package ByTIC\MediaLibrary\FileAdder
+ * Class FileAdderFactory.
  */
 class FileAdderFactory
 {
-
     /**
-     * @param HasMediaTrait $subject
+     * @param HasMediaTrait                                      $subject
      * @param string|\Symfony\Component\HttpFoundation\File\File $file
      *
-     * @return FileAdder
      * @throws \Nip\Logger\Exception
+     *
+     * @return FileAdder
      */
     public static function create($subject, $file)
     {
@@ -33,6 +32,7 @@ class FileAdderFactory
         if (function_exists('app')) {
             app(FileAdder::class);
         }
-        return new FileAdder;
+
+        return new FileAdder();
     }
 }

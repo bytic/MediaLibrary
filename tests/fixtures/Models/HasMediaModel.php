@@ -7,11 +7,9 @@ use ByTIC\MediaLibrary\HasMedia\Interfaces\HasMedia;
 use Nip\Records\Record;
 
 /**
- * Class HasMediaModel
- * @package ByTIC\MediaLibrary\Tests\Fixtures\Models
+ * Class HasMediaModel.
  */
 class HasMediaModel extends Record implements HasMedia
 {
     use HasMediaTrait;
-
 }

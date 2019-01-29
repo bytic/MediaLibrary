@@ -5,8 +5,7 @@ namespace ByTIC\MediaLibrary\Collections\Traits;
 use Nip\Filesystem\FileDisk;
 
 /**
- * Trait HasFilesystemTrait
- * @package ByTIC\MediaLibrary\Collections\Traits
+ * Trait HasFilesystemTrait.
  */
 trait HasFilesystemTrait
 {
@@ -20,6 +19,7 @@ trait HasFilesystemTrait
         if ($this->filesystem == null) {
             $this->initFilesystem();
         }
+
         return $this->filesystem;
     }
 

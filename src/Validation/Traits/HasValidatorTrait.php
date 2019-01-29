@@ -2,21 +2,23 @@
 
 namespace ByTIC\MediaLibrary\Validation\Traits;
 
-use ByTIC\MediaLibrary\Validation\Validators\{AbstractValidator, FileValidator, GenericValidator, ImageValidator};
+use ByTIC\MediaLibrary\Validation\Validators\AbstractValidator;
+use ByTIC\MediaLibrary\Validation\Validators\FileValidator;
+use ByTIC\MediaLibrary\Validation\Validators\GenericValidator;
+use ByTIC\MediaLibrary\Validation\Validators\ImageValidator;
 
 /**
- * Trait HasValidatorTrait
- * @package ByTIC\MediaLibrary\Validation
+ * Trait HasValidatorTrait.
  */
 trait HasValidatorTrait
 {
-
     /**
      * @return AbstractValidator|null
      */
     public function getValidator()
     {
         $validator = $this->generateValidator();
+
         return $validator;
     }
 
@@ -27,6 +29,7 @@ trait HasValidatorTrait
     {
         $validator = $this->newValidator();
         $this->hydrateValidator($validator);
+
         return $validator;
     }
 
@@ -36,6 +39,7 @@ trait HasValidatorTrait
     protected function newValidator()
     {
         $class = $this->getValidatorClassName();
+
         return new $class();
     }
 
@@ -51,6 +55,7 @@ trait HasValidatorTrait
             case 'files':
                 return FileValidator::class;
         }
+
         return GenericValidator::class;
     }
 

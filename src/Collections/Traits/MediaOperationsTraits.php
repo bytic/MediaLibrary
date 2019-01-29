@@ -6,15 +6,14 @@ use ByTIC\MediaLibrary\Collections\Collection;
 use ByTIC\MediaLibrary\Media\Media;
 
 /**
- * Trait MediaOperationsTraits
- * @package ByTIC\MediaLibrary\Collections\Traits
+ * Trait MediaOperationsTraits.
  */
 trait MediaOperationsTraits
 {
-
     /** @noinspection PhpUnusedParameterInspection
      *
      * @param $filter
+     *
      * @return MediaOperationsTraits|Collection|Media[]
      */
     public function filter($filter)
@@ -34,7 +33,7 @@ trait MediaOperationsTraits
     public function delete()
     {
         foreach ($this as $key => $file) {
-            /** @var Media $file */
+            /* @var Media $file */
             $file->delete();
             $this->unset($key);
         }

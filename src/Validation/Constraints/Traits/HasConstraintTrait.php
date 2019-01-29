@@ -5,10 +5,8 @@ namespace ByTIC\MediaLibrary\Validation\Constraints\Traits;
 use ByTIC\MediaLibrary\Validation\Constraints\AbstractConstraint;
 use ByTIC\MediaLibrary\Validation\Validators\AbstractValidator;
 
-
 /**
- * Trait HasValidatorTrait
- * @package ByTIC\MediaLibrary\Validation
+ * Trait HasValidatorTrait.
  */
 trait HasConstraintTrait
 {
@@ -16,7 +14,6 @@ trait HasConstraintTrait
      * @var null|AbstractConstraint
      */
     protected $constraint = null;
-
 
     /**
      * @var string
@@ -31,6 +28,7 @@ trait HasConstraintTrait
         if ($this->constraint === null) {
             $this->initConstraint();
         }
+
         return $this->constraint;
     }
 
@@ -55,6 +53,7 @@ trait HasConstraintTrait
     {
         $constraint = $this->newConstraint();
         $this->hydrateConstraint($constraint);
+
         return $constraint;
     }
 
@@ -64,6 +63,7 @@ trait HasConstraintTrait
     protected function newConstraint()
     {
         $class = $this->getValidator()->getConstraintClassName();
+
         return new $class();
     }
 

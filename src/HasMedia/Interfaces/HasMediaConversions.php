@@ -3,8 +3,7 @@
 namespace ByTIC\MediaLibrary\HasMedia\Interfaces;
 
 /**
- * Interface HasMediaConversions
- * @package ByTIC\MediaLibrary\HasMedia\Interfaces
+ * Interface HasMediaConversions.
  */
 interface HasMediaConversions extends HasMedia
 {

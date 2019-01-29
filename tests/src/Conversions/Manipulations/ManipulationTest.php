@@ -6,8 +6,7 @@ use ByTIC\MediaLibrary\Conversions\Manipulations\Manipulation;
 use ByTIC\MediaLibrary\Tests\AbstractTest;
 
 /**
- * Class ManipulationTest
- * @package ByTIC\MediaLibrary\Tests\Conversions\Manipulations
+ * Class ManipulationTest.
  */
 class ManipulationTest extends AbstractTest
 {

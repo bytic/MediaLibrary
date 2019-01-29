@@ -7,12 +7,10 @@ use ByTIC\MediaLibrary\Media\Media;
 use Nip\Collection;
 
 /**
- * Class BaseManipulator
- * @package ByTIC\MediaLibrary\Media\Manipulator
+ * Class BaseManipulator.
  */
 class BaseManipulator extends AbstractManipulator
 {
-
     /**
      * @return bool
      */
@@ -38,11 +36,10 @@ class BaseManipulator extends AbstractManipulator
     }
 
     /**
-     * @param Media $media
+     * @param Media      $media
      * @param Conversion $conversion
      */
     public function performConversion(Media $media, Conversion $conversion)
     {
-        return;
     }
 }

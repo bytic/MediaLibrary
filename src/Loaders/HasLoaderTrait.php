@@ -3,12 +3,10 @@
 namespace ByTIC\MediaLibrary\Loaders;
 
 /**
- * Trait HasLoaderTrait
- * @package ByTIC\MediaLibrary\Loaders
+ * Trait HasLoaderTrait.
  */
 trait HasLoaderTrait
 {
-
     /**
      * @var AbstractLoader
      */
@@ -22,6 +20,7 @@ trait HasLoaderTrait
         if ($this->loader == null) {
             $this->initLoader();
         }
+
         return $this->loader;
     }
 
@@ -42,6 +41,7 @@ trait HasLoaderTrait
 
     /**
      * @param AbstractLoader $loader
+     *
      * @return AbstractLoader
      */
     protected function hydrateLoader($loader)
@@ -52,9 +52,11 @@ trait HasLoaderTrait
     /**
      * @return AbstractLoader
      */
-    protected function newLoader() {
+    protected function newLoader()
+    {
         $class = $this->getLoaderClass();
         $loader = new $class();
+
         return $loader;
     }
 

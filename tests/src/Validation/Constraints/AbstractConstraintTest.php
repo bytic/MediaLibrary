@@ -6,8 +6,7 @@ use ByTIC\MediaLibrary\Tests\AbstractTest;
 use ByTIC\MediaLibrary\Validation\Constraints\ImageConstraint;
 
 /**
- * Class AbstractConstraintTest
- * @package ByTIC\MediaLibrary\Tests\Validation\Constraints
+ * Class AbstractConstraintTest.
  */
 class AbstractConstraintTest extends AbstractTest
 {

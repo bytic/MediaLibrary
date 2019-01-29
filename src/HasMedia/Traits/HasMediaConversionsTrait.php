@@ -6,8 +6,7 @@ use ByTIC\MediaLibrary\Conversions\Conversion;
 use ByTIC\MediaLibrary\Conversions\ConversionCollection;
 
 /**
- * Trait HasMediaConversionsTrait
- * @package ByTIC\MediaLibrary\HasMedia
+ * Trait HasMediaConversionsTrait.
  */
 trait HasMediaConversionsTrait
 {
@@ -15,13 +14,16 @@ trait HasMediaConversionsTrait
 
     /**
      * Add a conversion.
+     *
      * @param string $name
+     *
      * @return Conversion
      */
     public function addMediaConversion(string $name): Conversion
     {
         $conversion = Conversion::create($name);
         $this->mediaConversions[$name] = $conversion;
+
         return $conversion;
     }
 
@@ -33,6 +35,7 @@ trait HasMediaConversionsTrait
         if ($this->mediaConversions === null) {
             $this->initMediaConversions();
         }
+
         return $this->mediaConversions;
     }
 
