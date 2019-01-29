@@ -3,8 +3,7 @@
 namespace ByTIC\MediaLibrary\PathGenerator;
 
 /**
- * Class PathGeneratorFactory
- * @package ByTIC\MediaLibrary\PathGenerator
+ * Class PathGeneratorFactory.
  */
 class PathGeneratorFactory
 {
@@ -23,6 +22,6 @@ class PathGeneratorFactory
             return app($pathGeneratorClass);
         }
 
-        return new $pathGeneratorClass;
+        return new $pathGeneratorClass();
     }
 }

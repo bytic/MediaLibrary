@@ -6,8 +6,7 @@ use ByTIC\MediaLibrary\Conversions\Manipulations\Manipulation;
 use ByTIC\MediaLibrary\Conversions\Manipulations\ManipulationSequence;
 
 /**
- * Class Conversion
- * @package ByTIC\MediaLibrary\Convertions
+ * Class Conversion.
  */
 class Conversion
 {
@@ -21,6 +20,7 @@ class Conversion
 
     /**
      * Conversion constructor.
+     *
      * @param string $name
      */
     public function __construct(string $name)
@@ -32,6 +32,7 @@ class Conversion
     /**
      * @param $name
      * @param $arguments
+     *
      * @return $this
      */
     public function __call($name, $arguments)
@@ -40,6 +41,7 @@ class Conversion
 //            throw new BadMethodCallException("Manipulation `{$name}` does not exist");
 //        }
         $this->manipulations[] = Manipulation::create($name, ...$arguments);
+
         return $this;
     }
 
@@ -53,6 +55,7 @@ class Conversion
 
     /**
      * @param string $name
+     *
      * @return Conversion
      */
     public static function create(string $name)
@@ -62,19 +65,24 @@ class Conversion
 
     /**
      * Set the collection names on which this conversion must be performed.
+     *
      * @param array ...$collectionNames
+     *
      * @return $this
      */
     public function performOnCollections(...$collectionNames)
     {
         $this->performOnCollections = $collectionNames;
+
         return $this;
     }
 
     /**
      * Determine if this conversion should be performed on the given
      * collection.
+     *
      * @param string $collectionName
+     *
      * @return bool
      */
     public function shouldBePerformedOn(string $collectionName): bool
@@ -86,6 +94,7 @@ class Conversion
         if (in_array('*', $this->performOnCollections)) {
             return true;
         }
+
         return in_array($collectionName, $this->performOnCollections);
     }
 

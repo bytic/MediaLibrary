@@ -3,8 +3,7 @@
 namespace ByTIC\MediaLibrary\Conversions;
 
 /**
- * Class ConversionCollection
- * @package ByTIC\MediaLibrary\Convertions
+ * Class ConversionCollection.
  */
 class ConversionCollection extends \Nip\Collection
 {
@@ -20,11 +19,13 @@ class ConversionCollection extends \Nip\Collection
         if ($collectionName === '') {
             return $this;
         }
+
         return $this->shouldBePerformedOn($collectionName);
     }
 
     /**
      * @param string $collectionName
+     *
      * @return $this
      */
     protected function shouldBePerformedOn($collectionName)
@@ -35,6 +36,7 @@ class ConversionCollection extends \Nip\Collection
                 $results[$key] = $item;
             }
         }
+
         return new self($results);
     }
 }

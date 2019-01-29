@@ -7,14 +7,12 @@ use ByTIC\MediaLibrary\Loaders\LoaderInterface;
 use Nip\Container\ServiceProvider\AbstractSignatureServiceProvider;
 
 /**
- * Class MediaLibraryServiceProvider
- * @package ByTIC\MediaLibrary
+ * Class MediaLibraryServiceProvider.
  */
 class MediaLibraryServiceProvider extends AbstractSignatureServiceProvider
 {
-
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function register()
     {
@@ -22,7 +20,7 @@ class MediaLibraryServiceProvider extends AbstractSignatureServiceProvider
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function provides()
     {

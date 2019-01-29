@@ -3,15 +3,15 @@
 namespace ByTIC\MediaLibrary\Exceptions;
 
 /**
- * Class UnexpectedTypeException
- * @package ByTIC\MediaLibrary\Exceptions
+ * Class UnexpectedTypeException.
  */
 class UnexpectedTypeException extends ValidatorException
 {
     /**
      * UnexpectedTypeException constructor.
+     *
      * @param string $value
-     * @param int $expectedType
+     * @param int    $expectedType
      */
     public function __construct($value, $expectedType)
     {

@@ -7,8 +7,7 @@ use ByTIC\MediaLibrary\HasMedia\HasMediaTrait;
 use Nip\Records\Record;
 
 /**
- * Class MediaRepository
- * @package ByTIC\MediaLibrary\MediaRepository
+ * Class MediaRepository.
  */
 class MediaRepository
 {
@@ -44,7 +43,8 @@ class MediaRepository
 
     /**
      * @param string $collectionName
-     * @param array $filter
+     * @param array  $filter
+     *
      * @return Collection
      */
     public function getFilteredCollection(string $collectionName, $filter = []): Collection
@@ -55,7 +55,7 @@ class MediaRepository
     /**
      * Apply given filters on media.
      *
-     * @param Collection $collection
+     * @param Collection     $collection
      * @param array|callable $filter
      *
      * @return Collection
@@ -64,5 +64,4 @@ class MediaRepository
     {
         return $collection->filter($filter);
     }
-
 }

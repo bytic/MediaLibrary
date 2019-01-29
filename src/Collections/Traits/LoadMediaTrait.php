@@ -9,8 +9,7 @@ use ByTIC\MediaLibrary\Media\Media;
 use ByTIC\MediaLibrary\MediaRepository\HasMediaRepositoryTrait;
 
 /**
- * Trait LoadMediaTrait
- * @package ByTIC\MediaLibrary\Collections\Traits
+ * Trait LoadMediaTrait.
  */
 trait LoadMediaTrait
 {
@@ -67,7 +66,7 @@ trait LoadMediaTrait
     }
 
     /**
-     * Append a media object inside the collection
+     * Append a media object inside the collection.
      *
      * @param Media $media
      */
@@ -94,6 +93,7 @@ trait LoadMediaTrait
 
     /**
      * @param AbstractLoader $loader
+     *
      * @return AbstractLoader
      */
     protected function hydrateLoader($loader)
@@ -111,5 +111,4 @@ trait LoadMediaTrait
     {
         return Filesystem::class;
     }
-
 }

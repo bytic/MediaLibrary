@@ -7,8 +7,7 @@ use ByTIC\MediaLibrary\Collections\UploadStrategy\GenericStrategy;
 use ByTIC\MediaLibrary\Collections\UploadStrategy\OriginalNameStrategy;
 
 /**
- * Trait HasStrategyTrait
- * @package ByTIC\MediaLibrary\Collections\UploadStrategy\Traits
+ * Trait HasStrategyTrait.
  */
 trait HasStrategyTrait
 {
@@ -25,6 +24,7 @@ trait HasStrategyTrait
         if ($this->strategy === null) {
             $this->initStrategy();
         }
+
         return $this->strategy;
     }
 
@@ -47,6 +47,7 @@ trait HasStrategyTrait
     protected function generateStrategy()
     {
         $strategy = $this->newStrategy();
+
         return $strategy;
     }
 
@@ -56,6 +57,7 @@ trait HasStrategyTrait
     protected function newStrategy()
     {
         $class = $this->getStrategyClassName();
+
         return new $class();
     }
 
@@ -66,11 +68,11 @@ trait HasStrategyTrait
     {
         $mediaType = $this->getMediaType();
         switch ($mediaType) {
-            case 'images' :
+            case 'images':
                 return GenericStrategy::class;
 
         }
+
         return OriginalNameStrategy::class;
     }
-
 }

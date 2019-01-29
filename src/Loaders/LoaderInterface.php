@@ -3,10 +3,8 @@
 namespace ByTIC\MediaLibrary\Loaders;
 
 /**
- * Interface LoaderInterface
- * @package ByTIC\MediaLibrary\Loaders
+ * Interface LoaderInterface.
  */
 interface LoaderInterface
 {
-
 }

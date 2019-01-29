@@ -3,10 +3,8 @@
 namespace ByTIC\MediaLibrary\Validation;
 
 /**
- * Class ValidatorsFactory
- * @package ByTIC\MediaLibrary\Validation
+ * Class ValidatorsFactory.
  */
 class ValidatorsFactory
 {
-
 }

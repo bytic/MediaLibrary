@@ -3,8 +3,7 @@
 namespace ByTIC\MediaLibrary\Validation\Constraints\Traits;
 
 /**
- * Trait InitTrait
- * @package ByTIC\MediaLibrary\Validation\Constraints\Traits
+ * Trait InitTrait.
  */
 trait InitTrait
 {
@@ -29,7 +28,7 @@ trait InitTrait
 
     protected function initVariablesFromConfig()
     {
-        $configKey = 'media-library.contraints.' . $this->getName();
+        $configKey = 'media-library.contraints.'.$this->getName();
 
         if (function_exists('config') && function_exists('app')) {
             if (config()->has($configKey)) {

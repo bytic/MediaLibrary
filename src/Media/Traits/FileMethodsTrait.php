@@ -3,16 +3,14 @@
 namespace ByTIC\MediaLibrary\Media\Traits;
 
 use Exception;
-use Nip\Filesystem\File;
 use League\Flysystem\File as FileLeague;
+use Nip\Filesystem\File;
 
 /**
- * Trait FileMethodsTrait
- * @package ByTIC\MediaLibrary\Media\Traits
+ * Trait FileMethodsTrait.
  */
 trait FileMethodsTrait
 {
-
     /**
      * @var File|FileLeague
      */
@@ -81,13 +79,14 @@ trait FileMethodsTrait
         return $this->getFile()->delete();
     }
 
-
     /**
      * Get the path to the original media file.
      *
      * @param string $conversionName
-     * @return string
+     *
      * @throws Exception
+     *
+     * @return string
      */
     public function getPath(string $conversionName = ''): string
     {
@@ -99,8 +98,8 @@ trait FileMethodsTrait
 
         if ($conversionName) {
             $path = $this->getBasePath()
-                . DIRECTORY_SEPARATOR . $conversionName
-                . DIRECTORY_SEPARATOR . $this->getName();
+                .DIRECTORY_SEPARATOR.$conversionName
+                .DIRECTORY_SEPARATOR.$this->getName();
         }
 
         return $path;

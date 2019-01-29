@@ -8,12 +8,10 @@ use ByTIC\MediaLibrary\Conversions\Manipulations\ManipulationSequence;
 use ByTIC\MediaLibrary\Tests\AbstractTest;
 
 /**
- * Class ConversionTest
- * @package ByTIC\MediaLibrary\Tests\HasMedia
+ * Class ConversionTest.
  */
 class ConversionTest extends AbstractTest
 {
-
     public function testCreate()
     {
         $conversion = Conversion::create('thumb');
@@ -46,6 +44,4 @@ class ConversionTest extends AbstractTest
         self::assertEquals('resize', $manipulation->getName());
         self::assertEquals([100, 200], $manipulation->getAttributes());
     }
-
-
 }

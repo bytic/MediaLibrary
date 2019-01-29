@@ -10,15 +10,14 @@ use ByTIC\MediaLibrary\Media\Media;
 use Nip\Collection;
 
 /**
- * Class ImageManipulator
- * @package ByTIC\MediaLibrary\Media\Manipulator
+ * Class ImageManipulator.
  */
 class ImageManipulator extends AbstractManipulator
 {
     protected $driver = null;
 
     /**
-     * @param Media $media
+     * @param Media      $media
      * @param Conversion $conversion
      */
     public function performConversion(Media $media, Conversion $conversion)
@@ -29,7 +28,6 @@ class ImageManipulator extends AbstractManipulator
 
         $path = $media->getPath($conversion->getName());
         $media->getCollection()->getFilesystem()->put($path, $imageContent);
-
     }
 
     /**
@@ -40,6 +38,7 @@ class ImageManipulator extends AbstractManipulator
         if ($this->driver === null) {
             $this->driver = $this->newDriver();
         }
+
         return $this->driver;
     }
 
@@ -60,7 +59,7 @@ class ImageManipulator extends AbstractManipulator
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function supportedExtensions(): Collection
     {
@@ -68,7 +67,7 @@ class ImageManipulator extends AbstractManipulator
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function supportedMimeTypes(): Collection
     {

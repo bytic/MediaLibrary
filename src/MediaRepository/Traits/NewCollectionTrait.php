@@ -5,14 +5,13 @@ namespace ByTIC\MediaLibrary\MediaRepository\Traits;
 use ByTIC\MediaLibrary\Collections\Collection;
 
 /**
- * Trait NewCollectionTrait
- * @package ByTIC\MediaLibrary\MediaRepository\Traits
+ * Trait NewCollectionTrait.
  */
 trait NewCollectionTrait
 {
-
     /**
      * @param string $collectionName
+     *
      * @return Collection
      */
     public function getCollection(string $collectionName): Collection
@@ -20,6 +19,7 @@ trait NewCollectionTrait
         if (!isset($this->collections[$collectionName])) {
             $this->initCollection($collectionName);
         }
+
         return $this->collections[$collectionName];
     }
 
@@ -35,6 +35,7 @@ trait NewCollectionTrait
 
     /**
      * @param string $collectionName
+     *
      * @return Collection
      */
     protected function getNewCollection(string $collectionName)

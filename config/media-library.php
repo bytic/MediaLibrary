@@ -5,6 +5,6 @@ return [
         'image' => [
 //            'min' => ,
 //            'max'   => 8192,  //kilobytes
-        ]
-    ]
+        ],
+    ],
 ];

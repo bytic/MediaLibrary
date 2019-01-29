@@ -5,12 +5,10 @@ namespace ByTIC\MediaLibrary\Loaders;
 use Nip\Filesystem\File;
 
 /**
- * Class Filesystem
- * @package ByTIC\MediaLibrary\Loaders
+ * Class Filesystem.
  */
 class Filesystem extends AbstractLoader
 {
-
     /**
      * @return File[]
      */
@@ -32,21 +30,25 @@ class Filesystem extends AbstractLoader
         } elseif (count($files)) {
             return $this->hydrateFileContents($files);
         }
+
         return [];
     }
 
     /**
      * @param $path
+     *
      * @return File[]
      */
     protected function scanDirectoryContents($path)
     {
         $contents = $this->getFilesystem()->listContents($path);
+
         return $this->hydrateFileContents($contents);
     }
 
     /**
      * @param $contents
+     *
      * @return File[]
      */
     protected function hydrateFileContents($contents)
@@ -57,6 +59,7 @@ class Filesystem extends AbstractLoader
                 $files[] = new File($this->getFilesystem(), $object['path']);
             }
         }
+
         return $files;
     }
 }

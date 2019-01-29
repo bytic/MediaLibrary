@@ -5,8 +5,7 @@ namespace ByTIC\MediaLibrary\Conversions\Manipulations;
 use Nip\Collection;
 
 /**
- * Class ManipulationSequence
- * @package ByTIC\MediaLibrary\Conversions\Manipulations
+ * Class ManipulationSequence.
  */
 class ManipulationSequence extends Collection
 {

@@ -8,13 +8,13 @@ use ByTIC\MediaLibrary\Validation\Validators\FileValidator;
 use ByTIC\MediaLibrary\Validation\Validators\ImageValidator;
 
 /**
- * Class HasValidatorTraitTest
- * @package ByTIC\MediaLibrary\Tests\Validation\Traits
+ * Class HasValidatorTraitTest.
  */
 class HasValidatorTraitTest extends AbstractTest
 {
     /**
      * @dataProvider getValidatorByMediaTypeData
+     *
      * @param string $type
      * @param string $class
      */

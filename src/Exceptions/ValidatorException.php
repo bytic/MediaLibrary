@@ -3,8 +3,7 @@
 namespace ByTIC\MediaLibrary\Exceptions;
 
 /**
- * Class ValidatorException
- * @package ByTIC\MediaLibrary\Exceptions
+ * Class ValidatorException.
  */
 class ValidatorException extends RuntimeException
 {

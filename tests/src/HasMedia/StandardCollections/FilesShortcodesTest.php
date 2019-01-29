@@ -2,16 +2,15 @@
 
 namespace ByTIC\MediaLibrary\Tests\HasMedia\StandardCollections;
 
+use ByTIC\MediaLibrary\Collections\Collection;
 use ByTIC\MediaLibrary\FileAdder\FileAdder;
 use ByTIC\MediaLibrary\Loaders\Filesystem;
 use ByTIC\MediaLibrary\Media\Media;
 use ByTIC\MediaLibrary\Tests\AbstractTest;
-use ByTIC\MediaLibrary\Collections\Collection;
 use ByTIC\MediaLibrary\Tests\Fixtures\Models\Articles\Articles;
 
 /**
- * Class FilesShortcodesTest
- * @package ByTIC\MediaLibrary\Tests\HasMedia\StandardCollections
+ * Class FilesShortcodesTest.
  */
 class FilesShortcodesTest extends AbstractTest
 {
@@ -50,7 +49,7 @@ class FilesShortcodesTest extends AbstractTest
         $article->id = 9;
 
         $adder = $article->addFile(
-            TEST_FIXTURE_PATH . DIRECTORY_SEPARATOR . 'test-files' . DIRECTORY_SEPARATOR . 'image1.gif'
+            TEST_FIXTURE_PATH.DIRECTORY_SEPARATOR.'test-files'.DIRECTORY_SEPARATOR.'image1.gif'
         );
 
         self::assertInstanceOf(FileAdder::class, $adder);
