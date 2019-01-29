@@ -9,8 +9,7 @@ use ByTIC\MediaLibrary\MediaRepository\HasMediaRepositoryTrait;
 use ByTIC\MediaLibrary\MediaRepository\MediaRepository;
 
 /**
- * Trait HasMediaTrait
- * @package ByTIC\MediaLibrary\HasMedia
+ * Trait HasMediaTrait.
  */
 trait HasMediaTrait
 {
@@ -24,7 +23,7 @@ trait HasMediaTrait
     /**
      * Get media collection by its collectionName.
      *
-     * @param string $collectionName
+     * @param string         $collectionName
      * @param array|callable $filters
      *
      * @return Collection
@@ -34,17 +33,18 @@ trait HasMediaTrait
         return $this->getMediaRepository()->getFilteredCollection($collectionName, $filters);
     }
 
-
     /**
      * @param MediaRepository $mediaRepository
+     *
      * @return MediaRepository
      */
     protected function hydrateMediaRepository($mediaRepository)
     {
         $mediaRepository->setRecord($this);
-        if (method_exists($this,'hydrateMediaRepositoryCustom')) {
+        if (method_exists($this, 'hydrateMediaRepositoryCustom')) {
             $this->hydrateMediaRepositoryCustom($mediaRepository);
         }
+
         return $mediaRepository;
     }
 }

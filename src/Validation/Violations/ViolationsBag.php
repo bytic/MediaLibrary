@@ -2,19 +2,14 @@
 
 namespace ByTIC\MediaLibrary\Validation\Violations;
 
-use ArrayAccess;
-use Countable;
-use IteratorAggregate;
-use JsonSerializable;
-
 /**
- * Class MessageBag
- * @package ByTIC\MediaLibrary\Validation\Violations
+ * Class MessageBag.
  */
 class ViolationsBag extends \Nip\Collections\Collection
 {
     /**
      * @param string $glue
+     *
      * @return string
      */
     public function getMessageString($glue = ', ')
@@ -23,6 +18,7 @@ class ViolationsBag extends \Nip\Collections\Collection
         foreach ($this as $violation) {
             $messages[] = $violation->getMessage();
         }
+
         return implode($glue, $messages);
     }
 }

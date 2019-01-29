@@ -5,12 +5,10 @@ namespace ByTIC\MediaLibrary\UrlGenerator;
 use ByTIC\MediaLibrary\Media\Media;
 
 /**
- * Interface UrlGeneratorInterface
- * @package ByTIC\MediaLibrary\UrlGenerator
+ * Interface UrlGeneratorInterface.
  */
 interface UrlGeneratorInterface
 {
-
     /**
      * Get the url for the profile of a media item.
      *
@@ -23,6 +21,5 @@ interface UrlGeneratorInterface
      *
      * @return \ByTIC\MediaLibrary\UrlGenerator\UrlGeneratorInterface
      */
-    public function setMedia(Media $media): UrlGeneratorInterface;
-
+    public function setMedia(Media $media): self;
 }

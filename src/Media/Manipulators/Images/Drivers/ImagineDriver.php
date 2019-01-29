@@ -8,14 +8,12 @@ use Intervention\Image\Image;
 use Intervention\Image\ImageManager;
 
 /**
- * Class ImagineDriver
- * @package ByTIC\MediaLibrary\Media\Manipulators\Images\Drivers
+ * Class ImagineDriver.
  */
 class ImagineDriver extends AbstractDriver
 {
-
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function manipulate($data, ManipulationSequence $manipulations, $extenstion)
     {
@@ -29,16 +27,18 @@ class ImagineDriver extends AbstractDriver
 
     /**
      * @param $data
+     *
      * @return Image
      */
     public function makeImage($data)
     {
         $manager = new ImageManager();
+
         return $manager->make($data);
     }
 
     /**
-     * @param Image $image
+     * @param Image                $image
      * @param ManipulationSequence $manipulations
      */
     protected function performManipulations($image, $manipulations)
@@ -49,7 +49,7 @@ class ImagineDriver extends AbstractDriver
     }
 
     /**
-     * @param Image $image
+     * @param Image        $image
      * @param Manipulation $manipulation
      */
     protected function performManipulation($image, $manipulation)

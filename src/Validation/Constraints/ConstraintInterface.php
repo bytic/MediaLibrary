@@ -3,10 +3,8 @@
 namespace ByTIC\MediaLibrary\Validation\Constraints;
 
 /**
- * Interface ConstraintInterface
- * @package ByTIC\MediaLibrary\Validation\Constraints
+ * Interface ConstraintInterface.
  */
 interface ConstraintInterface
 {
-
 }

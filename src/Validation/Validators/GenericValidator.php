@@ -5,13 +5,12 @@ namespace ByTIC\MediaLibrary\Validation\Validators;
 use ByTIC\MediaLibrary\Validation\Constraints\ConstraintInterface;
 
 /**
- * Class GenericValidator
- * @package ByTIC\MediaLibrary\Validation\Validators
+ * Class GenericValidator.
  */
 class GenericValidator extends AbstractValidator
 {
     /**
-     * @return boolean
+     * @return bool
      */
     protected function contraintNeedsValidation(): bool
     {
@@ -21,10 +20,10 @@ class GenericValidator extends AbstractValidator
     /**
      * @param $value
      * @param ConstraintInterface $constraint
+     *
      * @return mixed
      */
     protected function doValidation()
     {
-        return;
     }
 }

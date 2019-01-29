@@ -8,13 +8,13 @@ use ByTIC\MediaLibrary\Media\Media;
 use Nip\Collection;
 
 /**
- * Class AbstractManipulator
- * @package ByTIC\MediaLibrary\Media\Manipulator
+ * Class AbstractManipulator.
  */
 abstract class AbstractManipulator implements ManipulatorInterface
 {
     /**
      * @param Media $media
+     *
      * @return bool
      */
     public function canConvert(Media $media): bool
@@ -36,13 +36,14 @@ abstract class AbstractManipulator implements ManipulatorInterface
 
     /**
      * @param ConversionCollection $conversions
-     * @param Media $media
+     * @param Media                $media
+     *
      * @return int Number of convertions performed
      */
     public function performConversions(ConversionCollection $conversions, Media $media)
     {
         if ($conversions->isEmpty()) {
-            return null;
+            return;
         }
 
         $i = 0;
@@ -50,11 +51,12 @@ abstract class AbstractManipulator implements ManipulatorInterface
             $this->performConversion($media, $conversion);
             $i++;
         }
+
         return $i;
     }
 
     /**
-     * @param Media $media
+     * @param Media      $media
      * @param Conversion $conversion
      */
     abstract public function performConversion(Media $media, Conversion $conversion);

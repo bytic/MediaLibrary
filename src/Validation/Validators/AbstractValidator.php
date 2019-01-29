@@ -13,8 +13,7 @@ use ByTIC\MediaLibrary\Validation\Violations\ViolationsBag;
 use Nip\Utility\Traits\NameWorksTrait;
 
 /**
- * Class ImageValidator
- * @package ByTIC\MediaLibrary\Validation\Validators
+ * Class ImageValidator.
  */
 abstract class AbstractValidator implements ValidatorInterface
 {
@@ -43,6 +42,7 @@ abstract class AbstractValidator implements ValidatorInterface
     /**
      * @param $value
      * @param $constraint
+     *
      * @return ViolationsBag
      */
     public function validate($value, ConstraintInterface $constraint = null)
@@ -95,7 +95,8 @@ abstract class AbstractValidator implements ValidatorInterface
         $className = $this->getClassName();
         $firstName = $this->getClassFirstName();
         $contraintFirstName = str_replace('Validator', 'Constraint', $firstName);
-        return str_replace('\Validators\\' . $firstName, '\Constraints\\' . $contraintFirstName, $className);
+
+        return str_replace('\Validators\\'.$firstName, '\Constraints\\'.$contraintFirstName, $className);
     }
 
     /**
@@ -115,7 +116,7 @@ abstract class AbstractValidator implements ValidatorInterface
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     abstract protected function contraintNeedsValidation(): bool;
 

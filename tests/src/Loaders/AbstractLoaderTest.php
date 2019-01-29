@@ -9,8 +9,7 @@ use ByTIC\MediaLibrary\Tests\Fixtures\Models\Articles\Articles;
 use Mockery;
 
 /**
- * Class AbstractLoaderTest
- * @package ByTIC\MediaLibrary\Tests\Loaders
+ * Class AbstractLoaderTest.
  */
 class AbstractLoaderTest extends AbstractTest
 {

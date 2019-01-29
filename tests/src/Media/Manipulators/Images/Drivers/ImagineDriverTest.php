@@ -10,14 +10,13 @@ use Nip\Filesystem\File;
 use Nip\Filesystem\FileDisk;
 
 /**
- * Class ImagineDriverTest
- * @package ByTIC\MediaLibrary\Tests\Media\Manipulators\Images\Drivers
+ * Class ImagineDriverTest.
  */
 class ImagineDriverTest extends AbstractTest
 {
     public function testMakeImage()
     {
-        $fileSystem = new FileDisk((new Local(TEST_FIXTURE_PATH . '/test-files')));
+        $fileSystem = new FileDisk((new Local(TEST_FIXTURE_PATH.'/test-files')));
         $file = new File($fileSystem, '/image1.gif');
 
         $driver = new ImagineDriver();

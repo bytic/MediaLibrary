@@ -6,12 +6,10 @@ use ByTIC\MediaLibrary\Exceptions\RuntimeException;
 use ByTIC\MediaLibrary\MediaRepository\MediaRepository;
 
 /**
- * Trait HasMediaRepository
- * @package ByTIC\MediaLibrary\FileAdder\Traits
+ * Trait HasMediaRepository.
  */
 trait HasMediaRepository
 {
-
     /** @var MediaRepository $repository */
     protected $repository = null;
 
@@ -28,7 +26,7 @@ trait HasMediaRepository
             return $this->getSubject()->getMediaRepository();
         }
 
-        throw new RuntimeException("MediaRepository could not be detected in FileAdder");
+        throw new RuntimeException('MediaRepository could not be detected in FileAdder');
     }
 
     /**

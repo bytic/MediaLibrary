@@ -5,12 +5,10 @@ namespace ByTIC\MediaLibrary\Tests\Fixtures\Models;
 use ByTIC\MediaLibrary\HasMedia\Interfaces\HasMediaConversions;
 
 /**
- * Class HasConversionsModel
- * @package ByTIC\MediaLibrary\Tests\Fixtures\Models
+ * Class HasConversionsModel.
  */
 class HasConversionsModel extends HasMediaModel implements HasMediaConversions
 {
-
     public function registerMediaConversions()
     {
         $this->addMediaConversion('thumb')
@@ -19,5 +17,4 @@ class HasConversionsModel extends HasMediaModel implements HasMediaConversions
             ->sharpen(10)
             ->optimize();
     }
-
 }

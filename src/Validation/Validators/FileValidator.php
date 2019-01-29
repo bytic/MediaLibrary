@@ -3,14 +3,12 @@
 namespace ByTIC\MediaLibrary\Validation\Validators;
 
 use ByTIC\MediaLibrary\Validation\Constraints\FileConstraint;
-use Symfony\Component\HttpFoundation\File\File as FileObject;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use ByTIC\MediaLibrary\Validation\Constraints\ImageConstraint;
 use Nip\Logger\Exception;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
- * Class FileValidator
- * @package ByTIC\MediaLibrary\Validation\Validators
+ * Class FileValidator.
  */
 class FileValidator extends AbstractValidator
 {
@@ -20,15 +18,15 @@ class FileValidator extends AbstractValidator
     const MIB_BYTES = 1048576;
 
     private static $suffices = [
-        1 => 'bytes',
-        self::KB_BYTES => 'kB',
-        self::MB_BYTES => 'MB',
+        1               => 'bytes',
+        self::KB_BYTES  => 'kB',
+        self::MB_BYTES  => 'MB',
         self::KIB_BYTES => 'KiB',
         self::MIB_BYTES => 'MiB',
     ];
 
     /**
-     * @return boolean
+     * @return bool
      */
     protected function contraintNeedsValidation(): bool
     {
@@ -37,6 +35,7 @@ class FileValidator extends AbstractValidator
         if (null === $constraint->mimeTypes && null === $constraint->maxSize) {
             return false;
         }
+
         return true;
     }
 
@@ -55,9 +54,8 @@ class FileValidator extends AbstractValidator
     {
         $constraint = $this->getConstraint();
 
-
         if ($constraint->mimeTypes) {
-            $mimeTypes = (array)$constraint->mimeTypes;
+            $mimeTypes = (array) $constraint->mimeTypes;
             $mime = $this->determineMime();
             foreach ($mimeTypes as $mimeType) {
                 if ($mimeType === $mime) {
@@ -71,7 +69,6 @@ class FileValidator extends AbstractValidator
             }
             $this->addViolation($constraint, FileConstraint::INVALID_MIME_TYPE_ERROR, []);
         }
-        return;
     }
 
     /**
@@ -83,8 +80,6 @@ class FileValidator extends AbstractValidator
         if ($file instanceof UploadedFile) {
             return $file->getClientMimeType();
         }
-
-        return null;
     }
 
     /**

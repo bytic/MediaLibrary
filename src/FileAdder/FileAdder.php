@@ -8,8 +8,7 @@ use Nip\Logger\Exception;
 use Symfony\Component\HttpFoundation\File\File as SymfonyFile;
 
 /**
- * Class FileAdder
- * @package ByTIC\MediaLibrary\FileAdder
+ * Class FileAdder.
  */
 class FileAdder implements FileAdderInterface
 {
@@ -21,10 +20,10 @@ class FileAdder implements FileAdderInterface
     /** @var null|\ByTIC\MediaLibrary\Media\Media */
     protected $media = null;
 
-    /**@var string */
+    /** @var string */
     protected $mediaName;
 
-    /**@var string */
+    /** @var string */
     protected $fileName;
 
     /**
@@ -37,6 +36,7 @@ class FileAdder implements FileAdderInterface
     public function setFileName(string $fileName)
     {
         $this->fileName = $this->sanitizeFileName($fileName);
+
         return $this;
     }
 
@@ -50,7 +50,6 @@ class FileAdder implements FileAdderInterface
         return str_replace(['#', '/', '\\'], '-', $fileName);
     }
 
-
     /**
      * @return Media|null
      */
@@ -59,6 +58,7 @@ class FileAdder implements FileAdderInterface
         if ($this->media === null) {
             $this->setMedia($this->createMedia());
         }
+
         return $this->media;
     }
 
@@ -71,8 +71,9 @@ class FileAdder implements FileAdderInterface
     }
 
     /**
-     * @return Media
      * @throws Exception
+     *
+     * @return Media
      */
     protected function createMedia()
     {
@@ -84,6 +85,7 @@ class FileAdder implements FileAdderInterface
         }
         $media = new Media();
         $media->setModel($this->getSubject());
+
         return $media;
     }
 

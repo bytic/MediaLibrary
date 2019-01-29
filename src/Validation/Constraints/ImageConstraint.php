@@ -3,8 +3,7 @@
 namespace ByTIC\MediaLibrary\Validation\Constraints;
 
 /**
- * Class Image
- * @package ByTIC\MediaLibrary\Validation\Constraints
+ * Class Image.
  */
 class ImageConstraint extends FileConstraint
 {
@@ -22,22 +21,22 @@ class ImageConstraint extends FileConstraint
 
     // Include the mapping from the base class
     protected static $errorNames = [
-        self::NOT_FOUND_ERROR => 'NOT_FOUND_ERROR',
-        self::NOT_READABLE_ERROR => 'NOT_READABLE_ERROR',
-        self::EMPTY_ERROR => 'EMPTY_ERROR',
-        self::TOO_LARGE_ERROR => 'TOO_LARGE_ERROR',
-        self::INVALID_MIME_TYPE_ERROR => 'INVALID_MIME_TYPE_ERROR',
-        self::SIZE_NOT_DETECTED_ERROR => 'SIZE_NOT_DETECTED_ERROR',
-        self::TOO_WIDE_ERROR => 'TOO_WIDE_ERROR',
-        self::TOO_NARROW_ERROR => 'TOO_NARROW_ERROR',
-        self::TOO_HIGH_ERROR => 'TOO_HIGH_ERROR',
-        self::TOO_LOW_ERROR => 'TOO_LOW_ERROR',
-        self::RATIO_TOO_BIG_ERROR => 'RATIO_TOO_BIG_ERROR',
-        self::RATIO_TOO_SMALL_ERROR => 'RATIO_TOO_SMALL_ERROR',
-        self::SQUARE_NOT_ALLOWED_ERROR => 'SQUARE_NOT_ALLOWED_ERROR',
+        self::NOT_FOUND_ERROR             => 'NOT_FOUND_ERROR',
+        self::NOT_READABLE_ERROR          => 'NOT_READABLE_ERROR',
+        self::EMPTY_ERROR                 => 'EMPTY_ERROR',
+        self::TOO_LARGE_ERROR             => 'TOO_LARGE_ERROR',
+        self::INVALID_MIME_TYPE_ERROR     => 'INVALID_MIME_TYPE_ERROR',
+        self::SIZE_NOT_DETECTED_ERROR     => 'SIZE_NOT_DETECTED_ERROR',
+        self::TOO_WIDE_ERROR              => 'TOO_WIDE_ERROR',
+        self::TOO_NARROW_ERROR            => 'TOO_NARROW_ERROR',
+        self::TOO_HIGH_ERROR              => 'TOO_HIGH_ERROR',
+        self::TOO_LOW_ERROR               => 'TOO_LOW_ERROR',
+        self::RATIO_TOO_BIG_ERROR         => 'RATIO_TOO_BIG_ERROR',
+        self::RATIO_TOO_SMALL_ERROR       => 'RATIO_TOO_SMALL_ERROR',
+        self::SQUARE_NOT_ALLOWED_ERROR    => 'SQUARE_NOT_ALLOWED_ERROR',
         self::LANDSCAPE_NOT_ALLOWED_ERROR => 'LANDSCAPE_NOT_ALLOWED_ERROR',
-        self::PORTRAIT_NOT_ALLOWED_ERROR => 'PORTRAIT_NOT_ALLOWED_ERROR',
-        self::CORRUPTED_IMAGE_ERROR => 'CORRUPTED_IMAGE_ERROR',
+        self::PORTRAIT_NOT_ALLOWED_ERROR  => 'PORTRAIT_NOT_ALLOWED_ERROR',
+        self::CORRUPTED_IMAGE_ERROR       => 'CORRUPTED_IMAGE_ERROR',
     ];
 
     /**
@@ -112,5 +111,4 @@ class ImageConstraint extends FileConstraint
     public $allowLandscapeMessage = 'The image is landscape oriented ({{ width }}x{{ height }}px). Landscape oriented images are not allowed.';
     public $allowPortraitMessage = 'The image is portrait oriented ({{ width }}x{{ height }}px). Portrait oriented images are not allowed.';
     public $corruptedMessage = 'The image file is corrupted.';
-
 }

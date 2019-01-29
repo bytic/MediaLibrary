@@ -6,14 +6,12 @@ use ByTIC\MediaLibrary\Validation\Constraints\ImageConstraint;
 use Nip\Logger\Exception;
 
 /**
- * Class ImageValidator
- * @package ByTIC\MediaLibrary\Validation\Validators
+ * Class ImageValidator.
  */
 class ImageValidator extends AbstractValidator
 {
-
     /**
-     * @return boolean
+     * @return bool
      */
     protected function contraintNeedsValidation(): bool
     {
@@ -28,6 +26,7 @@ class ImageValidator extends AbstractValidator
         ) {
             return false;
         }
+
         return true;
     }
 
@@ -41,6 +40,7 @@ class ImageValidator extends AbstractValidator
 
         if (empty($size) || ($size[0] === 0) || ($size[1] === 0)) {
             $this->addViolation($constraint, ImageConstraint::SIZE_NOT_DETECTED_ERROR, []);
+
             return;
         }
 
@@ -48,7 +48,7 @@ class ImageValidator extends AbstractValidator
         $height = $size[1];
 
         if ($constraint->minWidth) {
-            if (!ctype_digit((string)$constraint->minWidth)) {
+            if (!ctype_digit((string) $constraint->minWidth)) {
                 throw new Exception(sprintf('"%s" is not a valid minimum width',
                     $constraint->minWidth));
             }
@@ -58,12 +58,13 @@ class ImageValidator extends AbstractValidator
                     ImageConstraint::TOO_NARROW_ERROR,
                     ['width' => $width, 'min_width' => $constraint->minWidth]
                 );
+
                 return;
             }
         }
 
         if ($constraint->maxWidth) {
-            if (!ctype_digit((string)$constraint->maxWidth)) {
+            if (!ctype_digit((string) $constraint->maxWidth)) {
                 throw new Exception(sprintf('"%s" is not a valid maximum width',
                     $constraint->maxWidth));
             }
@@ -73,11 +74,12 @@ class ImageValidator extends AbstractValidator
                     ImageConstraint::TOO_WIDE_ERROR,
                     ['width' => $width, 'max_width' => $constraint->maxWidth]
                 );
+
                 return;
             }
         }
         if ($constraint->minHeight) {
-            if (!ctype_digit((string)$constraint->minHeight)) {
+            if (!ctype_digit((string) $constraint->minHeight)) {
                 throw new Exception(sprintf('"%s" is not a valid minimum height',
                     $constraint->minHeight));
             }
@@ -87,11 +89,12 @@ class ImageValidator extends AbstractValidator
                     ImageConstraint::TOO_LOW_ERROR,
                     ['height' => $height, 'min_height' => $constraint->minHeight]
                 );
+
                 return;
             }
         }
         if ($constraint->maxHeight) {
-            if (!ctype_digit((string)$constraint->maxHeight)) {
+            if (!ctype_digit((string) $constraint->maxHeight)) {
                 throw new Exception(sprintf('"%s" is not a valid maximum height',
                     $constraint->maxHeight));
             }
@@ -105,7 +108,7 @@ class ImageValidator extends AbstractValidator
         }
         $ratio = round($width / $height, 2);
         if (null !== $constraint->minRatio) {
-            if (!is_numeric((string)$constraint->minRatio)) {
+            if (!is_numeric((string) $constraint->minRatio)) {
                 throw new Exception(sprintf('"%s" is not a valid minimum ratio',
                     $constraint->minRatio));
             }
@@ -118,7 +121,7 @@ class ImageValidator extends AbstractValidator
             }
         }
         if (null !== $constraint->maxRatio) {
-            if (!is_numeric((string)$constraint->maxRatio)) {
+            if (!is_numeric((string) $constraint->maxRatio)) {
                 throw new Exception(sprintf('"%s" is not a valid maximum ratio',
                     $constraint->maxRatio));
             }
@@ -135,8 +138,9 @@ class ImageValidator extends AbstractValidator
     }
 
     /**
-     * @return bool
      * @throws Exception
+     *
+     * @return bool
      */
     protected function validateCorruptedFile()
     {
@@ -157,6 +161,7 @@ class ImageValidator extends AbstractValidator
             }
             imagedestroy($resource);
         }
+
         return true;
     }
 

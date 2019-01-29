@@ -3,7 +3,7 @@
 namespace ByTIC\MediaLibrary\MediaRepository;
 
 /**
- * Trait HasMediaRepositoryTrait
+ * Trait HasMediaRepositoryTrait.
  */
 trait HasMediaRepositoryTrait
 {
@@ -20,11 +20,13 @@ trait HasMediaRepositoryTrait
         if ($this->mediaRepository == null) {
             $this->initMediaRepository();
         }
+
         return $this->mediaRepository;
     }
 
     /**
      * @param MediaRepository $repository
+     *
      * @return void
      */
     public function setMediaRepository($repository)
@@ -46,6 +48,7 @@ trait HasMediaRepositoryTrait
     {
         $class = $this->getMediaRepositoryClass();
         $repository = new $class();
+
         return $repository;
     }
 
@@ -59,6 +62,7 @@ trait HasMediaRepositoryTrait
 
     /**
      * @param $mediaRepository
+     *
      * @return MediaRepository
      */
     protected function hydrateMediaRepository($mediaRepository)

@@ -3,8 +3,7 @@
 namespace ByTIC\MediaLibrary\Exceptions;
 
 /**
- * Class FileCannotBeAdded
- * @package ByTIC\MediaLibrary\Exceptions
+ * Class FileCannotBeAdded.
  */
 class FileCannotBeAdded extends RuntimeException
 {

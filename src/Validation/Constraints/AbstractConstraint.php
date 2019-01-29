@@ -5,11 +5,9 @@ namespace ByTIC\MediaLibrary\Validation\Constraints;
 use Nip\Utility\Traits\NameWorksTrait;
 
 /**
- * Class AbstractConstraint
+ * Class AbstractConstraint.
  *
  * @property $errorNames
- *
- * @package ByTIC\MediaLibrary\Validation\Constraints
  */
 abstract class AbstractConstraint implements ConstraintInterface
 {
@@ -29,6 +27,7 @@ abstract class AbstractConstraint implements ConstraintInterface
         if ($this->name === null) {
             $this->initName();
         }
+
         return $this->name;
     }
 
@@ -63,6 +62,5 @@ abstract class AbstractConstraint implements ConstraintInterface
         if (isset(static::$errorNames[$code])) {
             return static::$errorNames[$code];
         }
-        return;
     }
 }

@@ -7,12 +7,10 @@ use ByTIC\MediaLibrary\HasMedia\HasMediaTrait;
 use ByTIC\MediaLibrary\HasMedia\Interfaces\HasMedia;
 
 /**
- * Trait HasSubjectTrait
- * @package ByTIC\MediaLibrary\FileAdder\Traits
+ * Trait HasSubjectTrait.
  */
 trait HasSubjectTrait
 {
-
     /** @var HasMediaTrait|HasMedia subject */
     protected $subject;
 
@@ -40,7 +38,7 @@ trait HasSubjectTrait
     public function setSubject($subject)
     {
         $this->subject = $subject;
+
         return $this;
     }
-
 }

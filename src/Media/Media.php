@@ -7,13 +7,11 @@ use ByTIC\MediaLibrary\Collections\Traits\LoadMediaTrait;
 use ByTIC\MediaLibrary\HasMedia\HasMediaTrait;
 use ByTIC\MediaLibrary\Media\Traits\FileMethodsTrait;
 use ByTIC\MediaLibrary\PathGenerator\PathGeneratorFactory;
-use Nip\Logger\Exception;
 use Nip\Records\Record;
 use function Nip\url;
 
 /**
- * Class Media
- * @package ByTIC\MediaLibrary
+ * Class Media.
  */
 class Media
 {
@@ -63,6 +61,7 @@ class Media
 
     /**
      * @return string
+     *
      * @deprecated Use getFullUrl
      */
     public function __toString()
@@ -94,6 +93,7 @@ class Media
         if ($this->hasFile()) {
             return $this->getFile()->getUrl();
         }
+
         return $this->getCollection()->getDefaultMediaUrl();
 //        $urlGenerator = UrlGeneratorFactory::createForMedia($this);
 //        if ($conversionName !== '') {

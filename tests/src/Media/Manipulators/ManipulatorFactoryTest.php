@@ -11,14 +11,13 @@ use Nip\Filesystem\File;
 use Nip\Filesystem\FileDisk;
 
 /**
- * Class ManipulatorFactoryTest
- * @package ByTIC\MediaLibrary\Tests\Media\Manipulators
+ * Class ManipulatorFactoryTest.
  */
 class ManipulatorFactoryTest extends AbstractTest
 {
     public function testCreateForMediaImage()
     {
-        $fileSystem = new FileDisk((new Local(TEST_FIXTURE_PATH . '/test-files')));
+        $fileSystem = new FileDisk((new Local(TEST_FIXTURE_PATH.'/test-files')));
 
         $file = new File($fileSystem, '/image1.gif');
 

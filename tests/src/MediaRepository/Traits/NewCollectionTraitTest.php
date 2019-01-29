@@ -7,8 +7,7 @@ use ByTIC\MediaLibrary\Tests\AbstractTest;
 use ByTIC\MediaLibrary\Tests\Fixtures\Models\Articles\Article;
 
 /**
- * Class NewCollectionTraitTest
- * @package ByTIC\MediaLibrary\Tests\MediaRepository\Traits
+ * Class NewCollectionTraitTest.
  */
 class NewCollectionTraitTest extends AbstractTest
 {

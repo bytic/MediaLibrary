@@ -5,8 +5,7 @@ namespace ByTIC\MediaLibrary\Collections\Traits;
 use ByTIC\MediaLibrary\Validation\Validators\AbstractValidator;
 
 /**
- * Trait HasAcceptsMediaTrait
- * @package ByTIC\MediaLibrary\Collections\Traits
+ * Trait HasAcceptsMediaTrait.
  */
 trait HasAcceptsMediaTrait
 {
@@ -17,6 +16,7 @@ trait HasAcceptsMediaTrait
     {
         if (method_exists($this, 'getValidator')) {
             $this->initHasAcceptsMediaWithValidation();
+
             return;
         }
         $this->initHasAcceptsMediaEmpty();
@@ -33,6 +33,7 @@ trait HasAcceptsMediaTrait
             if ($violations->count() < 1) {
                 return true;
             }
+
             return $violations;
         });
     }
@@ -46,11 +47,13 @@ trait HasAcceptsMediaTrait
 
     /**
      * @param callable $acceptsFile
+     *
      * @return HasAcceptsMediaTrait
      */
     public function acceptsMedia(callable $acceptsFile): self
     {
         $this->acceptsMedia = $acceptsFile;
+
         return $this;
     }
 }

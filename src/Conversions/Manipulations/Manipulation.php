@@ -3,12 +3,10 @@
 namespace ByTIC\MediaLibrary\Conversions\Manipulations;
 
 /**
- * Class Manipulation
- * @package ByTIC\MediaLibrary\Conversions\Manipulations
+ * Class Manipulation.
  */
 class Manipulation
 {
-
     /**
      * @var string
      */
@@ -21,8 +19,9 @@ class Manipulation
 
     /**
      * Manipulation constructor.
+     *
      * @param string $name
-     * @param array $attributes
+     * @param array  $attributes
      */
     public function __construct($name, ...$attributes)
     {
@@ -30,10 +29,10 @@ class Manipulation
         $this->attributes = $attributes;
     }
 
-
     /**
      * @param $name
      * @param array ...$atributes
+     *
      * @return Manipulation
      */
     public static function create($name, ...$atributes)
