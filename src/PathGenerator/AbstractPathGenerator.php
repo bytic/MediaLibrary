@@ -32,9 +32,22 @@ abstract class AbstractPathGenerator
     public static function getBasePathForMedia($media)
     {
         return '/' . $media->getCollection()->getName()
-            . '/' . $media->getModel()->getManager()->getTable()
+            . '/' . static::getFolderNameForMedia($media)
             . '/' . $media->getModel()->getPrimaryKey()
             . '/';
+    }
+
+    /**
+     * @param Media $media
+     * @return string
+     */
+    public static function getFolderNameForMedia($media)
+    {
+        $model = $media->getModel();
+        if (method_exists($model,'getFolderNameForMedia')) {
+            return $model->getFolderNameForMedia();
+        }
+        return $media->getModel()->getManager()->getTable();
     }
 
     /**

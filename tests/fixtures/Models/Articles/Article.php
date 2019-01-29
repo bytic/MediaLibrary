@@ -16,6 +16,10 @@ class Article extends Record implements HasMedia
 {
     use HasMediaTrait;
 
+    public function getFolderNameForMedia()
+    {
+        return 'articles';
+    }
 
     /**
      * @return FileDisk
