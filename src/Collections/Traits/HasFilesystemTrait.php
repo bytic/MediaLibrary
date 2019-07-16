@@ -2,6 +2,7 @@
 
 namespace ByTIC\MediaLibrary\Collections\Traits;
 
+use ByTIC\MediaLibrary\PathGenerator\PathGeneratorFactory;
 use Nip\Filesystem\FileDisk;
 
 /**
@@ -29,6 +30,26 @@ trait HasFilesystemTrait
     public function setFilesystem($filesystem)
     {
         $this->filesystem = $filesystem;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBasePathForMedia()
+    {
+        $method = 'getBasePathForMedia';
+        $manager = $this->getRecord()->getManager();
+
+        $media = $this->newMedia();
+
+        if (method_exists($manager, $method)) {
+            $path = $manager->$method($media);
+            if (!empty($path)) {
+                return $path;
+            }
+        }
+
+        return PathGeneratorFactory::create()::$method($media);
     }
 
     protected function initFilesystem()
