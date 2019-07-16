@@ -120,7 +120,7 @@ trait HasDefaultMediaTrait
      */
     public function getDefaultMediaGenericUrl()
     {
-        return \asset('/assets/images/'
+        return \asset('/images/'
             .$this->getRecord()->getManager()->getTable().'/'
             .$this->getDefaultFileName());
     }
