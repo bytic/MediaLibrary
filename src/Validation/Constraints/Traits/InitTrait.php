@@ -30,7 +30,7 @@ trait InitTrait
     {
         $configKey = 'media-library.contraints.'.$this->getName();
 
-        if (function_exists('config') && function_exists('app')) {
+        if (function_exists('config') && function_exists('app') && app()->has('config')) {
             if (config()->has($configKey)) {
                 $variables = config()->get($configKey);
                 $this->applyVariables($variables);

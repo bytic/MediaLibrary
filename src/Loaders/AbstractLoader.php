@@ -79,7 +79,7 @@ abstract class AbstractLoader implements LoaderInterface
      */
     protected function appendMediaInCollection($media)
     {
-        $this->getCollection()->appendMedia($media);
+        $this->getCollection()->appendMediaFromLoader($media, $this);
     }
 
     /**
@@ -87,8 +87,6 @@ abstract class AbstractLoader implements LoaderInterface
      */
     public function getBasePath()
     {
-        $media = $this->getCollection()->newMedia();
-
-        return PathGeneratorFactory::create()::getBasePathForMedia($media);
+        return $this->getCollection()->getBasePathForMedia();
     }
 }
