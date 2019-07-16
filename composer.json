@@ -26,6 +26,7 @@
     "bytic/logger": "^1.0",
     "bytic/filesystem": "^1.0",
     "bytic/orm": "^1.0",
+    "bytic/router": "^1.0",
     "intervention/image": "^2.4"
   },
   "require-dev": {
