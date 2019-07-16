@@ -11,7 +11,7 @@ use ByTIC\MediaLibrary\Validation\Traits\HasValidatorTrait;
 /**
  * Class Collection.
  *
- * @method Media get
+ * @method Media get()
  */
 class Collection extends \Nip\Collections\Collection
 {
