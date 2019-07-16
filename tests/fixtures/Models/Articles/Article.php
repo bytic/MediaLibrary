@@ -15,6 +15,11 @@ class Article extends Record implements HasMedia
 {
     use HasMediaTrait;
 
+    protected function inflectManagerName()
+    {
+        return Articles::class;
+    }
+
     public function getFolderNameForMedia()
     {
         return 'articles';
