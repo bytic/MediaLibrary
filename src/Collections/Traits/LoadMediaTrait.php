@@ -68,7 +68,7 @@ trait LoadMediaTrait
     /**
      * Append a media object inside the collection.
      *
-     * @param Media $media
+     * @param Media          $media
      * @param AbstractLoader $loader
      */
     public function appendMediaFromLoader(Media $media, $loader)
@@ -77,11 +77,13 @@ trait LoadMediaTrait
         $manager = $this->getRecord()->getManager();
         if (!method_exists($manager, $method)) {
             $this->appendMedia($media);
+
             return;
         }
 
         if ($manager->$method($media, $loader)) {
             $this->appendMedia($media);
+
             return;
         }
     }

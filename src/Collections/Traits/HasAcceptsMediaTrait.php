@@ -4,10 +4,8 @@ namespace ByTIC\MediaLibrary\Collections\Traits;
 
 use ByTIC\MediaLibrary\Validation\Validators\AbstractValidator;
 
-
 /**
- * Trait HasAcceptsMediaTrait
- * @package ByTIC\MediaLibrary\Collections\Traits
+ * Trait HasAcceptsMediaTrait.
  *
  * @method  getValidator();
  * @method  getConstraint();
