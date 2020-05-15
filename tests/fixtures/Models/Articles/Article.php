@@ -4,7 +4,6 @@ namespace ByTIC\MediaLibrary\Tests\Fixtures\Models\Articles;
 
 use ByTIC\MediaLibrary\HasMedia\HasMediaTrait;
 use ByTIC\MediaLibrary\HasMedia\Interfaces\HasMedia;
-use ByTIC\MediaLibrary\HasMedia\Interfaces\HasMedia;
 use League\Flysystem\Adapter\Local as LocalAdapter;
 use Nip\Filesystem\FileDisk;
 use Nip\Records\Record;
