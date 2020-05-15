@@ -4,7 +4,7 @@ namespace ByTIC\MediaLibrary;
 
 use ByTIC\MediaLibrary\Loaders\Filesystem;
 use ByTIC\MediaLibrary\Loaders\LoaderInterface;
-use Nip\Container\ServiceProvider\AbstractSignatureServiceProvider;
+use Nip\Container\ServiceProviders\Providers\AbstractSignatureServiceProvider;
 
 /**
  * Class MediaLibraryServiceProvider.
