@@ -11,7 +11,6 @@ use Nip\Records\RecordManager;
  */
 class Articles extends RecordManager
 {
-
     public function generateModelClass($class = null)
     {
         return Article::class;

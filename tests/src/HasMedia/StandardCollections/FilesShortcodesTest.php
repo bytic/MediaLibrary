@@ -49,7 +49,7 @@ class FilesShortcodesTest extends AbstractTest
         $article->id = 9;
 
         $adder = $article->addFile(
-            TEST_FIXTURE_PATH.DIRECTORY_SEPARATOR.'test-files'.DIRECTORY_SEPARATOR.'image1.gif'
+            TEST_FIXTURE_PATH . DIRECTORY_SEPARATOR . 'test-files' . DIRECTORY_SEPARATOR . 'image1.gif'
         );
 
         self::assertInstanceOf(FileAdder::class, $adder);

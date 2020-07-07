@@ -31,7 +31,7 @@ class Article extends Record implements HasMedia
     public function getMediaFilesystemDisk()
     {
         $disk = new FileDisk(
-            new LocalAdapter(TEST_FIXTURE_PATH.DIRECTORY_SEPARATOR.'storage'),
+            new LocalAdapter(TEST_FIXTURE_PATH . DIRECTORY_SEPARATOR . 'storage'),
             []
         );
 

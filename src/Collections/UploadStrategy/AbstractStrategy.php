@@ -39,7 +39,7 @@ abstract class AbstractStrategy implements AbstractStrategyInterface
             return static::transformFileName($path, $extension);
         }
 
-        throw new \RuntimeException(__METHOD__.' needs a UploadedFile|SplFileInfo|string instance or a file path string');
+        throw new \RuntimeException(__METHOD__ . ' needs a UploadedFile|SplFileInfo|string instance or a file path string');
     }
 
     /**

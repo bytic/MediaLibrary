@@ -48,7 +48,7 @@ trait FileAdderProcessesTrait
     {
         $media = $this->getMedia();
         $destination = PathGeneratorFactory::create()::getBasePathForMediaOriginal($media);
-        $destination .= DIRECTORY_SEPARATOR.$media->getCollection()->getStrategy()::makeFileName($this);
+        $destination .= DIRECTORY_SEPARATOR . $media->getCollection()->getStrategy()::makeFileName($this);
 
         $media->generateFileFromContent($destination, fopen($this->getPathToFile(), 'r'));
 

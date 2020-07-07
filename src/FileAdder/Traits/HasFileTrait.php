@@ -74,7 +74,7 @@ trait HasFileTrait
     public function setFileFromSymfonyFile($file)
     {
         $this->file = $file;
-        $this->setPathToFile($file->getPath().'/'.$file->getFilename());
+        $this->setPathToFile($file->getPath() . '/' . $file->getFilename());
         $this->setFileName(pathinfo($file->getFilename(), PATHINFO_BASENAME));
         $this->mediaName = pathinfo($file->getFilename(), PATHINFO_FILENAME);
 
