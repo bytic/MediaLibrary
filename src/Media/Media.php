@@ -52,11 +52,16 @@ class Media
     }
 
     /**
+     * @param string $conversionName
      * @return string
      */
-    public function getBasePath()
+    public function getBasePath(string $conversionName = '')
     {
-        return PathGeneratorFactory::create()::getBasePathForMedia($this);
+        $path = PathGeneratorFactory::create()::getBasePathForMedia($this);
+        if ($conversionName) {
+            $path = $path . DIRECTORY_SEPARATOR . $conversionName;
+        }
+        return $path;
     }
 
     /**

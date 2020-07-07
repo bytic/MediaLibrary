@@ -36,7 +36,7 @@ class FilesShortcodesTest extends AbstractTest
 
         $mediaCollection = $article->getFiles();
         self::assertInstanceOf(Collection::class, $mediaCollection);
-        self::assertCount(1, $mediaCollection);
+        self::assertSame(1, $mediaCollection->count());
 
         $file = $mediaCollection->get('test.txt');
         self::assertInstanceOf(Media::class, $file);
@@ -56,13 +56,13 @@ class FilesShortcodesTest extends AbstractTest
 
         $files = $article->getFiles();
         self::assertInstanceOf(Collection::class, $files);
-        self::assertCount(2, $files);
+        self::assertSame(2, $files->count());
 
         $imageFile = $files->get('image1.gif');
         self::assertInstanceOf(Media::class, $imageFile);
 
         $files->deleteMediaByKey('image1.gif');
-        self::assertCount(1, $files);
+        self::assertSame(1, $files->count());
     }
 
     public function testAddFileFromContent()
@@ -75,7 +75,7 @@ class FilesShortcodesTest extends AbstractTest
 
         $files = $article->getFiles();
         self::assertInstanceOf(Collection::class, $files);
-        self::assertCount(2, $files);
+        self::assertSame(2, $files->count());
 
         $addedMedia = $files->get('testAdd.txt');
         self::assertInstanceOf(Media::class, $addedMedia);

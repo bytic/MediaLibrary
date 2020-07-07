@@ -94,14 +94,10 @@ trait FileMethodsTrait
             throw  new Exception('Error getting path for media with no file');
         }
 
-        $path = $this->getFile()->getPath();
-
         if ($conversionName) {
-            $path = $this->getBasePath()
-                .DIRECTORY_SEPARATOR.$conversionName
-                .DIRECTORY_SEPARATOR.$this->getName();
+            return $this->getBasePath($conversionName) . DIRECTORY_SEPARATOR . $this->getName();
         }
 
-        return $path;
+        return $this->getFile()->getPath();
     }
 }

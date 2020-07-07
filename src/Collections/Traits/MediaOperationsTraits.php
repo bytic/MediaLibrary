@@ -10,15 +10,13 @@ use ByTIC\MediaLibrary\Media\Media;
  */
 trait MediaOperationsTraits
 {
-    /** @noinspection PhpUnusedParameterInspection
-     *
-     * @param $filter
-     *
-     * @return MediaOperationsTraits|Collection|Media[]
+    /** @inheritDoc
      */
-    public function filter($filter)
+    public function filter(callable $callback = null)
     {
-        return $this;
+        $filtered = parent::filter($callback);
+        $filtered->rehydrateFromSibling($this);
+        return $filtered;
     }
 
     /**
@@ -52,5 +50,15 @@ trait MediaOperationsTraits
         if (empty($contents)) {
             $this->getFilesystem()->deleteDir($directory);
         }
+    }
+
+    /**
+     * @param static $sibling
+     */
+    protected function rehydrateFromSibling($sibling)
+    {
+        $this->setName($sibling->getName());
+        $this->setMediaRepository($sibling->getMediaRepository());
+        $this->setMediaType($sibling->getMediaType());
     }
 }

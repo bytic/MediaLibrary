@@ -4,7 +4,10 @@ namespace ByTIC\MediaLibrary\MediaRepository;
 
 use ByTIC\MediaLibrary\Collections\Collection;
 use ByTIC\MediaLibrary\HasMedia\HasMediaTrait;
+use ByTIC\MediaLibrary\Media\Media;
+use Closure;
 use Nip\Records\Record;
+use Nip\Utility\Arr;
 
 /**
  * Class MediaRepository.
@@ -62,6 +65,27 @@ class MediaRepository
      */
     protected function applyFilterToCollection(Collection $collection, $filter): Collection
     {
+        if (is_array($filter)) {
+            $filter = $this->getDefaultFilterFunction($filter);
+        }
+
         return $collection->filter($filter);
+    }
+
+    protected function getDefaultFilterFunction(array $filters): Closure
+    {
+        return function (Media $media) use ($filters) {
+            foreach ($filters as $property => $value) {
+                if (! Arr::has($media->custom_properties, $property)) {
+                    return false;
+                }
+
+                if (Arr::get($media->custom_properties, $property) !== $value) {
+                    return false;
+                }
+            }
+
+            return true;
+        };
     }
 }
