@@ -121,8 +121,8 @@ trait HasDefaultMediaTrait
     public function getDefaultMediaGenericUrl()
     {
         return \asset('/images/'
-            .$this->getRecord()->getManager()->getTable().'/'
-            .$this->getDefaultFileName());
+            . $this->getRecord()->getManager()->getTable() . '/'
+            . $this->getDefaultFileName());
     }
 
     /**
@@ -133,6 +133,6 @@ trait HasDefaultMediaTrait
         $name = inflector()->singularize($this->getName());
         $extension = $this->getName() == 'logos' ? 'png' : 'jpg';
 
-        return $name.'.'.$extension;
+        return $name . '.' . $extension;
     }
 }

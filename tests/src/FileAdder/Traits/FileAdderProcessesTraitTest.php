@@ -25,7 +25,7 @@ class FileAdderProcessesTraitTest extends AbstractTest
         });
 
         $fileAdder = new FileAdder();
-        $fileAdder->setFile(TEST_FIXTURE_PATH.'/test-files/image1.gif');
+        $fileAdder->setFile(TEST_FIXTURE_PATH . '/test-files/image1.gif');
 
         static::expectException(FileCannotBeAdded::class);
         $fileAdder->toMediaCollection($collection);

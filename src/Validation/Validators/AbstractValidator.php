@@ -96,7 +96,7 @@ abstract class AbstractValidator implements ValidatorInterface
         $firstName = $this->getClassFirstName();
         $contraintFirstName = str_replace('Validator', 'Constraint', $firstName);
 
-        return str_replace('\Validators\\'.$firstName, '\Constraints\\'.$contraintFirstName, $className);
+        return str_replace('\Validators\\' . $firstName, '\Constraints\\' . $contraintFirstName, $className);
     }
 
     /**

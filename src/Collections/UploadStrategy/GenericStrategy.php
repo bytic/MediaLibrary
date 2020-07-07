@@ -16,6 +16,6 @@ class GenericStrategy extends AbstractStrategy
      */
     public static function transformFileName($path, $extension)
     {
-        return date('Y-m-d-').md5($path.time()).'.'.$extension;
+        return date('Y-m-d-') . md5($path . time()) . '.' . $extension;
     }
 }

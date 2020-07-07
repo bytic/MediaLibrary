@@ -19,7 +19,7 @@ abstract class AbstractPathGenerator
         $basePath = self::getBasePathForMedia($media);
         $originalPath = $media->getCollection()->getOriginalPath();
         if (!empty($originalPath)) {
-            $basePath .= DIRECTORY_SEPARATOR.$media->getCollection()->getOriginalPath();
+            $basePath .= DIRECTORY_SEPARATOR . $media->getCollection()->getOriginalPath();
         }
 
         return $basePath;
@@ -32,10 +32,10 @@ abstract class AbstractPathGenerator
      */
     public static function getBasePathForMedia($media)
     {
-        return '/'.$media->getCollection()->getName()
-            .'/'.static::getFolderNameForMedia($media)
-            .'/'.$media->getModel()->getPrimaryKey()
-            .'/';
+        return '/' . $media->getCollection()->getName()
+            . '/' . static::getFolderNameForMedia($media)
+            . '/' . $media->getModel()->getPrimaryKey()
+            . '/';
     }
 
     /**
@@ -61,6 +61,6 @@ abstract class AbstractPathGenerator
      */
     public static function getBasePathForMediaConversion($media, $conversionName)
     {
-        return self::getBasePathForMedia($media).DIRECTORY_SEPARATOR.$conversionName;
+        return self::getBasePathForMedia($media) . DIRECTORY_SEPARATOR . $conversionName;
     }
 }

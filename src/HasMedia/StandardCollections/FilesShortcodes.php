@@ -48,7 +48,7 @@ trait FilesShortcodes
     public function addFileFromContent($content, $name)
     {
         $path = sys_get_temp_dir();
-        $fullPath = $path.DIRECTORY_SEPARATOR.$name;
+        $fullPath = $path . DIRECTORY_SEPARATOR . $name;
         file_put_contents($fullPath, $content);
         $this->addFile($fullPath);
     }

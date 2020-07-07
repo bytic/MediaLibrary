@@ -49,8 +49,10 @@ class ImageValidator extends AbstractValidator
 
         if ($constraint->minWidth) {
             if (!ctype_digit((string) $constraint->minWidth)) {
-                throw new Exception(sprintf('"%s" is not a valid minimum width',
-                    $constraint->minWidth));
+                throw new Exception(sprintf(
+                    '"%s" is not a valid minimum width',
+                    $constraint->minWidth
+                ));
             }
             if ($width < $constraint->minWidth) {
                 $this->addViolation(
@@ -65,8 +67,10 @@ class ImageValidator extends AbstractValidator
 
         if ($constraint->maxWidth) {
             if (!ctype_digit((string) $constraint->maxWidth)) {
-                throw new Exception(sprintf('"%s" is not a valid maximum width',
-                    $constraint->maxWidth));
+                throw new Exception(sprintf(
+                    '"%s" is not a valid maximum width',
+                    $constraint->maxWidth
+                ));
             }
             if ($width > $constraint->maxWidth) {
                 $this->addViolation(
@@ -80,8 +84,10 @@ class ImageValidator extends AbstractValidator
         }
         if ($constraint->minHeight) {
             if (!ctype_digit((string) $constraint->minHeight)) {
-                throw new Exception(sprintf('"%s" is not a valid minimum height',
-                    $constraint->minHeight));
+                throw new Exception(sprintf(
+                    '"%s" is not a valid minimum height',
+                    $constraint->minHeight
+                ));
             }
             if ($height < $constraint->minHeight) {
                 $this->addViolation(
@@ -95,8 +101,10 @@ class ImageValidator extends AbstractValidator
         }
         if ($constraint->maxHeight) {
             if (!ctype_digit((string) $constraint->maxHeight)) {
-                throw new Exception(sprintf('"%s" is not a valid maximum height',
-                    $constraint->maxHeight));
+                throw new Exception(sprintf(
+                    '"%s" is not a valid maximum height',
+                    $constraint->maxHeight
+                ));
             }
             if ($height > $constraint->maxHeight) {
                 $this->addViolation(
@@ -109,8 +117,10 @@ class ImageValidator extends AbstractValidator
         $ratio = round($width / $height, 2);
         if (null !== $constraint->minRatio) {
             if (!is_numeric((string) $constraint->minRatio)) {
-                throw new Exception(sprintf('"%s" is not a valid minimum ratio',
-                    $constraint->minRatio));
+                throw new Exception(sprintf(
+                    '"%s" is not a valid minimum ratio',
+                    $constraint->minRatio
+                ));
             }
             if ($ratio < $constraint->minRatio) {
                 $this->addViolation(
@@ -122,8 +132,10 @@ class ImageValidator extends AbstractValidator
         }
         if (null !== $constraint->maxRatio) {
             if (!is_numeric((string) $constraint->maxRatio)) {
-                throw new Exception(sprintf('"%s" is not a valid maximum ratio',
-                    $constraint->maxRatio));
+                throw new Exception(sprintf(
+                    '"%s" is not a valid maximum ratio',
+                    $constraint->maxRatio
+                ));
             }
             if ($ratio > $constraint->maxRatio) {
                 $this->addViolation(

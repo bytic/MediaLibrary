@@ -17,6 +17,6 @@ class OriginalNameStrategy extends AbstractStrategy
     {
         $name = pathinfo($path, PATHINFO_FILENAME);
 
-        return $name.'.'.$extension;
+        return $name . '.' . $extension;
     }
 }

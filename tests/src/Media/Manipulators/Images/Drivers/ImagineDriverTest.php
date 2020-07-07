@@ -16,7 +16,7 @@ class ImagineDriverTest extends AbstractTest
 {
     public function testMakeImage()
     {
-        $fileSystem = new FileDisk((new Local(TEST_FIXTURE_PATH.'/test-files')));
+        $fileSystem = new FileDisk((new Local(TEST_FIXTURE_PATH . '/test-files')));
         $file = new File($fileSystem, '/image1.gif');
 
         $driver = new ImagineDriver();

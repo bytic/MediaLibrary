@@ -28,7 +28,7 @@ trait InitTrait
 
     protected function initVariablesFromConfig()
     {
-        $configKey = 'media-library.contraints.'.$this->getName();
+        $configKey = 'media-library.contraints.' . $this->getName();
 
         if (function_exists('config') && function_exists('app') && app()->has('config')) {
             if (config()->has($configKey)) {
