@@ -76,7 +76,19 @@ trait FileMethodsTrait
      */
     public function delete()
     {
-        return $this->getFile()->delete();
+        $converstions = $this->getConversionNames();
+        $converstions[] = 'full';
+        $filesystem = $this->getFile()->getFilesystem();
+        foreach ($converstions as $converstion) {
+            $path = $this->getPath($converstion);
+            if ($filesystem->has($path)) {
+                $filesystem->delete($path);
+            }
+        }
+        if ($this->getFile()->exists()) {
+            $this->getFile()->delete();
+        }
+        return true;
     }
 
     /**

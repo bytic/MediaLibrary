@@ -5,7 +5,6 @@ namespace ByTIC\MediaLibrary\Media;
 use ByTIC\MediaLibrary\Collections\Collection;
 use ByTIC\MediaLibrary\Collections\Traits\LoadMediaTrait;
 use ByTIC\MediaLibrary\HasMedia\HasMediaTrait;
-use ByTIC\MediaLibrary\Media\Traits\FileMethodsTrait;
 use ByTIC\MediaLibrary\PathGenerator\PathGeneratorFactory;
 use Nip\Records\Record;
 use function Nip\url;
@@ -15,7 +14,8 @@ use function Nip\url;
  */
 class Media
 {
-    use FileMethodsTrait;
+    use Traits\FileMethodsTrait;
+    use Traits\HasConversionsTrait;
 
     /**
      * @var Record

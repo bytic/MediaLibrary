@@ -30,7 +30,7 @@ trait HasMediaConversionsTrait
     /**
      * @return ConversionCollection
      */
-    public function getMediaConversions()
+    public function getMediaConversions() : ConversionCollection
     {
         if ($this->mediaConversions === null) {
             $this->initMediaConversions();

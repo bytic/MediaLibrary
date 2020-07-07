@@ -54,7 +54,6 @@ trait NewCollectionTrait
     {
         $this->prepareCollectionImages($collection);
         $this->prepareCollectionFiles($collection);
-        $collection->loadMedia();
     }
 
     /**

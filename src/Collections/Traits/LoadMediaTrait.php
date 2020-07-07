@@ -26,6 +26,11 @@ trait LoadMediaTrait
      */
     protected $mediaLoaded = false;
 
+    protected function doLoad(): void
+    {
+        $this->loadMedia();
+    }
+
     public function loadMedia()
     {
         if ($this->isMediaLoaded()) {

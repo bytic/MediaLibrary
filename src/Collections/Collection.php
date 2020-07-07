@@ -7,6 +7,7 @@ use ByTIC\MediaLibrary\Loaders\AbstractLoader;
 use ByTIC\MediaLibrary\Media\Media;
 use ByTIC\MediaLibrary\Validation\Constraints\Traits\HasConstraintTrait;
 use ByTIC\MediaLibrary\Validation\Traits\HasValidatorTrait;
+use Nip\Collections\Lazy\AbstractLazyCollection;
 
 /**
  * Class Collection
@@ -14,7 +15,7 @@ use ByTIC\MediaLibrary\Validation\Traits\HasValidatorTrait;
  *
  * @method Media get
  */
-class Collection extends \Nip\Collections\Collection
+class Collection extends AbstractLazyCollection
 {
     use Traits\HasAcceptsMediaTrait;
     use Traits\LoadMediaTrait;

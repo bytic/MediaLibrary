@@ -5,7 +5,7 @@ namespace ByTIC\MediaLibrary\Conversions;
 /**
  * Class ConversionCollection.
  */
-class ConversionCollection extends \Nip\Collection
+class ConversionCollection extends \Nip\Collections\AbstractCollection
 {
     /**
      * Get all the conversions in the collection.
@@ -32,6 +32,7 @@ class ConversionCollection extends \Nip\Collection
     {
         $results = [];
         foreach ($this as $key=>$item) {
+            /** @var Conversion $item */
             if ($item->shouldBePerformedOn($collectionName)) {
                 $results[$key] = $item;
             }

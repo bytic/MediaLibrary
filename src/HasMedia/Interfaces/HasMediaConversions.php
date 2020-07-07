@@ -2,15 +2,22 @@
 
 namespace ByTIC\MediaLibrary\HasMedia\Interfaces;
 
+use ByTIC\MediaLibrary\Conversions\Conversion;
+use ByTIC\MediaLibrary\Conversions\ConversionCollection;
+
 /**
  * Interface HasMediaConversions.
  */
 interface HasMediaConversions extends HasMedia
 {
     /**
-     * Register the conversions that should be performed.
+     * Add a conversion.
      *
-     * @return array
+     * @param string $name
+     *
+     * @return Conversion
      */
-    public function initMediaConversions();
+    public function addMediaConversion(string $name): Conversion;
+
+    public function getMediaConversions(): ConversionCollection;
 }
