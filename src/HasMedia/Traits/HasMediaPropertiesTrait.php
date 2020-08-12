@@ -33,7 +33,7 @@ trait HasMediaPropertiesTrait
         $propertiesRecord = MediaModels::properties()->createFor($this, $collection);
 
         if ($this->hasRelation('MediaProperties')) {
-            return $this->getRelation('MediaProperties')->getResults()->add($propertiesRecord);
+            $this->getRelation('MediaProperties')->getResults()->add($propertiesRecord);
         }
         return $propertiesRecord;
     }
