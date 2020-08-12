@@ -74,6 +74,20 @@ abstract class AbstractLoader implements LoaderInterface
     }
 
     /**
+     * @param string $loader
+     * @return AbstractLoader
+     */
+    protected function initFromSibling($loader)
+    {
+        /** @var AbstractLoader $class */
+        $loader = is_object($loader) ? $loader : new $loader();
+        $loader->setFilesystem($this->getFilesystem());
+        $loader->setCollection($this->getCollection());
+
+        return $loader;
+    }
+
+    /**
      * @param $media
      */
     protected function appendMediaInCollection($media)

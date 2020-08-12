@@ -12,7 +12,7 @@ trait HasRecordTrait
     /**
      * @return HasMediaTrait|\Nip\Records\Record
      */
-    protected function getRecord()
+    public function getRecord()
     {
         return $this->getMediaRepository()->getRecord();
     }

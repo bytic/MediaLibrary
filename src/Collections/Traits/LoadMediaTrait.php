@@ -3,6 +3,8 @@
 namespace ByTIC\MediaLibrary\Collections\Traits;
 
 use ByTIC\MediaLibrary\Loaders\AbstractLoader;
+use ByTIC\MediaLibrary\Loaders\Database;
+use ByTIC\MediaLibrary\Loaders\Fallback;
 use ByTIC\MediaLibrary\Loaders\Filesystem;
 use ByTIC\MediaLibrary\Loaders\HasLoaderTrait;
 use ByTIC\MediaLibrary\Media\Media;
@@ -137,6 +139,10 @@ trait LoadMediaTrait
      */
     protected function getLoaderClass()
     {
-        return Filesystem::class;
+        $mediaLoader = config()->get('media-library.media_loader');
+        if (class_exists($mediaLoader)) {
+            return $mediaLoader;
+        }
+        return Database::class;
     }
 }

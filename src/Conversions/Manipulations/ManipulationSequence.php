@@ -2,11 +2,11 @@
 
 namespace ByTIC\MediaLibrary\Conversions\Manipulations;
 
-use Nip\Collection;
+use Nip\Collections\AbstractCollection;
 
 /**
  * Class ManipulationSequence.
  */
-class ManipulationSequence extends Collection
+class ManipulationSequence extends AbstractCollection
 {
 }
