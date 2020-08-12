@@ -25,6 +25,8 @@ class MediaRecords extends RecordManager
      */
     public function for(Record $model, $collection)
     {
+        $collection = is_object($collection) ? $collection->getName() : $collection;
+
         if ($model->hasRelation('Media')) {
             return $model->getRelation('Media')->getResults()->filter(
                 function ($item) use ($collection) {
@@ -52,7 +54,7 @@ class MediaRecords extends RecordManager
             'where' => [
                 ['model =?', $model->getManager()->getMorphName()],
                 ['model_id =?', $model->getPrimaryKey()],
-                ['collection_name=?', $media->getCollection()],
+                ['collection_name=?', $media->getCollection()->getName()],
                 ['path=?', $media->getPath()]
             ]
         ]);
