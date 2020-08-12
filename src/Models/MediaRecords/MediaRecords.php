@@ -2,6 +2,8 @@
 
 namespace ByTIC\MediaLibrary\Models\MediaRecords;
 
+use ByTIC\MediaLibrary\Media\Media;
+use ByTIC\MediaLibrary\Media\Traits\FileMethodsTrait;
 use ByTIC\MediaLibrary\Models\MediaProperties\MediaProperty;
 use Nip\Records\AbstractModels\Record;
 use Nip\Records\Collections\Collection;
@@ -33,9 +35,25 @@ class MediaRecords extends RecordManager
 
         return $this->findByParams([
             'where' => [
-                ['model =?', $model->getManager()->getController()],
+                ['model =?', $model->getManager()->getMorphName()],
                 ['model_id =?', $model->getPrimaryKey()],
                 ['collection_name=?', $collection]
+            ]
+        ]);
+    }
+
+    /**
+     * @param Media|FileMethodsTrait $media
+     */
+    public function deteleMedia(Media $media)
+    {
+        $model = $media->getModel();
+        $this->deleteByParams([
+            'where' => [
+                ['model =?', $model->getManager()->getMorphName()],
+                ['model_id =?', $model->getPrimaryKey()],
+                ['collection_name=?', $media->getCollection()],
+                ['path=?', $media->getPath()]
             ]
         ]);
     }

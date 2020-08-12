@@ -57,4 +57,17 @@ trait HasConversionsTrait
         return new ConversionCollection();
     }
 
+
+    public function removeConversions()
+    {
+        $converstions = $this->getConversionNames();
+        $converstions[] = 'full';
+        $filesystem = $this->getFile()->getFilesystem();
+        foreach ($converstions as $converstion) {
+            $path = $this->getPath($converstion);
+            if ($filesystem->has($path)) {
+                $filesystem->delete($path);
+            }
+        }
+    }
 }

@@ -12,3 +12,4 @@ $container = new Container();
 Container::setInstance($container);
 
 $container->set('inflector', new \Nip\Inflector\Inflector());
+$container->set('config', new \Nip\Config\Config());

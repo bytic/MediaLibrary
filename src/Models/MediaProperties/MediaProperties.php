@@ -2,8 +2,11 @@
 
 namespace ByTIC\MediaLibrary\Models\MediaProperties;
 
+use ByTIC\MediaLibrary\Collections\Collection;
+use ByTIC\MediaLibrary\HasMedia\Traits\HasMediaPropertiesTrait;
 use Nip\Records\AbstractModels\Record;
 use Nip\Records\RecordManager;
+use Nip\Records\Traits\Relations\HasRelationsRecordTrait;
 
 /**
  * Class MediaProperties
@@ -14,12 +17,13 @@ use Nip\Records\RecordManager;
 class MediaProperties extends RecordManager
 {
     /**
-     * @param Record $model
-     * @param $collection
+     * @param Record|HasMediaPropertiesTrait $model
+     * @param Collection|string $collection
      * @return MediaProperty|Record
      */
     public function for(Record $model, $collection)
     {
+        $collection = is_object($collection) ? $collection->getName() : $collection;
         if ($model->hasRelation('MediaProperties')) {
             return $model->getRelation('MediaProperties')->getResults()->filter(
                 function ($item) use ($collection) {
@@ -30,7 +34,7 @@ class MediaProperties extends RecordManager
 
         return $this->findOneByParams([
             'where' => [
-                ['model =?', $model->getManager()->getController()],
+                ['model =?', $model->getManager()->getMorphName()],
                 ['model_id =?', $model->getPrimaryKey()],
                 ['collection_name=?', $collection]
             ]
@@ -38,7 +42,16 @@ class MediaProperties extends RecordManager
     }
 
     /**
-     * @param Record $model
+     * @param $collection
+     * @return MediaProperty|Record
+     */
+    public function forCollection(Collection $collection)
+    {
+        return $this->for($collection->getRecord(), $collection->getName());
+    }
+
+    /**
+     * @param Record|HasMediaPropertiesTrait $model
      * @param $collection
      * @return MediaProperty
      */

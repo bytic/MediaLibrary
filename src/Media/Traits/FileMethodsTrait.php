@@ -2,6 +2,8 @@
 
 namespace ByTIC\MediaLibrary\Media\Traits;
 
+use ByTIC\MediaLibrary\Loaders\Database;
+use ByTIC\MediaLibrary\Support\MediaModels;
 use Exception;
 use League\Flysystem\File as FileLeague;
 use Nip\Filesystem\File;
@@ -76,19 +78,25 @@ trait FileMethodsTrait
      */
     public function delete()
     {
-        $converstions = $this->getConversionNames();
-        $converstions[] = 'full';
-        $filesystem = $this->getFile()->getFilesystem();
-        foreach ($converstions as $converstion) {
-            $path = $this->getPath($converstion);
-            if ($filesystem->has($path)) {
-                $filesystem->delete($path);
-            }
+        $this->deleteMediaFromDatabase();
+        $this->deleteMediaFromFilesystem();
+        return true;
+    }
+
+    protected function deleteMediaFromDatabase()
+    {
+        $loader = $this->getCollection()->getLoader();
+        if ($loader instanceof Database) {
+            MediaModels::records()->deteleMedia($this);
         }
+    }
+
+    protected function deleteMediaFromFilesystem()
+    {
+        $this->removeConversions();
         if ($this->getFile()->exists()) {
             $this->getFile()->delete();
         }
-        return true;
     }
 
     /**

@@ -21,20 +21,17 @@ class Database extends AbstractLoader
         }
         $files = $this->tryFilesystem();
 
+        $model = $this->getCollection()->getRecord();
+
         foreach ($files as $file) {
             MediaModels::records()->createFor(
                 $file,
-                $this->getCollection()->getRecord(),
+                $model,
                 $this->getCollection()->getName()
             );
         }
 
-        $propertiesRecord = MediaModels::properties()->createFor(
-            $this->getCollection()->getRecord(),
-            $this->getCollection()->getName()
-        );
-        $propertiesRecord->dbLoaded(true);
-        $propertiesRecord->save();
+        $model->mediaProperties($this->getCollection())->saveDbLoaded(true);
 
         return $files;
     }
@@ -44,10 +41,8 @@ class Database extends AbstractLoader
      */
     protected function tryDatabase()
     {
-        $propertiesRecord = MediaModels::properties()->for(
-            $this->getCollection()->getRecord(),
-            $this->getCollection()->getName()
-        );
+        $propertiesRecord = MediaModels::properties()->forCollection($this->getCollection());
+
         if (!is_object($propertiesRecord) || $propertiesRecord->dbLoaded() === false) {
             return false;
         }

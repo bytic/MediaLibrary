@@ -2,6 +2,7 @@
 
 namespace ByTIC\MediaLibrary\Tests\MediaRepository\Traits;
 
+use ByTIC\MediaLibrary\Loaders\Filesystem;
 use ByTIC\MediaLibrary\MediaRepository\MediaRepository;
 use ByTIC\MediaLibrary\Tests\AbstractTest;
 use ByTIC\MediaLibrary\Tests\Fixtures\Models\Articles\Article;
@@ -23,6 +24,7 @@ class NewCollectionTraitTest extends AbstractTest
     public function testPrepareCollectionFiles()
     {
         $article = new Article();
+        $article->getMediaRepository()->getCollection('files')->setLoaderClass(Filesystem::class);
 
         $collection = $article->getFiles();
         self::assertSame('files', $collection->getMediaType());

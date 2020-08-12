@@ -2,6 +2,7 @@
 
 namespace ByTIC\MediaLibrary\Models\MediaProperties;
 
+use ByTIC\MediaLibrary\Collections\Collection;
 use Nip\Records\AbstractModels\Record;
 
 /**
@@ -30,7 +31,7 @@ class MediaProperty extends Record
     }
 
     /**
-     * @param $collection
+     * @param Collection|string $collection
      */
     public function populateFromCollection($collection)
     {
@@ -82,6 +83,15 @@ class MediaProperty extends Record
         $this->checkCustomProperties();
         $this->customPropertiesArray[$name] = $value;
         $this->setCustomPropertiesAttribute($this->getCustomProperties());
+    }
+
+    /**
+     * @param bool $value
+     */
+    public function saveDbLoaded($value)
+    {
+        $this->dbLoaded($value);
+        $this->save();
     }
 
     /**

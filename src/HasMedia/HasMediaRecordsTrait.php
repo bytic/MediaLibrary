@@ -10,7 +10,15 @@ use ByTIC\MediaLibrary\Support\MediaModels;
  */
 trait HasMediaRecordsTrait
 {
+    /**
+     * @deprecated use initRelationsMedia
+     */
     protected function initMediaRelations()
+    {
+        $this->initRelationsMedia();
+    }
+
+    protected function initRelationsMedia()
     {
         $this->morphMany(
             'Media',

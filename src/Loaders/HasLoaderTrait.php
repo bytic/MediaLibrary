@@ -25,6 +25,16 @@ trait HasLoaderTrait
     }
 
     /**
+     * @param string $loader
+     */
+    public function setLoaderClass($loader)
+    {
+        $loader = new $loader();
+        $loader = $this->hydrateLoader($loader);
+        $this->setLoader($loader);
+    }
+
+    /**
      * @param AbstractLoader $loader
      */
     public function setLoader(AbstractLoader $loader)

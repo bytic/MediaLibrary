@@ -5,9 +5,11 @@ namespace ByTIC\MediaLibrary\FileAdder\Traits;
 use ByTIC\MediaLibrary\Collections\Collection;
 use ByTIC\MediaLibrary\Exceptions\FileCannotBeAdded;
 use ByTIC\MediaLibrary\Exceptions\FileCannotBeAdded\FileUnacceptableForCollection;
+use ByTIC\MediaLibrary\Loaders\Filesystem;
 use ByTIC\MediaLibrary\Media\Manipulators\ManipulatorFactory;
 use ByTIC\MediaLibrary\Media\Media;
 use ByTIC\MediaLibrary\PathGenerator\PathGeneratorFactory;
+use ByTIC\MediaLibrary\Support\MediaModels;
 use ByTIC\MediaLibrary\Validation\Violations\ViolationsBag;
 use Nip\Filesystem\File;
 
@@ -29,7 +31,7 @@ trait FileAdderProcessesTrait
 
     /**
      * @param Collection $collection
-     * @param Media      $media
+     * @param Media|null $media
      */
     protected function processMediaItem(Collection $collection, Media $media = null)
     {
@@ -38,15 +40,19 @@ trait FileAdderProcessesTrait
         $media = $media ? $media : $this->getMedia();
         $media->setCollection($collection);
 
-        $this->copyMediaToFilesystem();
-        $this->createMediaConversions();
+        $this->copyMediaToFilesystem($media);
+        $this->createMediaConversions($media);
+        $this->saveMediaRecord($media);
 
         $collection->appendMedia($media);
     }
 
-    protected function copyMediaToFilesystem()
+    /**
+     * @param Media|null $media
+     */
+    protected function copyMediaToFilesystem(Media $media = null)
     {
-        $media = $this->getMedia();
+        $media = $media ? $media : $this->getMedia();
         $destination = PathGeneratorFactory::create()::getBasePathForMediaOriginal($media);
         $destination .= DIRECTORY_SEPARATOR . $media->getCollection()->getStrategy()::makeFileName($this);
 
@@ -56,12 +62,36 @@ trait FileAdderProcessesTrait
         $media->setFile($file);
     }
 
-    protected function createMediaConversions()
+    /**
+     * @param Media|null $media
+     */
+    protected function createMediaConversions(Media $media = null)
     {
-        $media = $this->getMedia();
+        $media = $media ? $media : $this->getMedia();
+
         ManipulatorFactory::createForMedia($media)->performConversions(
             $this->getSubject()->getMediaConversions()->forCollection($media->getCollection()->getName()),
             $media
+        );
+    }
+
+    /**
+     * @param Media|null $media
+     */
+    protected function saveMediaRecord(Media $media = null)
+    {
+        $media = $media ? $media : $this->getMedia();
+
+        if ($media->getCollection()->getLoader() instanceof Filesystem) {
+            return;
+        }
+        $propertiesRecord = $this->getSubject()->mediaProperties($media->getCollection());
+        $propertiesRecord->saveDbLoaded(true);
+
+        MediaModels::records()->createFor(
+            $media->getFile(),
+            $this->getSubject(),
+            $media->getCollection()
         );
     }
 

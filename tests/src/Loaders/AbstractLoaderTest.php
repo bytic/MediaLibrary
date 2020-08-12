@@ -17,6 +17,8 @@ class AbstractLoaderTest extends AbstractTest
     {
         $record = new Article();
         $record->id = 99;
+        $record->getMediaRepository()->getCollection('files')->setLoaderClass(Filesystem::class);
+
         $collection = $record->getFiles();
 
         $loader = new Filesystem();
@@ -31,6 +33,7 @@ class AbstractLoaderTest extends AbstractTest
         $record->shouldReceive('getFolderNameForMedia')->andReturn('articles-custom');
         $record->setManagerName(Articles::class);
         $record->id = 99;
+        $record->getMediaRepository()->getCollection('files')->setLoaderClass(Filesystem::class);
 
         $collection = $record->getFiles();
 

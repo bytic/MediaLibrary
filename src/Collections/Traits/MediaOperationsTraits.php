@@ -7,6 +7,8 @@ use ByTIC\MediaLibrary\Media\Media;
 
 /**
  * Trait MediaOperationsTraits.
+ *
+ * @method Media get($key)
  */
 trait MediaOperationsTraits
 {
@@ -31,10 +33,9 @@ trait MediaOperationsTraits
     public function delete()
     {
         foreach ($this as $key => $file) {
-            /* @var Media $file */
-            $file->delete();
-            $this->unset($key);
+            $this->deleteMediaByKey($key);
         }
+
         if (isset($file)) {
             $directory = dirname($file->getPath());
             $this->deleteDirIfEmpty($directory);
@@ -60,5 +61,6 @@ trait MediaOperationsTraits
         $this->setName($sibling->getName());
         $this->setMediaRepository($sibling->getMediaRepository());
         $this->setMediaType($sibling->getMediaType());
+        $this->setLoader($sibling->getLoader());
     }
 }
