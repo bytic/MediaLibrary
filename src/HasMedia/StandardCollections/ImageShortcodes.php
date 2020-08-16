@@ -37,6 +37,14 @@ trait ImageShortcodes
     }
 
     /**
+     * @return Collection|Media[]
+     */
+    public function getLogos()
+    {
+        return $this->getMedia('logos');
+    }
+
+    /**
      * @return bool
      */
     public function hasLogo()
@@ -50,6 +58,14 @@ trait ImageShortcodes
     public function getCover()
     {
         return $this->getMedia('covers')->getDefaultMedia();
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getCovers()
+    {
+        return $this->getMedia('covers');
     }
 
     /**
