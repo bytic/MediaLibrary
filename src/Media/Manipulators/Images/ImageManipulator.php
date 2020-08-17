@@ -3,6 +3,8 @@
 namespace ByTIC\MediaLibrary\Media\Manipulators\Images;
 
 use ByTIC\MediaLibrary\Conversions\Conversion;
+use ByTIC\MediaLibrary\Conversions\Manipulations\Manipulation;
+use ByTIC\MediaLibrary\Conversions\Manipulations\ManipulationSequence;
 use ByTIC\MediaLibrary\Media\Manipulators\AbstractManipulator;
 use ByTIC\MediaLibrary\Media\Manipulators\Images\Drivers\AbstractDriver;
 use ByTIC\MediaLibrary\Media\Manipulators\Images\Drivers\ImagineDriver;
@@ -22,14 +24,30 @@ class ImageManipulator extends AbstractManipulator
      */
     public function performConversion(Media $media, Conversion $conversion)
     {
+        $manipulations = $this->prependCroperManipulations($media, $conversion->getManipulations());
         $imageContent = $this->getDriver()->manipulate(
             $media->getFile()->read(),
-            $conversion->getManipulations(),
+            $manipulations,
             $media->getExtension()
         );
 
         $path = $media->getPath($conversion->getName());
         $media->getCollection()->getFilesystem()->put($path, $imageContent);
+    }
+
+    /**
+     * @param Media $media
+     * @param ManipulationSequence $manipulations
+     * @return ManipulationSequence
+     */
+    protected function prependCroperManipulations($media, $manipulations)
+    {
+        if (!isset($media->cropperData)) {
+            return $manipulations;
+        }
+        $data = array_map('intval', $media->cropperData);
+        $manipulations->prepend(Manipulation::create('crop', $data['width'], $data['height'], $data['x'], $data['y']));
+        return $manipulations;
     }
 
     /**

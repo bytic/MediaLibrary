@@ -56,6 +56,18 @@ class Conversion
     /**
      * @param string $name
      *
+     * @return $this
+     */
+    public function setName(string $name): Conversion
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @param string $name
+     *
      * @return Conversion
      */
     public static function create(string $name)
