@@ -2,13 +2,15 @@
 
 namespace ByTIC\MediaLibrary\Collections\Traits;
 
+use ByTIC\MediaLibrary\Validation\Constraints\AbstractConstraint;
+use ByTIC\MediaLibrary\Validation\Constraints\ConstraintInterface;
 use ByTIC\MediaLibrary\Validation\Validators\AbstractValidator;
 
 /**
  * Trait HasAcceptsMediaTrait.
  *
- * @method  getValidator();
- * @method  getConstraint();
+ * @method AbstractValidator getValidator();
+ * @method ConstraintInterface|AbstractConstraint  getConstraint();
  */
 trait HasAcceptsMediaTrait
 {
@@ -28,7 +30,6 @@ trait HasAcceptsMediaTrait
     protected function initHasAcceptsMediaWithValidation()
     {
         $this->acceptsMedia(function ($file) {
-            /** @var AbstractValidator $validator */
             $validator = $this->getValidator();
             $constraint = $this->getConstraint();
 

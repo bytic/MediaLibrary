@@ -42,6 +42,11 @@ trait HasMediaTrait
     protected function hydrateMediaRepository($mediaRepository)
     {
         $mediaRepository->setRecord($this);
+
+        if (method_exists($this, 'registerMediaCollections')) {
+            $this->registerMediaCollections($mediaRepository);
+        }
+
         if (method_exists($this, 'hydrateMediaRepositoryCustom')) {
             $this->hydrateMediaRepositoryCustom($mediaRepository);
         }
