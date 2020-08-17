@@ -78,8 +78,8 @@ trait FileMethodsTrait
      */
     public function delete()
     {
-        $this->deleteMediaFromDatabase();
         $this->deleteMediaFromFilesystem();
+        $this->deleteMediaFromDatabase();
         return true;
     }
 
