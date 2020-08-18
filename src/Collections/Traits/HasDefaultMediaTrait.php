@@ -82,6 +82,11 @@ trait HasDefaultMediaTrait
      */
     public function generateDefaultMedia()
     {
+        $defaultMedia = $this->getRecord()->default_image;
+        if ($defaultMedia && $this->has($defaultMedia)) {
+            return $this->get($defaultMedia);
+        }
+
         if (count($this->items)) {
             return reset($this->items);
         }

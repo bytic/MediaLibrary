@@ -96,6 +96,6 @@ class Media
      */
     public function isDefault()
     {
-        return $this === $this->getCollection()->getDefaultMedia();
+        return $this->getPath() === $this->getCollection()->getDefaultMedia()->getPath();
     }
 }
