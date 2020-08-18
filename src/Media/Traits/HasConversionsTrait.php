@@ -45,6 +45,22 @@ trait HasConversionsTrait
     }
 
     /**
+     * @param $name
+     * @return bool
+     */
+    public function hasConversion($name)
+    {
+        $names = is_array($name) ? $name : [$name];
+        $conversions = $this->getConversionNames();
+        foreach ($names as $name) {
+            if (!in_array($name, $conversions)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
      * @return ConversionCollection
      */
     protected function generateConversions()

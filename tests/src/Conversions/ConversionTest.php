@@ -12,7 +12,7 @@ use ByTIC\MediaLibrary\Tests\AbstractTest;
  */
 class ConversionTest extends AbstractTest
 {
-    public function testCreate()
+    public function test_Create()
     {
         $conversion = Conversion::create('thumb');
         self::assertSame('thumb', $conversion->getName());
@@ -22,7 +22,7 @@ class ConversionTest extends AbstractTest
         self::assertEquals(0, $manipulations->count());
     }
 
-    public function testAddSameNameManipulation()
+    public function test_AddSameNameManipulation()
     {
         $conversion = Conversion::create('thumb');
         $conversion->resize(100, 200);
@@ -33,7 +33,7 @@ class ConversionTest extends AbstractTest
         self::assertEquals(2, $manipulations->count());
     }
 
-    public function testCreateManipulation()
+    public function test_CreateManipulation()
     {
         $conversion = Conversion::create('thumb');
         $conversion->resize(100, 200);

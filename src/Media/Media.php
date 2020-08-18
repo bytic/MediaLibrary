@@ -14,6 +14,7 @@ use function Nip\url;
  */
 class Media
 {
+    use Traits\UrlMethodsTrait;
     use Traits\FileMethodsTrait;
     use Traits\HasConversionsTrait;
 
@@ -72,40 +73,6 @@ class Media
     public function __toString()
     {
         return $this->getFullUrl();
-    }
-
-    /**
-     * Get the full url to a original media file.
-     *
-     * @param string $conversionName
-     *
-     * @return string
-     */
-    public function getFullUrl(string $conversionName = ''): string
-    {
-        return url()->to($this->getUrl($conversionName));
-    }
-
-    /**
-     * Get the url to a original media file.
-     *
-     * @param string $conversionName
-     *
-     * @return string
-     */
-    public function getUrl(string $conversionName = ''): string
-    {
-        if ($this->hasFile()) {
-            return $this->getFile()->getUrl();
-        }
-
-        return $this->getCollection()->getDefaultMediaUrl();
-//        $urlGenerator = UrlGeneratorFactory::createForMedia($this);
-//        if ($conversionName !== '') {
-////            $conversion = ConversionCollection::createForMedia($this)->getByName($conversionName);
-////            $urlGenerator->setConversion($conversion);
-//        }
-//        return $urlGenerator->getUrl();
     }
 
     /**

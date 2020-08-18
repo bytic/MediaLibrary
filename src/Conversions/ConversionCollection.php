@@ -2,11 +2,27 @@
 
 namespace ByTIC\MediaLibrary\Conversions;
 
+use ByTIC\MediaLibrary\Exceptions\InvalidConversion;
+use Nip\Collections\AbstractCollection;
+
 /**
  * Class ConversionCollection.
  */
-class ConversionCollection extends \Nip\Collections\AbstractCollection
+class ConversionCollection extends AbstractCollection
 {
+    public function getByName(string $name): Conversion
+    {
+        $conversion = $this->first(function (Conversion $conversion) use ($name) {
+            return $conversion->getName() === $name;
+        });
+
+        if (!$conversion) {
+            throw InvalidConversion::unknownName($name);
+        }
+
+        return $conversion;
+    }
+
     /**
      * Get all the conversions in the collection.
      *
@@ -31,7 +47,7 @@ class ConversionCollection extends \Nip\Collections\AbstractCollection
     protected function shouldBePerformedOn($collectionName)
     {
         $results = [];
-        foreach ($this as $key=>$item) {
+        foreach ($this as $key => $item) {
             /** @var Conversion $item */
             if ($item->shouldBePerformedOn($collectionName)) {
                 $results[$key] = $item;

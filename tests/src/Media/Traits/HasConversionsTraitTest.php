@@ -5,7 +5,6 @@ namespace ByTIC\MediaLibrary\Tests\Media\Traits;
 use ByTIC\MediaLibrary\Media\Media;
 use ByTIC\MediaLibrary\MediaRepository\MediaRepository;
 use ByTIC\MediaLibrary\Tests\AbstractTest;
-use ByTIC\MediaLibrary\Tests\Fixtures\Models\Articles\Article;
 use ByTIC\MediaLibrary\Tests\Fixtures\Models\HasConversionsModel;
 
 /**
@@ -23,5 +22,20 @@ class HasConversionsTraitTest extends AbstractTest
         $media = $repository->getCollection('images')->newMedia();
         self::assertInstanceOf(Media::class, $media);
         self::assertSame(['thumb'], $media->getConversionNames());
+    }
+
+    public function test_hasConversions()
+    {
+        $repository = new MediaRepository();
+        $repository->setRecord(new HasConversionsModel());
+
+        $media = $repository->getCollection('images')->newMedia();
+        self::assertInstanceOf(Media::class, $media);
+
+        self::assertTrue($media->hasConversion('thumb'));
+        self::assertTrue($media->hasConversion(['thumb']));
+
+        self::assertFalse($media->hasConversion(['thumb', 'dnx']));
+        self::assertFalse($media->hasConversion('dnx'));
     }
 }
