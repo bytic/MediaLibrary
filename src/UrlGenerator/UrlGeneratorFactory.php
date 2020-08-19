@@ -12,6 +12,18 @@ use ByTIC\MediaLibrary\PathGenerator\PathGeneratorFactory;
 class UrlGeneratorFactory
 {
     /**
+     * @return BaseUrlGenerator
+     */
+    public static function create()
+    {
+        $pathGenerator = PathGeneratorFactory::create();
+
+        $urlGenerator = new BaseUrlGenerator();
+        $urlGenerator->setPathGenerator($pathGenerator);
+        return $urlGenerator;
+    }
+
+    /**
      * @param Media|UrlMethodsTrait $media
      *
      * @param string $conversionName
@@ -20,15 +32,10 @@ class UrlGeneratorFactory
      */
     public static function createForMedia(Media $media, string $conversionName = ''): UrlGeneratorInterface
     {
-        $pathGenerator = PathGeneratorFactory::create();
+        $urlGenerator = static::create()
+            ->setMedia($media);
 
-        $urlGenerator = new BaseUrlGenerator();
-
-        $urlGenerator
-            ->setMedia($media)
-            ->setPathGenerator($pathGenerator);
-
-        if ($conversionName !== '') {
+        if (!empty($conversionName)) {
             /** @noinspection PhpUnhandledExceptionInspection */
             $conversion = $media->getConversions()->getByName($conversionName);
 

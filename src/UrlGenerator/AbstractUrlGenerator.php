@@ -35,7 +35,7 @@ class AbstractUrlGenerator implements UrlGeneratorInterface
 
     public function getPath(): string
     {
-        $convestion = $this->conversion instanceof Conversion ? $this->conversion->getName() : null;
+        $convestion = $this->conversion instanceof Conversion ? $this->conversion->getName() : '';
         return $this->media->getPath($convestion);
     }
 
@@ -60,6 +60,11 @@ class AbstractUrlGenerator implements UrlGeneratorInterface
         return $this;
     }
 
+    public function __toString() : string
+    {
+        return $this->getUrl();
+    }
+
 //    protected function getDiskName(): string
 //    {
 //        return $this->conversion === null
@@ -72,4 +77,5 @@ class AbstractUrlGenerator implements UrlGeneratorInterface
 //        return app('filesystem')->disk($this->getDiskName());
         return $this->media->getFile()->getFilesystem();
     }
+
 }

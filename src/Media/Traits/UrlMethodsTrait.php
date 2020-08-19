@@ -32,10 +32,9 @@ trait UrlMethodsTrait
      *
      * @return string
      */
-    public function getUrl(string $conversionName = ''): string
+    public function getUrl(string $conversionName = '')
     {
-        $conversionName = $conversionName ? $conversionName : ($this->hasConversion('default') ? 'default' : null);
-        $urlGenerator = UrlGeneratorFactory::createForMedia($this, $conversionName);
-        return $urlGenerator->getUrl();
+        $conversionName = $conversionName ? $conversionName : ($this->hasConversion('default') ? 'default' : '');
+        return UrlGeneratorFactory::createForMedia($this, $conversionName);
     }
 }

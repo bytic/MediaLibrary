@@ -9,6 +9,8 @@ use ByTIC\MediaLibrary\HasMedia\Interfaces\HasMediaConversions;
  */
 class HasConversionsModel extends HasMediaModel implements HasMediaConversions
 {
+    protected $managerName = HasMediaModelManager::class;
+
     public function registerMediaConversions()
     {
         $this->addMediaConversion('thumb')
