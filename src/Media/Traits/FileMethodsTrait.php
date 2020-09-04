@@ -115,7 +115,7 @@ trait FileMethodsTrait
         }
 
         if ($conversionName) {
-            return $this->getBasePath($conversionName) . DIRECTORY_SEPARATOR . $this->getName();
+            return $this->getBasePath($conversionName) . '/' . $this->getName();
         }
 
         return $this->getFile()->getPath();
