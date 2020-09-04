@@ -11,8 +11,6 @@ use function Nip\url;
  */
 trait UrlMethodsTrait
 {
-
-
     /**
      * Get the full url to a original media file.
      *

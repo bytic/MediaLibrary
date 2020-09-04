@@ -17,7 +17,7 @@ class MediaModels
     /**
      * @return MediaRecords
      */
-    static public function records()
+    public static function records()
     {
         return static::getModels('records', MediaRecords::class);
     }
@@ -25,7 +25,7 @@ class MediaModels
     /**
      * @return MediaProperties
      */
-    static public function properties()
+    public static function properties()
     {
         return static::getModels('properties', MediaProperties::class);
     }
@@ -35,7 +35,7 @@ class MediaModels
      * @param string $default
      * @return mixed|\Nip\Records\AbstractModels\RecordManager
      */
-    static protected function getModels($type, $default)
+    protected static function getModels($type, $default)
     {
         if (!isset(static::$models[$type])) {
             $modelManager = static::getConfigVar($type, $default);
@@ -50,7 +50,7 @@ class MediaModels
      * @param null|string $default
      * @return string
      */
-    static protected function getConfigVar($type, $default = null)
+    protected static function getConfigVar($type, $default = null)
     {
         if (!function_exists('config')) {
             return $default;

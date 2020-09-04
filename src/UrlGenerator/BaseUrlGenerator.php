@@ -8,5 +8,4 @@ namespace ByTIC\MediaLibrary\UrlGenerator;
  */
 class BaseUrlGenerator extends AbstractUrlGenerator
 {
-
 }

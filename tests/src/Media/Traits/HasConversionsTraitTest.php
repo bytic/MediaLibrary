@@ -13,7 +13,6 @@ use ByTIC\MediaLibrary\Tests\Fixtures\Models\HasConversionsModel;
  */
 class HasConversionsTraitTest extends AbstractTest
 {
-
     public function testPrepareCollectionImages()
     {
         $repository = new MediaRepository();

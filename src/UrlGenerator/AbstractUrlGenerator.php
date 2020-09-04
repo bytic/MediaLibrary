@@ -13,7 +13,6 @@ use League\Flysystem\FilesystemInterface;
  */
 class AbstractUrlGenerator implements UrlGeneratorInterface
 {
-
     /**
      * @var Media
      */
@@ -60,7 +59,7 @@ class AbstractUrlGenerator implements UrlGeneratorInterface
         return $this;
     }
 
-    public function __toString() : string
+    public function __toString(): string
     {
         return $this->getUrl();
     }
@@ -77,5 +76,4 @@ class AbstractUrlGenerator implements UrlGeneratorInterface
 //        return app('filesystem')->disk($this->getDiskName());
         return $this->media->getFile()->getFilesystem();
     }
-
 }
