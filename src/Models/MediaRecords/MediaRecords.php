@@ -17,7 +17,6 @@ use Nip\Records\RecordManager;
  */
 class MediaRecords extends RecordManager
 {
-
     /**
      * @param Record $model
      * @param $collection

@@ -11,7 +11,6 @@ use ByTIC\MediaLibrary\PathGenerator\AbstractPathGenerator;
  */
 interface UrlGeneratorInterface
 {
-
     public function getUrl(): string;
 
     public function getPath(): string;

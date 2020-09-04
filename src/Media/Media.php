@@ -60,7 +60,7 @@ class Media
     {
         $path = PathGeneratorFactory::create()::getBasePathForMedia($this);
         if ($conversionName) {
-            $path = rtrim($path,  '/') . '/' . $conversionName;
+            $path = rtrim($path, '/') . '/' . $conversionName;
         }
         return $path;
     }

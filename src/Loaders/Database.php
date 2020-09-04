@@ -53,7 +53,7 @@ class Database extends AbstractLoader
         );
         $files = [];
         foreach ($mediaRecords as $mediaRecord) {
-            $files[] = new File($this->getFilesystem(),$mediaRecord->path);
+            $files[] = new File($this->getFilesystem(), $mediaRecord->path);
         }
         return $files;
     }
