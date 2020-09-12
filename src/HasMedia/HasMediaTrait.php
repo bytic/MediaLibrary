@@ -17,6 +17,7 @@ trait HasMediaTrait
     use Traits\AddMediaTrait;
     use Traits\HasMediaFilesystemTrait;
     use Traits\HasMediaConversionsTrait;
+    use Traits\HasMediaConstraintsTrait;
     use Traits\HasMediaPropertiesTrait;
     use ImageShortcodes;
     use FilesShortcodes;

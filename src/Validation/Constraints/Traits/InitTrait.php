@@ -28,12 +28,19 @@ trait InitTrait
 
     protected function initVariablesFromConfig()
     {
-        $configKey = 'media-library.contraints.' . $this->getName();
+        if (!function_exists('config')
+            || !function_exists('app')
+            || !app()->has('config')) {
+            return;
+        }
 
-        if (function_exists('config') && function_exists('app') && app()->has('config')) {
+        $tries = [$this->getName(), $this->generateName()];
+        foreach ($tries as $name) {
+            $configKey = 'media-library.contraints.' . $name;
             if (config()->has($configKey)) {
                 $variables = config()->get($configKey);
                 $this->applyVariables($variables);
+                return;
             }
         }
     }

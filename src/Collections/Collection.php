@@ -60,6 +60,7 @@ class Collection extends AbstractLazyCollection
     public function setName(string $name)
     {
         $this->name = $name;
+        $this->setContraintName($name);
     }
 
     /**

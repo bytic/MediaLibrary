@@ -41,8 +41,17 @@ abstract class AbstractConstraint implements ConstraintInterface
 
     protected function initName()
     {
-        $this->name = strtolower(str_replace('Constraint', '', $this->getClassFirstName()));
+        $this->name = $this->generateName();
     }
+
+    /**
+     * @return string
+     */
+    protected function generateName()
+    {
+        return strtolower(str_replace('Constraint', '', $this->getClassFirstName()));
+    }
+
 
     /**
      * @param $variables

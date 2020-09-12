@@ -2,6 +2,7 @@
 
 namespace ByTIC\MediaLibrary\Tests;
 
+use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -9,5 +10,12 @@ use PHPUnit\Framework\TestCase;
  */
 abstract class AbstractTest extends TestCase
 {
+    use MockeryPHPUnitIntegration;
+
     protected $object;
+
+    protected function tearDown() : void
+    {
+        \Mockery::close();
+    }
 }
