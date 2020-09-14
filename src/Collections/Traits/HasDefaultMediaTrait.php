@@ -4,6 +4,7 @@ namespace ByTIC\MediaLibrary\Collections\Traits;
 
 use ByTIC\MediaLibrary\HasMedia\HasMediaTrait;
 use ByTIC\MediaLibrary\Media\Media;
+use ByTIC\MediaLibrary\Support\MediaModels;
 use Nip\Records\Record;
 
 /**
@@ -41,9 +42,7 @@ trait HasDefaultMediaTrait
         }
     }
 
-    /**
-     * @return mixed
-     */
+
     public function persistDefaultMedia()
     {
         $media = $this->getDefaultMedia();
@@ -53,10 +52,8 @@ trait HasDefaultMediaTrait
                 return $this->getRecord()->persistDefaultMedia($this, $media);
             }
 
-            if ($this->getName() == 'images') {
-                $this->getRecord()->default_image = $media->getName();
-                $this->getRecord()->update();
-            }
+            $propertiesRecord = MediaModels::properties()->forCollection($this);
+            $propertiesRecord->defaultMedia($media->getName());
         }
     }
 
@@ -82,7 +79,8 @@ trait HasDefaultMediaTrait
      */
     public function generateDefaultMedia()
     {
-        $defaultMedia = $this->getRecord()->default_image;
+        $propertiesRecord = MediaModels::properties()->forCollection($this);
+        $defaultMedia = $propertiesRecord->defaultMedia();
         if ($defaultMedia && $this->has($defaultMedia)) {
             return $this->get($defaultMedia);
         }

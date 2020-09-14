@@ -3,7 +3,8 @@
 namespace ByTIC\MediaLibrary\Models\MediaProperties;
 
 use ByTIC\MediaLibrary\Collections\Collection;
-use Nip\Records\AbstractModels\Record;
+use ByTIC\MediaLibrary\HasMedia\HasMediaTrait;
+use Nip\Records\Record;
 
 /**
  * Class MediaProperty
@@ -13,6 +14,8 @@ use Nip\Records\AbstractModels\Record;
  * @property int $model_id
  * @property string $collection_name
  * @property string $custom_properties
+ *
+ * @method HasMediaTrait getModel
  */
 class MediaProperty extends Record
 {
@@ -106,6 +109,34 @@ class MediaProperty extends Record
         $value = ($value == true);
         $this->setCustomPropery('dbLoaded', $value);
         return $value;
+    }
+
+    /**
+     * @param null $value
+     * @return mixed|null
+     */
+    public function defaultMedia($value = null)
+    {
+        if ($value == null) {
+            return $this->getCustomProperty('defaultMedia', $this->getModel()->default_image);
+        }
+        $this->setCustomPropery('defaultMedia', $value);
+        $this->save();
+
+        if ($this->collection_name == 'images') {
+            $this->getModel()->default_image = $value;
+            $this->getModel()->update();
+        }
+        return $value;
+    }
+
+    /**
+     * @param $value
+     */
+    public function setDefaultMedia($value)
+    {
+        $this->dbLoaded($value);
+        $this->save();
     }
 
     /**

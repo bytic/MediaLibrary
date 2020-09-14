@@ -6,7 +6,6 @@ use ByTIC\MediaLibrary\Collections\Collection;
 use ByTIC\MediaLibrary\HasMedia\Traits\HasMediaPropertiesTrait;
 use Nip\Records\AbstractModels\Record;
 use Nip\Records\RecordManager;
-use Nip\Records\Traits\Relations\HasRelationsRecordTrait;
 
 /**
  * Class MediaProperties
@@ -16,6 +15,24 @@ use Nip\Records\Traits\Relations\HasRelationsRecordTrait;
  */
 class MediaProperties extends RecordManager
 {
+    /**
+     * @deprecated use initRelationsMedia
+     */
+    protected function initRelations()
+    {
+        parent::initRelations();
+
+        $this->initRelationsMediaTrait();
+    }
+
+    protected function initRelationsMediaTrait()
+    {
+        $this->morphTo(
+            'Model',
+            ['morphTypeField' => 'model', 'fk' => 'model_id']
+        );
+    }
+
     /**
      * @param Record|HasMediaPropertiesTrait $model
      * @param Collection|string $collection

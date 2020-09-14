@@ -18,7 +18,6 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/bytic/migrations" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/bytic/newrelic" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/bytic/request-detective" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/cakephp/collection" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/cakephp/core" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/cakephp/database" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/cakephp/datasource" />
@@ -70,6 +69,7 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/ramsey/uuid" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/riimu/kit-phpencoder" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/robmorgan/phinx" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/sebastian/cli-parser" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/sebastian/code-unit" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/sebastian/code-unit-reverse-lookup" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/sebastian/comparator" />
