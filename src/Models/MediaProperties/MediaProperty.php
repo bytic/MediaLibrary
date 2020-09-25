@@ -15,7 +15,7 @@ use Nip\Records\Record;
  * @property string $collection_name
  * @property string $custom_properties
  *
- * @method HasMediaTrait getModel
+ * @method HasMediaTrait|Record getModel
  */
 class MediaProperty extends Record
 {
@@ -118,15 +118,12 @@ class MediaProperty extends Record
     public function defaultMedia($value = null)
     {
         if ($value == null) {
-            return $this->getCustomProperty('defaultMedia', $this->getModel()->default_image);
+            $model = $this->getModel();
+            $default = $model ? $model->getAttribute('default_image') : null;
+            return $this->getCustomProperty('defaultMedia', $default);
         }
-        $this->setCustomPropery('defaultMedia', $value);
-        $this->save();
 
-        if ($this->collection_name == 'images') {
-            $this->getModel()->default_image = $value;
-            $this->getModel()->update();
-        }
+        $this->setCustomPropery('defaultMedia', $value);
         return $value;
     }
 
@@ -135,8 +132,14 @@ class MediaProperty extends Record
      */
     public function setDefaultMedia($value)
     {
-        $this->dbLoaded($value);
+        $this->defaultMedia($value);
         $this->save();
+
+        $model = $this->getModel();
+        if ($this->collection_name == 'images') {
+            $model->setAttribute('default_image', $value);
+            $model->update();
+        }
     }
 
     /**
