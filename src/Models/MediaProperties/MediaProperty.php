@@ -61,7 +61,7 @@ class MediaProperty extends Record
 
     public function initCustomProperties()
     {
-        $properties = json_decode($this->custom_properties, true);
+        $properties = json_decode($this->getAttributeFromArray('custom_properties'), true);
         $properties = (is_array($properties)) ? $properties : [];
         $this->customPropertiesArray = $properties;
     }
