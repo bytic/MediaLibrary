@@ -77,6 +77,7 @@ class MediaProperties extends RecordManager
         $record = $this->getNew();
         $record->populateFromModel($model);
         $record->populateFromCollection($collection);
+        $record->setCustomPropertiesAttribute('{}');
         $record->insert();
         return $record;
     }

@@ -153,6 +153,6 @@ class MediaProperty extends Record
             $this->customPropertiesArray = $value;
             $value = json_encode($value);
         }
-        $this->setDataValue('custom_properties', $value);
+        $this->setPropertyValue('custom_properties', $value);
     }
 }
