@@ -80,9 +80,11 @@ trait HasDefaultMediaTrait
     public function generateDefaultMedia()
     {
         $propertiesRecord = MediaModels::properties()->forCollection($this);
-        $defaultMedia = $propertiesRecord->defaultMedia();
-        if ($defaultMedia && $this->has($defaultMedia)) {
-            return $this->get($defaultMedia);
+        if ($propertiesRecord) {
+            $defaultMedia = $propertiesRecord->defaultMedia();
+            if ($defaultMedia && $this->has($defaultMedia)) {
+                return $this->get($defaultMedia);
+            }
         }
 
         if (count($this->items)) {
