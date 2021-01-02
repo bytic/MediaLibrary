@@ -49,16 +49,12 @@ trait FilesShortcodes
     {
         $tmpFile = tempnam(sys_get_temp_dir(), 'bytic-media-library');
         file_put_contents($tmpFile, $content);
-//
-//        $path = sys_get_temp_dir();
-//        $fullPath = $path . DIRECTORY_SEPARATOR . $name;
-//        file_put_contents($fullPath, $content);
-
 
         $fileAdder = $this->addMedia($tmpFile);
         $fileAdder->setFileName($name);
         $fileAdder->toMediaCollection('files');
 
+        unlink($tmpFile);
         return $fileAdder;
     }
 }
