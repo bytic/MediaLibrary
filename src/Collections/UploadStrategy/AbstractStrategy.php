@@ -18,6 +18,10 @@ abstract class AbstractStrategy implements AbstractStrategyInterface
      */
     public static function makeFileName($fileAdder)
     {
+        $fileName = $fileAdder->getFileName();
+        if (!empty($fileName)) {
+            return $fileName;
+        }
         $file = $fileAdder->getFile();
 
         if ($file instanceof UploadedFile) {

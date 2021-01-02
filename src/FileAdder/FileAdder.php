@@ -23,33 +23,6 @@ class FileAdder implements FileAdderInterface
     /** @var string */
     protected $mediaName;
 
-    /** @var string */
-    protected $fileName;
-
-    /**
-     * Set the name of the file that is stored on disk.
-     *
-     * @param string $fileName
-     *
-     * @return $this
-     */
-    public function setFileName(string $fileName)
-    {
-        $this->fileName = $this->sanitizeFileName($fileName);
-
-        return $this;
-    }
-
-    /**
-     * @param $fileName
-     *
-     * @return string
-     */
-    protected function sanitizeFileName(string $fileName): string
-    {
-        return str_replace(['#', '/', '\\'], '-', $fileName);
-    }
-
     /**
      * @return Media|null
      */
