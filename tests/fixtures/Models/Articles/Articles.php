@@ -16,6 +16,11 @@ class Articles extends RecordManager
     use HasMediaRecordsTrait;
     use SingletonTrait;
 
+    protected function initRelations()
+    {
+        $this->initRelationsMedia();
+    }
+
     public function generateModelClass($class = null)
     {
         return Article::class;

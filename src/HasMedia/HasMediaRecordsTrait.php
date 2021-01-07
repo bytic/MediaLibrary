@@ -10,10 +10,10 @@ use ByTIC\MediaLibrary\Support\MediaModels;
  */
 trait HasMediaRecordsTrait
 {
-    protected function initRelations()
-    {
-        $this->initRelationsMedia();
-    }
+//    protected function initRelations()
+//    {
+//        $this->initRelationsMedia();
+//    }
 
     /**
      * @deprecated use initRelationsMedia
