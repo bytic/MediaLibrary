@@ -2,7 +2,9 @@
 
 namespace ByTIC\MediaLibrary\Tests\Fixtures\Models\Articles;
 
+use ByTIC\MediaLibrary\HasMedia\HasMediaRecordsTrait;
 use Nip\Records\RecordManager;
+use Nip\Utility\Traits\SingletonTrait;
 
 /**
  * Class Articles.
@@ -11,6 +13,9 @@ use Nip\Records\RecordManager;
  */
 class Articles extends RecordManager
 {
+    use HasMediaRecordsTrait;
+    use SingletonTrait;
+
     public function generateModelClass($class = null)
     {
         return Article::class;

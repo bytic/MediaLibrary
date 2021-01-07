@@ -2,6 +2,7 @@
 
 namespace ByTIC\MediaLibrary\Tests\Fixtures\Models;
 
+use ByTIC\MediaLibrary\HasMedia\HasMediaRecordsTrait;
 use Nip\Records\RecordManager;
 use Nip\Utility\Traits\SingletonTrait;
 
@@ -10,5 +11,6 @@ use Nip\Utility\Traits\SingletonTrait;
  */
 class HasMediaModelManager extends RecordManager
 {
+    use HasMediaRecordsTrait;
     use SingletonTrait;
 }

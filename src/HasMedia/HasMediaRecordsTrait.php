@@ -10,6 +10,11 @@ use ByTIC\MediaLibrary\Support\MediaModels;
  */
 trait HasMediaRecordsTrait
 {
+    protected function initRelations()
+    {
+        $this->initRelationsMedia();
+    }
+
     /**
      * @deprecated use initRelationsMedia
      */
@@ -22,12 +27,24 @@ trait HasMediaRecordsTrait
     {
         $this->morphMany(
             'Media',
-            ['class' => get_class(MediaModels::records()), 'morphTypeField' => 'model', 'fk' => 'model_id']
+            [
+                'class' => function () {
+                    return get_class(MediaModels::records());
+                },
+                'morphTypeField' => 'model',
+                'fk' => 'model_id'
+            ]
         );
 
         $this->morphMany(
             'MediaProperties',
-            ['class' => get_class(MediaModels::properties()), 'morphTypeField' => 'model', 'fk' => 'model_id']
+            [
+                'class' => function () {
+                    return get_class(MediaModels::properties());
+                },
+                'morphTypeField' => 'model',
+                'fk' => 'model_id'
+            ]
         );
     }
 }
