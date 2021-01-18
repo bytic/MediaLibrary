@@ -3,6 +3,7 @@
 namespace ByTIC\MediaLibrary\HasMedia\Traits;
 
 use Nip\Filesystem\FileDisk;
+use Nip\Utility\Str;
 
 /**
  * Trait HasMediaFilesystemTrait.
@@ -14,16 +15,24 @@ trait HasMediaFilesystemTrait
      *
      * @return FileDisk
      */
-    public function getMediaFilesystemDisk()
+    public function getMediaFilesystemDisk($collection = null)
     {
-        return app('filesystem')->disk($this->getMediaFilesystemDiskName());
+        return app('filesystem')->disk($this->getMediaFilesystemDiskName($collection));
     }
 
     /**
      * @return string
      */
-    public function getMediaFilesystemDiskName()
+    public function getMediaFilesystemDiskName($collection = null)
     {
+        $methodBase = 'generateMediaFilesystemDiskName';
+        $method = $methodBase. Str::camel($collection);
+        if (method_exists($this, $method)) {
+            return $this->{$method}($collection);
+        }
+        if (method_exists($this, $methodBase)) {
+            return $this->{$method}($collection);
+        }
         return 'public';
     }
 }

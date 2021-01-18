@@ -62,6 +62,6 @@ trait HasFilesystemTrait
      */
     protected function generateFilesystem()
     {
-        return $this->getRecord()->getMediaFilesystemDisk();
+        return $this->getRecord()->getMediaFilesystemDisk($this->getName());
     }
 }
