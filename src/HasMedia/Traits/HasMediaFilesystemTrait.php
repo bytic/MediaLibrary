@@ -31,7 +31,7 @@ trait HasMediaFilesystemTrait
             return $this->{$method}($collection);
         }
         if (method_exists($this, $methodBase)) {
-            return $this->{$method}($collection);
+            return $this->{$methodBase}($collection);
         }
         return 'public';
     }
