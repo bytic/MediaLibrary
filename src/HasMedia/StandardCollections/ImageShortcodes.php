@@ -7,8 +7,6 @@ use ByTIC\MediaLibrary\Media\Media;
 
 /**
  * Trait StandardCollectionsShortcodes.
- *
- * @method Collection getMedia(string $collectionName = 'default', $filters = []): Collection
  */
 trait ImageShortcodes
 {
@@ -75,4 +73,12 @@ trait ImageShortcodes
     {
         return $this->getMedia('covers')->count() > 0;
     }
+
+    /**
+     * @param string $collectionName
+     * @param array  $filters
+     *
+     * @return Collection
+     */
+    abstract public function getMedia(string $collectionName = 'default', $filters = []): Collection;
 }
