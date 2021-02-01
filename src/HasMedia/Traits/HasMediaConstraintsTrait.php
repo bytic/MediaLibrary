@@ -8,5 +8,4 @@ namespace ByTIC\MediaLibrary\HasMedia\Traits;
  */
 trait HasMediaConstraintsTrait
 {
-
 }

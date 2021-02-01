@@ -26,7 +26,7 @@ trait HasMediaFilesystemTrait
     public function getMediaFilesystemDiskName($collection = null)
     {
         $methodBase = 'generateMediaFilesystemDiskName';
-        $method = $methodBase. Str::camel($collection);
+        $method = $methodBase . Str::camel($collection);
         if (method_exists($this, $method)) {
             return $this->{$method}($collection);
         }
