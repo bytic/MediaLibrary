@@ -27,4 +27,3 @@ class InitTraitTest extends AbstractTest
         $contraint->init();
     }
 }
-

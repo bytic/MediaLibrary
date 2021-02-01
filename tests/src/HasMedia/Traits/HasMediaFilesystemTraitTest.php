@@ -27,6 +27,6 @@ class HasMediaFilesystemTraitTest extends AbstractTest
     public function test_getMediaFilesystemDiskName_with_disk_name()
     {
         $model = new ModelWithDiskName();
-        self::assertSame('custom',$model->getMediaFilesystemDiskName());
+        self::assertSame('custom', $model->getMediaFilesystemDiskName());
     }
 }

@@ -22,5 +22,4 @@ class CollectionTest extends AbstractTest
         self::assertInstanceOf(ImageConstraint::class, $constraint);
         self::assertSame('covers', $constraint->getName());
     }
-
 }
