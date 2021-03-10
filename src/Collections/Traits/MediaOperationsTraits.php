@@ -14,7 +14,7 @@ trait MediaOperationsTraits
 {
     /** @inheritDoc
      */
-    public function filter(callable $callback = null)
+    public function filter(callable $callback = null): \Nip\Collections\CollectionInterface
     {
         $filtered = parent::filter($callback);
         $filtered->rehydrateFromSibling($this);
