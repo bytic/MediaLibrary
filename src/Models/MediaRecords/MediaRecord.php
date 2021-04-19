@@ -2,6 +2,7 @@
 
 namespace ByTIC\MediaLibrary\Models\MediaRecords;
 
+use ByTIC\MediaLibrary\Collections\Collection;
 use Nip\Filesystem\File;
 use Nip\Records\Record;
 
@@ -37,11 +38,12 @@ class MediaRecord extends Record
     }
 
     /**
-     * @param $collection
+     * @param Collection $collection
      */
     public function populateFromCollection($collection)
     {
         $name = is_object($collection) ? $collection->getName() : $collection;
         $this->collection_name = $name;
+        $this->disk = $collection->getMediaFilesystemDiskName();
     }
 }

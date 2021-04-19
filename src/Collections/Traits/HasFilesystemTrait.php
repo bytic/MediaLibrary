@@ -52,6 +52,14 @@ trait HasFilesystemTrait
         return PathGeneratorFactory::create()::$method($media);
     }
 
+    /**
+     * @return string
+     */
+    public function getMediaFilesystemDiskName()
+    {
+        return $this->getRecord()->getMediaFilesystemDiskName($this->getName());
+    }
+
     protected function initFilesystem()
     {
         $this->setFilesystem($this->generateFilesystem());
