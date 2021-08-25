@@ -42,8 +42,11 @@ class MediaRecord extends Record
      */
     public function populateFromCollection($collection)
     {
-        $name = is_object($collection) ? $collection->getName() : $collection;
-        $this->collection_name = $name;
-        $this->disk = $collection->getMediaFilesystemDiskName();
+        if (is_object($collection)) {
+            $this->collection_name = $collection->getName();
+            $this->disk = $collection->getMediaFilesystemDiskName();
+            return;
+        }
+        $this->collection_name = $collection;
     }
 }

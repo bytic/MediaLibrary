@@ -27,7 +27,7 @@ class Database extends AbstractLoader
             MediaModels::records()->createFor(
                 $file,
                 $model,
-                $this->getCollection()->getName()
+                $this->getCollection()
             );
         }
 
