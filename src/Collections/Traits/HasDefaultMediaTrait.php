@@ -133,7 +133,7 @@ trait HasDefaultMediaTrait
     /**
      * @return string
      */
-    protected function getDefaultFileName()
+    public function getDefaultFileName()
     {
         $name = inflector()->singularize($this->getName());
         $extension = $this->getName() == 'logos' ? 'png' : 'jpg';
