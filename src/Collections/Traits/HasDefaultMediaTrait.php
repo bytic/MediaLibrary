@@ -6,6 +6,7 @@ use ByTIC\MediaLibrary\HasMedia\HasMediaTrait;
 use ByTIC\MediaLibrary\Media\Media;
 use ByTIC\MediaLibrary\Support\MediaModels;
 use Nip\Records\Record;
+use function asset;
 
 /**
  * Trait HasDefaultMediaTrait.
@@ -42,19 +43,20 @@ trait HasDefaultMediaTrait
         }
     }
 
-
     public function persistDefaultMedia()
     {
         $media = $this->getDefaultMedia();
 
-        if ($media->getFile()->exists()) {
-            if (method_exists($this->getRecord(), 'persistDefaultMedia')) {
-                return $this->getRecord()->persistDefaultMedia($this, $media);
-            }
-
-            $propertiesRecord = MediaModels::properties()->forCollection($this);
-            $propertiesRecord->defaultMedia($media->getName());
+        if (false === $media->getFile()->exists()) {
+            return;
         }
+        if (method_exists($this->getRecord(), 'persistDefaultMedia')) {
+            return $this->getRecord()->persistDefaultMedia($this, $media);
+        }
+
+        $propertiesRecord = MediaModels::properties()->forCollection($this);
+        $propertiesRecord->defaultMedia($media->getName());
+        $propertiesRecord->save();
     }
 
     /**
@@ -125,7 +127,7 @@ trait HasDefaultMediaTrait
      */
     public function getDefaultMediaGenericUrl()
     {
-        return \asset('/images/'
+        return asset('/images/'
             . $this->getRecord()->getManager()->getTable() . '/'
             . $this->getDefaultFileName());
     }
