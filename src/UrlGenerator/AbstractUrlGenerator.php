@@ -23,6 +23,11 @@ class AbstractUrlGenerator implements UrlGeneratorInterface
      */
     protected $conversion = null;
 
+    /**
+     * @var AbstractPathGenerator
+     */
+    protected $pathGenerator;
+
     public function getUrl(): string
     {
         if (!$this->media->hasFile()) {
