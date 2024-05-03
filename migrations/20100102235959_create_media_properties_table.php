@@ -23,6 +23,9 @@ final class CreateMediaPropertiesTable extends AbstractMigration
     public function change(): void
     {
         $table = $this->table('media-properties');
+        if ($table->exists()) {
+            return;
+        }
 
         $table->addColumn('model', 'string');
         $table->addColumn('model_id', 'biginteger');

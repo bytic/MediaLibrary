@@ -23,6 +23,9 @@ final class CreateMediaTable extends AbstractMigration
     public function change(): void
     {
         $table = $this->table('media-records');
+        if ($table->exists()) {
+            return;
+        }
 
         $table->addColumn('model', 'string');
         $table->addColumn('model_id', 'biginteger');
