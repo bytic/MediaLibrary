@@ -22,15 +22,15 @@
   "require": {
     "php": "^7.2|^8.0",
     "ext-json": "*",
-    "bytic/filesystem": "^0.9|^1.0",
-    "bytic/orm": "^0.9|^1.0",
+    "bytic/filesystem": "^0.9|^1.0|^2.0",
+    "bytic/orm": "^0.9|^1.0|^2.0",
     "intervention/image": "^2.4"
   },
   "require-dev": {
     "bytic/container": "^0.9|^1.0|^2.0",
     "bytic/migrations": "^0.12",
-    "bytic/router": "^0.9|^1.0",
-    "bytic/logger": "^0.9|^1.0",
+    "bytic/router": "^0.9|^1.0|^2.0",
+    "bytic/logger": "^0.9|^1.0|^2.0",
     "bytic/phpqatools": "^1.0",
     "mockery/mockery": "^1.2"
   },
