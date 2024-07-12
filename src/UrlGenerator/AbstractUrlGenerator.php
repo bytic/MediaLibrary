@@ -5,7 +5,7 @@ namespace ByTIC\MediaLibrary\UrlGenerator;
 use ByTIC\MediaLibrary\Conversions\Conversion;
 use ByTIC\MediaLibrary\Media\Media;
 use ByTIC\MediaLibrary\PathGenerator\AbstractPathGenerator;
-use League\Flysystem\FilesystemInterface;
+use Nip\Filesystem\FileDisk;
 
 /**
  * Class AbstractUrlGenerator
@@ -76,7 +76,7 @@ class AbstractUrlGenerator implements UrlGeneratorInterface
 //            : $this->media->conversions_disk;
 //    }
 
-    protected function getDisk(): FilesystemInterface
+    protected function getDisk(): FileDisk
     {
 //        return app('filesystem')->disk($this->getDiskName());
         return $this->media->getFile()->getFilesystem();
