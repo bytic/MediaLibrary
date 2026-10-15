@@ -75,8 +75,13 @@ class PackageConfig extends \ByTIC\PackageBase\Utility\PackageConfig
      * @return mixed|Config|string|null
      * @throws Exception
      */
-    public static function constraints(string $name, $default = [])
+    public static function constraints(string $name, $default = null)
     {
-        return static::instance()->get('contraints.' . $name, $default);
+        $configKey = 'contraints.' . $name;
+        if (!static::has($configKey)) {
+            return $default;
+        }
+
+        return static::instance()->get($configKey, $default);
     }
 }
