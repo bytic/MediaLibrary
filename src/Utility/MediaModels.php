@@ -4,19 +4,21 @@ declare(strict_types=1);
 
 namespace ByTIC\MediaLibrary\Utility;
 
+use ByTIC\PackageBase\Utility\ModelFinder;
+use ByTIC\MediaLibrary\MediaLibraryServiceProvider;
 use ByTIC\MediaLibrary\Models\MediaProperties\MediaProperties;
 use ByTIC\MediaLibrary\Models\MediaRecords\MediaRecords;
-use Nip\Records\Locator\ModelLocator;
+use Nip\Records\RecordManager;
 
 /**
  * Class MediaModels.
  */
-class MediaModels
+class MediaModels extends ModelFinder
 {
     protected static array $models = [];
 
     /**
-     * @return MediaRecords
+     * @return RecordManager|MediaRecords
      */
     public static function records()
     {
@@ -24,40 +26,15 @@ class MediaModels
     }
 
     /**
-     * @return MediaProperties
+     * @return RecordManager|MediaProperties
      */
     public static function properties()
     {
         return static::getModels('properties', MediaProperties::class);
     }
 
-    /**
-     * @param string $type
-     * @param string $default
-     * @return mixed
-     */
-    protected static function getModels($type, $default)
+    protected static function packageName(): string
     {
-        if (!isset(static::$models[$type])) {
-            $modelManager = static::getConfigVar($type, $default);
-            return static::$models[$type] = ModelLocator::get($modelManager);
-        }
-
-        return static::$models[$type];
-    }
-
-    /**
-     * @param string $type
-     * @param null|string $default
-     * @return mixed
-     */
-    protected static function getConfigVar($type, $default = null)
-    {
-        $value = PackageConfig::get('media_models.' . $type);
-        if ($value !== null) {
-            return $value;
-        }
-
-        return $default;
+        return MediaLibraryServiceProvider::NAME;
     }
 }

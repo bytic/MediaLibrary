@@ -4,58 +4,79 @@ declare(strict_types=1);
 
 namespace ByTIC\MediaLibrary\Utility;
 
+use ByTIC\MediaLibrary\Loaders\Database;
+use ByTIC\MediaLibrary\MediaLibraryServiceProvider;
+use ByTIC\MediaLibrary\Models\MediaProperties\MediaProperties;
+use ByTIC\MediaLibrary\Models\MediaRecords\MediaRecords;
+use Exception;
 use Nip\Config\Config;
+use Nip\Utility\Traits\SingletonTrait;
 
 /**
  * Class PackageConfig.
  */
-class PackageConfig
+class PackageConfig extends \ByTIC\PackageBase\Utility\PackageConfig
 {
+    use SingletonTrait;
+
+    protected $name = MediaLibraryServiceProvider::NAME;
+
     public static function configPath(): string
     {
         return dirname(__DIR__, 2) . '/config/media-library.php';
     }
 
     /**
-     * @param string $key
-     * @param mixed $default
-     * @return mixed
+     * @return mixed|Config|string|null
+     * @throws Exception
      */
-    public static function get(string $key, $default = null)
+    public static function diskName(string $default = 'public')
     {
-        if (!function_exists('config')) {
-            return $default;
-        }
-
-        $config = config();
-        if (!($config instanceof Config) && !is_object($config)) {
-            return $default;
-        }
-        if (method_exists($config, 'has') && method_exists($config, 'get')) {
-            $fullKey = 'media-library.' . $key;
-            if ($config->has($fullKey)) {
-                return $config->get($fullKey);
-            }
-        }
-
-        return $default;
+        return static::instance()->get('disk_name', $default);
     }
 
     /**
-     * @param string $key
-     * @return bool
+     * @return mixed|Config|string|null
+     * @throws Exception
      */
-    public static function has(string $key): bool
+    public static function mediaModels(string $type, $default = null)
     {
-        if (!function_exists('config')) {
-            return false;
-        }
+        return static::instance()->get('media_models.' . $type, $default);
+    }
 
-        $config = config();
-        if (!is_object($config) || !method_exists($config, 'has')) {
-            return false;
-        }
+    /**
+     * @return mixed|Config|string|null
+     * @throws Exception
+     */
+    public static function mediaModelsRecords($default = MediaRecords::class)
+    {
+        return static::mediaModels('records', $default);
+    }
 
-        return $config->has('media-library.' . $key);
+    /**
+     * @return mixed|Config|string|null
+     * @throws Exception
+     */
+    public static function mediaModelsProperties($default = MediaProperties::class)
+    {
+        return static::mediaModels('properties', $default);
+    }
+
+    /**
+     * @return mixed|Config|string|null
+     * @throws Exception
+     */
+    public static function mediaLoader($default = Database::class)
+    {
+        return static::instance()->get('media_loader', $default);
+    }
+
+    /**
+     * @return mixed|Config|string|null
+     * @throws Exception
+     */
+    public static function constraints(string $name, $default = [])
+    {
+        return static::instance()->get('contraints.' . $name, $default);
     }
 }
