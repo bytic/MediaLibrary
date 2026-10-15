@@ -2,8 +2,8 @@
 
 namespace ByTIC\MediaLibrary\Collections\Traits;
 
-use ByTIC\MediaLibrary\Collections\Collection;
 use ByTIC\MediaLibrary\Media\Media;
+use Nip\Collections\CollectionInterface;
 
 /**
  * Trait MediaOperationsTraits.
@@ -14,7 +14,7 @@ trait MediaOperationsTraits
 {
     /** @inheritDoc
      */
-    public function filter(callable $callback = null): \Nip\Collections\CollectionInterface
+    public function filter(?callable $callback = null): CollectionInterface
     {
         $filtered = parent::filter($callback);
         $filtered->rehydrateFromSibling($this);

@@ -33,7 +33,7 @@ trait FileAdderProcessesTrait
      * @param Collection $collection
      * @param Media|null $media
      */
-    protected function processMediaItem(Collection $collection, Media $media = null)
+    protected function processMediaItem(Collection $collection, ?Media $media = null)
     {
         $this->guardAgainstDisallowedFileAdditions($collection, $this->getFile());
 
@@ -50,7 +50,7 @@ trait FileAdderProcessesTrait
     /**
      * @param Media|null $media
      */
-    protected function copyMediaToFilesystem(Media $media = null)
+    protected function copyMediaToFilesystem(?Media $media = null)
     {
         $media = $media ? $media : $this->getMedia();
         $destination = PathGeneratorFactory::create()::getBasePathForMediaOriginal($media);
@@ -65,7 +65,7 @@ trait FileAdderProcessesTrait
     /**
      * @param Media|null $media
      */
-    protected function createMediaConversions(Media $media = null)
+    protected function createMediaConversions(?Media $media = null)
     {
         $media = $media ? $media : $this->getMedia();
 
@@ -78,7 +78,7 @@ trait FileAdderProcessesTrait
     /**
      * @param Media|null $media
      */
-    protected function saveMediaRecord(Media $media = null)
+    protected function saveMediaRecord(?Media $media = null)
     {
         $media = $media ? $media : $this->getMedia();
 

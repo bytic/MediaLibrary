@@ -78,9 +78,6 @@ class PackageConfig extends \ByTIC\PackageBase\Utility\PackageConfig
     public static function constraints(string $name, $default = null)
     {
         $configKey = 'contraints.' . $name;
-        if (!static::has($configKey)) {
-            return $default;
-        }
 
         return static::instance()->get($configKey, $default);
     }

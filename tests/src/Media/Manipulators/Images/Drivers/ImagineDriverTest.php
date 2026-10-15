@@ -5,7 +5,7 @@ namespace ByTIC\MediaLibrary\Tests\Media\Manipulators\Images\Drivers;
 use ByTIC\MediaLibrary\Media\Manipulators\Images\Drivers\ImagineDriver;
 use ByTIC\MediaLibrary\Tests\AbstractTest;
 use Intervention\Image\Image;
-use League\Flysystem\Adapter\Local;
+use League\Flysystem\Local\LocalFilesystemAdapter;
 use Nip\Filesystem\File;
 use Nip\Filesystem\FileDisk;
 
@@ -16,7 +16,7 @@ class ImagineDriverTest extends AbstractTest
 {
     public function testMakeImage()
     {
-        $fileSystem = new FileDisk((new Local(TEST_FIXTURE_PATH . '/test-files')));
+        $fileSystem = new FileDisk(new LocalFilesystemAdapter(TEST_FIXTURE_PATH . '/test-files'));
         $file = new File($fileSystem, '/image1.gif');
 
         $driver = new ImagineDriver();

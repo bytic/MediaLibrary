@@ -6,7 +6,7 @@ use ByTIC\MediaLibrary\Media\Manipulators\Images\ImageManipulator;
 use ByTIC\MediaLibrary\Media\Manipulators\ManipulatorFactory;
 use ByTIC\MediaLibrary\Media\Media;
 use ByTIC\MediaLibrary\Tests\AbstractTest;
-use League\Flysystem\Adapter\Local;
+use League\Flysystem\Local\LocalFilesystemAdapter;
 use Nip\Filesystem\File;
 use Nip\Filesystem\FileDisk;
 
@@ -17,7 +17,7 @@ class ManipulatorFactoryTest extends AbstractTest
 {
     public function testCreateForMediaImage()
     {
-        $fileSystem = new FileDisk((new Local(TEST_FIXTURE_PATH . '/test-files')));
+        $fileSystem = new FileDisk(new LocalFilesystemAdapter(TEST_FIXTURE_PATH . '/test-files'));
 
         $file = new File($fileSystem, '/image1.gif');
 

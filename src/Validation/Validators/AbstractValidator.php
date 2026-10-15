@@ -45,7 +45,7 @@ abstract class AbstractValidator implements ValidatorInterface
      *
      * @return ViolationsBag
      */
-    public function validate($value, ConstraintInterface $constraint = null)
+    public function validate($value, ?ConstraintInterface $constraint = null)
     {
         $constraint = $constraint ? $constraint : $this->getCollection()->getConstraint();
         $this->setValue($value);
