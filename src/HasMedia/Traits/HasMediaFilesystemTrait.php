@@ -34,11 +34,6 @@ trait HasMediaFilesystemTrait
             return $this->{$methodBase}($collection);
         }
 
-        $diskName = \ByTIC\MediaLibrary\Utility\PackageConfig::diskName();
-        if (is_string($diskName) && $diskName !== '') {
-            return $diskName;
-        }
-
-        return 'public';
+        return \ByTIC\MediaLibrary\Utility\PackageConfig::diskName();
     }
 }
