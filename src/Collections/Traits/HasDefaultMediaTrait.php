@@ -36,7 +36,7 @@ trait HasDefaultMediaTrait
     public function persistDefaultMediaFromName($mediaName)
     {
         $media = $this->get($mediaName, null);
-        if ($media) {
+        if ($media instanceof \ByTIC\MediaLibrary\Media\Media) {
             $this->setDefaultMedia($media);
 
             return $this->persistDefaultMedia();

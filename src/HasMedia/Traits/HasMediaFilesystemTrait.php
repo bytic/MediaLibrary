@@ -33,6 +33,12 @@ trait HasMediaFilesystemTrait
         if (method_exists($this, $methodBase)) {
             return $this->{$methodBase}($collection);
         }
+
+        $diskName = config('media-library.disk_name');
+        if (is_string($diskName) && $diskName !== '') {
+            return $diskName;
+        }
+
         return 'public';
     }
 }

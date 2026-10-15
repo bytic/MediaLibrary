@@ -17,7 +17,7 @@ trait HasLoaderTrait
      */
     public function getLoader(): AbstractLoader
     {
-        if ($this->loader == null) {
+        if ($this->loader === null) {
             $this->initLoader();
         }
 
