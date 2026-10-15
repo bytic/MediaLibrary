@@ -16,7 +16,7 @@ trait HasConversionsTrait
 
     public function getConversionNames(): array
     {
-        if ($this->conversionNames == null) {
+        if ($this->conversionNames === null) {
             $this->conversionNames = $this->generateConversionNames();
         }
         return $this->conversionNames;
@@ -38,7 +38,7 @@ trait HasConversionsTrait
 
     public function getConversions(): ConversionCollection
     {
-        if ($this->conversions == null) {
+        if ($this->conversions === null) {
             $this->conversions = $this->generateConversions();
         }
         return $this->conversions;

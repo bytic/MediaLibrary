@@ -53,7 +53,7 @@ class MediaProperty extends Record
 
     protected function checkCustomProperties()
     {
-        if ($this->customPropertiesArray == null) {
+        if ($this->customPropertiesArray === null) {
             $this->initCustomProperties();
         }
     }
@@ -81,11 +81,24 @@ class MediaProperty extends Record
      * @param $name
      * @param $value
      */
-    public function setCustomPropery($name, $value)
+    public function setCustomProperty($name, $value)
     {
         $this->checkCustomProperties();
         $this->customPropertiesArray[$name] = $value;
         $this->setCustomPropertiesAttribute($this->getCustomProperties());
+    }
+
+    /**
+     * @deprecated Use setCustomProperty() instead.
+     */
+    public function setCustomPropery($name, $value)
+    {
+        trigger_error(
+            sprintf('%s is deprecated; use setCustomProperty() instead.', __METHOD__),
+            E_USER_DEPRECATED
+        );
+
+        $this->setCustomProperty($name, $value);
     }
 
     /**
@@ -103,11 +116,12 @@ class MediaProperty extends Record
      */
     public function dbLoaded($value = null)
     {
-        if ($value == null) {
+        if ($value === null) {
             return $this->getCustomProperty('dbLoaded', false);
         }
-        $value = ($value == true);
-        $this->setCustomPropery('dbLoaded', $value);
+
+        $value = (bool) $value;
+        $this->setCustomProperty('dbLoaded', $value);
         return $value;
     }
 
@@ -117,13 +131,13 @@ class MediaProperty extends Record
      */
     public function defaultMedia($value = null)
     {
-        if ($value == null) {
+        if ($value === null) {
             $model = $this->getModel();
             $default = $model ? $model->getAttribute('default_image') : null;
             return $this->getCustomProperty('defaultMedia', $default);
         }
 
-        $this->setCustomPropery('defaultMedia', $value);
+        $this->setCustomProperty('defaultMedia', $value);
         return $value;
     }
 

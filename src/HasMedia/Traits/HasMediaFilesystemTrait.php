@@ -33,6 +33,7 @@ trait HasMediaFilesystemTrait
         if (method_exists($this, $methodBase)) {
             return $this->{$methodBase}($collection);
         }
-        return 'public';
+
+        return \ByTIC\MediaLibrary\Utility\PackageConfig::diskName();
     }
 }

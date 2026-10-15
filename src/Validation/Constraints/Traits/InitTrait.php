@@ -36,9 +36,8 @@ trait InitTrait
 
         $tries = [$this->getName(), $this->generateName()];
         foreach ($tries as $name) {
-            $configKey = 'media-library.contraints.' . $name;
-            if (config()->has($configKey)) {
-                $variables = config()->get($configKey);
+            $variables = \ByTIC\MediaLibrary\Utility\PackageConfig::constraints($name);
+            if ($variables !== null) {
                 $this->applyVariables($variables);
                 return;
             }

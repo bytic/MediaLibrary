@@ -12,6 +12,8 @@ use Nip\Container\ServiceProviders\Providers\BootableServiceProviderInterface;
  */
 class MediaLibraryServiceProvider extends AbstractSignatureServiceProvider implements BootableServiceProviderInterface
 {
+    public const NAME = 'media-library';
+
     /**
      * {@inheritdoc}
      */
