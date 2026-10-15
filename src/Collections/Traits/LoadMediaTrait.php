@@ -139,7 +139,7 @@ trait LoadMediaTrait
      */
     protected function getLoaderClass()
     {
-        $mediaLoader = config()->get('media-library.media_loader');
+        $mediaLoader = \ByTIC\MediaLibrary\Utility\PackageConfig::get('media_loader', Database::class);
         if (class_exists($mediaLoader)) {
             return $mediaLoader;
         }
