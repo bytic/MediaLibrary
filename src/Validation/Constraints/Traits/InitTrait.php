@@ -38,7 +38,7 @@ trait InitTrait
         foreach ($tries as $name) {
             $configKey = 'contraints.' . $name;
             if (\ByTIC\MediaLibrary\Utility\PackageConfig::has($configKey)) {
-                $variables = \ByTIC\MediaLibrary\Utility\PackageConfig::get($configKey);
+                $variables = \ByTIC\MediaLibrary\Utility\PackageConfig::constraints($name);
                 $this->applyVariables($variables);
                 return;
             }
