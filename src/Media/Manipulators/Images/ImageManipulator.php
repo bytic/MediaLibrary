@@ -75,7 +75,7 @@ class ImageManipulator extends AbstractManipulator
      */
     public function requirementsAreInstalled(): bool
     {
-        return true;
+        return extension_loaded('gd') || extension_loaded('imagick');
     }
 
     /**

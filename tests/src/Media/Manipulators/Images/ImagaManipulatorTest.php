@@ -35,7 +35,7 @@ class ImagaManipulatorTest extends AbstractTest
         $media->setFile($file);
 
         $manipulator = new ImageManipulator();
-        self::assertTrue($manipulator->canConvert($media));
+        self::assertSame($manipulator->requirementsAreInstalled(), $manipulator->canConvert($media));
     }
 
     public function testGetDriver()
