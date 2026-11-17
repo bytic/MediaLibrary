@@ -4,8 +4,10 @@ namespace ByTIC\MediaLibrary\Media\Manipulators\Images\Drivers;
 
 use ByTIC\MediaLibrary\Conversions\Manipulations\Manipulation;
 use ByTIC\MediaLibrary\Conversions\Manipulations\ManipulationSequence;
-use Intervention\Image\Image;
+use Intervention\Image\Drivers\Gd\Driver as GdDriver;
+use Intervention\Image\Drivers\Imagick\Driver as ImagickDriver;
 use Intervention\Image\ImageManager;
+use Intervention\Image\Interfaces\ImageInterface;
 
 /**
  * Class ImagineDriver.
@@ -15,30 +17,36 @@ class ImagineDriver extends AbstractDriver
     /**
      * {@inheritdoc}
      */
-    public function manipulate($data, ManipulationSequence $manipulations, $extenstion)
+    public function manipulate($data, ManipulationSequence $manipulations, $extension)
     {
         $image = $this->makeImage($data);
         $this->performManipulations($image, $manipulations);
 
-        $image->encode($extenstion);
-
-        return $image->__toString();
+        return $image->encodeUsingFileExtension($extension)->toString();
     }
 
     /**
      * @param $data
      *
-     * @return Image
+     * @return ImageInterface
      */
     public function makeImage($data)
     {
-        $manager = new ImageManager();
+        if (extension_loaded('gd')) {
+            $driver = GdDriver::class;
+        } elseif (extension_loaded('imagick')) {
+            $driver = ImagickDriver::class;
+        } else {
+            throw new \RuntimeException(
+                'Image manipulation requires either the GD or Imagick PHP extension.'
+            );
+        }
 
-        return $manager->make($data);
+        return ImageManager::usingDriver($driver)->decode($data);
     }
 
     /**
-     * @param Image                $image
+     * @param ImageInterface       $image
      * @param ManipulationSequence $manipulations
      */
     protected function performManipulations($image, $manipulations)
@@ -49,12 +57,16 @@ class ImagineDriver extends AbstractDriver
     }
 
     /**
-     * @param Image        $image
-     * @param Manipulation $manipulation
+     * @param ImageInterface $image
+     * @param Manipulation    $manipulation
      */
     protected function performManipulation($image, $manipulation)
     {
-        $methodName = $manipulation->getName();
+        $methodName = match ($manipulation->getName()) {
+            'fit' => 'cover',
+            'orientate' => 'orient',
+            default => $manipulation->getName(),
+        };
         $image->{$methodName}(...$manipulation->getAttributes());
     }
 }

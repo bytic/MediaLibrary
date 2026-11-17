@@ -4,7 +4,7 @@ checks:
         duplication: true
 build:
     environment:
-        php: '7.2'
+        php: '8.3'
 
     nodes:
         analysis:
