@@ -21,6 +21,16 @@ return [
      */
     'media_loader' => ByTIC\MediaLibrary\Loaders\Database::class,
 
+    /*
+     * Image conversion settings.
+     *
+     * JPEG and WebP output use a high quality by default. Metadata is stripped
+     * to avoid unnecessary payload, while progressive JPEGs decode more smoothly.
+     */
+    'images' => [
+        'quality' => env('MEDIA_IMAGE_QUALITY', 95),
+    ],
+
     'contraints' => [
         'image' => [
 //            'min' => ,
