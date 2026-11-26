@@ -71,6 +71,13 @@ class PackageConfig extends \ByTIC\PackageBase\Utility\PackageConfig
         return static::instance()->get('media_loader', $default);
     }
 
+    public static function imageQuality(int $default = 95): int
+    {
+        $quality = static::instance()->get('images.quality', $default);
+
+        return max(1, min(100, (int) $quality));
+    }
+
     /**
      * @return mixed|Config|string|null
      * @throws Exception

@@ -8,12 +8,24 @@ use Intervention\Image\Drivers\Gd\Driver as GdDriver;
 use Intervention\Image\Drivers\Imagick\Driver as ImagickDriver;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Interfaces\ImageInterface;
+use ByTIC\MediaLibrary\Utility\PackageConfig;
 
 /**
  * Class ImagineDriver.
  */
 class ImagineDriver extends AbstractDriver
 {
+    protected int $quality = 95;
+
+    public function __construct(?int $quality = null)
+    {
+        if ($quality !== null) {
+            $this->quality = max(1, min(100, $quality));
+        } else {
+            $this->quality = PackageConfig::imageQuality($this->quality);
+        }
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -22,7 +34,23 @@ class ImagineDriver extends AbstractDriver
         $image = $this->makeImage($data);
         $this->performManipulations($image, $manipulations);
 
-        return $image->encodeUsingFileExtension($extension)->toString();
+        $options = match (strtolower($extension)) {
+            'jpg', 'jpeg' => [
+                'quality' => $this->quality,
+                'progressive' => true,
+                'strip' => true,
+            ],
+            'png' => [
+                'strip' => true,
+            ],
+            'webp' => [
+                'quality' => $this->quality,
+                'strip' => true,
+            ],
+            default => [],
+        };
+
+        return $image->encodeUsingFileExtension($extension, ...$options)->toString();
     }
 
     /**
@@ -32,10 +60,10 @@ class ImagineDriver extends AbstractDriver
      */
     public function makeImage($data)
     {
-        if (extension_loaded('gd')) {
-            $driver = GdDriver::class;
-        } elseif (extension_loaded('imagick')) {
+        if (extension_loaded('imagick')) {
             $driver = ImagickDriver::class;
+        } elseif (extension_loaded('gd')) {
+            $driver = GdDriver::class;
         } else {
             throw new \RuntimeException(
                 'Image manipulation requires either the GD or Imagick PHP extension.'
